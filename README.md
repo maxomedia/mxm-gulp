@@ -18,7 +18,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - gulp (http://gulpjs.com/)
 
 #### Installation
-Clone repository (mind the dot at the end of the command, if you want to clone to current directory):
+Download the zip or clone the repository (mind the dot at the end of the command, if you want to clone to current directory):
 ```shell
   $ git clone https://github.com/maxomedia/mxm-gulp.git .
 ```

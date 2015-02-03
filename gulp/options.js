@@ -1,4 +1,5 @@
-var assets = '../Assets/'; // Relative to gulpfile.js
+var assets = '../Assets'; // Relative to gulpfile.js
+var webassets = '/project/media/Assets'; // Relative to webroot
 
 module.exports = {
 
@@ -9,7 +10,7 @@ module.exports = {
 	less: {
 		src: 'less/**/*.less',
 		main: 'less/main.less',
-		dest: assets + 'css',
+		dest: assets + '/css',
 		suffix: '.min',
 		autoprefix: [
 			'Android >= 2.3',
@@ -20,7 +21,7 @@ module.exports = {
 			'Opera >= 12',
 			'Safari >= 6'
 		],
-		sourceMapRoot: '/Assets/css/' // Relative to web root
+		sourceMapRoot: webassets + '/css/' // Relative to web root
 	},
 
 	// Browserify settings
@@ -49,11 +50,11 @@ module.exports = {
 
 	iconfont: {
 		src: 'svg/**/*.svg', // Relative to gulpfile.js
-		dest: assets + 'fonts',
+		dest: assets + '/fonts',
 		name: 'fonticons',
 		class: 'gfx',
 		template: 'gulp/utils/iconfont-template.less', // Relative to gulpfile.js
 		lessDest: 'less/scaffolding/', // Relative to gulpfile.js
-		rootPath: '/Assets/fonts/' // Relative to web root
+		rootPath: webassets + '/fonts/' // Relative to web root
 	}
 }

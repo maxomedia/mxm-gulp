@@ -2,6 +2,8 @@
 
 The buildsystem we use at maxomedia.
 
+Most of the tasks and the structure are inspired by https://github.com/greypants/gulp-starter (yes, I mean copied & pasted).
+
 #### Features
 - Less to CSS (autoprefixed, sourcemaps, minified)
 - JavaScript bundles with browserify (multiple bundles)

@@ -8,8 +8,8 @@ module.exports = {
 
 	// Less settings
 	less: {
-		src: 'less/**/*.less',
-		main: 'less/main.less',
+		src: 'less/**/*.less', // Relative to gulpfile.js
+		main: 'less/main.less', // Relative to gulpfile.js
 		dest: assets + '/css',
 		suffix: '.min',
 		autoprefix: [

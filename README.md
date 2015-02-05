@@ -32,3 +32,6 @@ Finally, run gulp to build your assets and start watching your development files
 ```shell
   $ gulp
 ```
+
+#### Documentation
+Please refer to the [wiki](https://github.com/maxomedia/mxm-gulp/wiki) of this repo for detailed information for each task.

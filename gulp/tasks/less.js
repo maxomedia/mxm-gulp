@@ -15,6 +15,16 @@ var autoprefixer = new lessPluginAutoprefix({browsers: options.autoprefix});
 // =====
 gulp.task('less', function (){
 
+	// Handle option errors
+	if (!options.src) return console.log('Gulp less task: no src specified');
+	if (!options.dest) return console.log('Gulp less task: no dest specified');
+	if (!options.sourceMapRoot) return console.log('Gulp less task: no sourceMapRoot defined');
+
+	// Handle glob if no main file is specified
+	if (!options.main) options.main = options.src;
+
+	console.log(autoprefixer);
+
 	// Start piping with main file
 	return gulp.src(options.main)
 

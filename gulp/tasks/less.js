@@ -23,8 +23,6 @@ gulp.task('less', function (){
 	// Handle glob if no main file is specified
 	if (!options.main) options.main = options.src;
 
-	console.log(autoprefixer);
-
 	// Start piping with main file
 	return gulp.src(options.main)
 

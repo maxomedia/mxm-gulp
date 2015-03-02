@@ -1,3 +1,4 @@
-var gulp = require('gulp');
+var gulp  = require('gulp');
+var tasks = require('../utils/getTasks').stage;
 
-gulp.task('stage', ['iconfont', 'minify-js', 'minify-css']);
+gulp.task('stage', tasks);

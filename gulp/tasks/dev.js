@@ -1,5 +1,4 @@
-var gulp = require('gulp');
+var gulp  = require('gulp');
+var tasks = require('../utils/getTasks').dev;
 
-global.dev = true;
-
-gulp.task('dev', ['less', 'js', 'jade']);
+gulp.task('dev', tasks);

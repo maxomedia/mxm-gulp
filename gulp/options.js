@@ -8,6 +8,8 @@ module.exports = {
 
 	// Less settings
 	less: {
+		build: true,
+		minify: true,
 		src: 'less/**/*.less',
 		main: 'less/main.less', // Comment out, if you want to pass the src glob
 		dest: assets + '/css',
@@ -26,6 +28,8 @@ module.exports = {
 
 	// Browserify settings
 	js: {
+		build: true,
+		minify: true,
 		bundles: [
 			{
 				name: 'Header Scripts',
@@ -42,13 +46,15 @@ module.exports = {
 
 	// Jade settings
 	jade: {
+		build: true,
+		minify: false,
 		src: 'jade/**/*.jade', // Relative to gulpfile.js
 		views: 'jade/views/**/*.jade', // Relative to gulpfile.js
-		dest: '../Styleguide', // Relative to gulpfile.js
-		minify: false
+		dest: '../Styleguide' // Relative to gulpfile.js
 	},
 
 	iconfont: {
+		build: true,
 		src: 'svg/**/*.svg', // Relative to gulpfile.js
 		dest: assets + '/fonts',
 		name: 'fonticons',

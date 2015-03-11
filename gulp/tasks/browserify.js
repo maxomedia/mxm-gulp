@@ -9,6 +9,7 @@ var watchify     = require('watchify');
 var source       = require('vinyl-source-stream');
 var logger       = require('../utils/bundleLogger');
 var handleErrors = require('../utils/handleErrors');
+var browserSync  = require('browser-sync');
 var options      = require('../options').js;
 
 
@@ -40,7 +41,8 @@ var browserifyJS = function(callback, dev) {
 				.on( 'error', handleErrors )
 				.pipe( source( config.src ) )
 				.pipe( gulp.dest( config.dest || options.dest ))
-				.on( 'end', report );
+				.on( 'end', report )
+				.pipe(browserSync.reload({stream: true}));
 		};
 
 		if (dev) {

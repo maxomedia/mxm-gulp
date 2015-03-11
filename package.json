@@ -7,6 +7,7 @@
   },
   "description": "Project setup",
   "devDependencies": {
+    "browser-sync": "^2.2.3",
     "browserify": "^8.1.1",
     "gulp": "^3.8.10",
     "gulp-changed": "^1.1.0",

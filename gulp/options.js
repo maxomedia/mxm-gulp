@@ -53,6 +53,7 @@ module.exports = {
 		dest: '../Styleguide' // Relative to gulpfile.js
 	},
 
+	// Iconfont
 	iconfont: {
 		build: true,
 		src: 'svg/**/*.svg', // Relative to gulpfile.js
@@ -62,5 +63,12 @@ module.exports = {
 		template: 'gulp/utils/iconfont-template.less', // Relative to gulpfile.js
 		lessDest: 'less/scaffolding/', // Relative to gulpfile.js
 		rootPath: webassets + '/fonts/' // Relative to web root
+	},
+
+	browserSync: {
+		active: true,
+		server: {
+			baseDir: '../'
+		}
 	}
 }

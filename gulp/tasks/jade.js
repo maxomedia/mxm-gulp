@@ -5,6 +5,8 @@
 var gulp    = require('gulp');
 var jade    = require('gulp-jade');
 var handleErrors = require('../utils/handleErrors');
+var browserSync = require('browser-sync');
+var syncOptions = require('../options').browserSync;
 var options = require('../options').jade;
 
 
@@ -14,8 +16,10 @@ var options = require('../options').jade;
 
 gulp.task('jade', function () {
 
+	var 
+
 	// Define source files
-	gulp.src( options.views )
+	return gulp.src( options.views )
 
 	// Compile files
 	.pipe( jade({pretty: !options.minify}).on('error', function (err){
@@ -25,5 +29,6 @@ gulp.task('jade', function () {
 	.on( 'error', handleErrors)
 
 	// Save to destination
-	.pipe( gulp.dest( options.dest ) );
+	.pipe( gulp.dest( options.dest ) )
+	.pipe(browserSync.reload({stream: syncOptions.stream}));
 });

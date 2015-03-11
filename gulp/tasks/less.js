@@ -6,6 +6,7 @@ var less                 = require('gulp-less');
 var lessPluginAutoprefix = require('less-plugin-autoprefix');
 var sourcemaps           = require('gulp-sourcemaps');
 var options              = require('../options').less;
+var browserSync = require('browser-sync');
 var handleErrors         = require('../utils/handleErrors');
 
 // Get an autoprefixer instance
@@ -40,5 +41,6 @@ gulp.task('less', function (){
 		.pipe( sourcemaps.write('/', {sourceMappingURLPrefix: options.sourceMapRoot}) )
 
 		// Save compiled css
-		.pipe( gulp.dest(options.dest) );
+		.pipe( gulp.dest(options.dest) )
+		.pipe(browserSync.reload({stream: true}));
 });

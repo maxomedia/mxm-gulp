@@ -13,7 +13,6 @@ module.exports = {
 		src: 'less/**/*.less',
 		main: 'less/main.less', // Comment out, if you want to pass the src glob
 		dest: assets + '/css',
-		suffix: '.min',
 		autoprefix: [
 			'Android >= 2.3',
 			'Chrome >= 20',
@@ -40,8 +39,10 @@ module.exports = {
 				src: 'js/app.js' // Relative to gulpfile.js
 			}
 		],
-		suffix: '.min',
-		dest: assets
+		dest: assets,
+		browserifyOptions: {
+			noParse: []
+		}
 	},
 
 	// Jade settings

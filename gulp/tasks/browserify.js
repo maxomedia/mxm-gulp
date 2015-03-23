@@ -22,7 +22,7 @@ var browserifyJS = function(callback, dev) {
 		if (dev) {
 
 			// Add watchify args and debug (sourcemaps) option
-			_.extend (config, watchify.args, {debug: true});
+			_.extend (config, watchify.args, {debug: true}, options.browserifyOptions);
 
 			// A watchify require/external bug that prevents proper recompiling,
 			// so (for now) we'll ignore these options during development

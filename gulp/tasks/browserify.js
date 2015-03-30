@@ -18,10 +18,8 @@ function getFilename(path) {
 }
 
 var browserifyJS = function (dev) {
-	console.log('browserifyJS');
 
 	var browserifyThis = function (config) {
-		console.log('browserifyThis', config);
 
 		if (dev) {
 
@@ -45,7 +43,6 @@ var browserifyJS = function (dev) {
 				.pipe(source(getFilename(config.src)))
 				.pipe(gulp.dest(config.dest || options.dest))
 				.pipe(browserSync.reload({stream: true}));
-				console.log('bundled');
 		};
 
 		if (dev) {
@@ -64,7 +61,7 @@ var browserifyJS = function (dev) {
 };
 
 gulp.task('browserify', function () {
-	return browserifyJS(true);
+	return browserifyJS();
 });
 
 module.exports = browserifyJS;

@@ -26,11 +26,7 @@ function buildIconfont(){
 	// Create iconfont
 	.pipe( iconfont({
 		fontName: options.name,
-		//fixedWidth: false,
-		//centerHorizontally: false,
 		normalize: true,
-		//fontHeight: 512,
-		//descent: 1,
 		appendCodepoints: true
 	}))
 

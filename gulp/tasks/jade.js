@@ -2,12 +2,12 @@
 // Dependencies
 // ============
 
-var gulp    = require('gulp');
-var jade    = require('gulp-jade');
+var gulp         = require('gulp');
+var jade         = require('gulp-jade');
 var handleErrors = require('../utils/handleErrors');
-var browserSync = require('browser-sync');
-var syncOptions = require('../options').browserSync;
-var options = require('../options').jade;
+var browserSync  = require('browser-sync');
+var syncOptions  = require('../options').browserSync;
+var options      = require('../options').jade;
 
 
 // =====
@@ -15,8 +15,6 @@ var options = require('../options').jade;
 // =====
 
 gulp.task('jade', function () {
-
-	var 
 
 	// Define source files
 	return gulp.src( options.views )

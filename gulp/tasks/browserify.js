@@ -42,6 +42,7 @@ var browserifyJS = function (dev) {
 				.on('error', handleErrors)
 				.pipe(source(getFilename(config.src)))
 				.pipe(gulp.dest(config.dest || options.dest))
+				.on('end', report)
 				.pipe(browserSync.reload({stream: true}));
 		};
 
@@ -53,6 +54,10 @@ var browserifyJS = function (dev) {
 			if (config.require) b.require(config.require);
 			if (config.external) b.external(config.external);
 		}
+
+		var report = function () {
+			logger.end( config.name || config.src );
+		};
 
 		return bundle();
 	};

@@ -20,13 +20,14 @@ gulp.task('jade', function () {
 	return gulp.src( options.views )
 
 	// Compile files
-	.pipe( jade({pretty: !options.minify}).on('error', function (err){
-		console.log(err);
+	.pipe( jade({
+		pretty: !options.minify,
+		locals: options.locals
 	}))
 
 	.on( 'error', handleErrors)
 
 	// Save to destination
 	.pipe( gulp.dest( options.dest ) )
-	.pipe(browserSync.reload({stream: syncOptions.stream}));
+	.pipe(browserSync.reload({stream: true}));
 });

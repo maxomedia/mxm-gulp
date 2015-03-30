@@ -31,10 +31,10 @@ module.exports = {
 		bundles: [
 			{
 				name: 'App',
-				src: 'js/app.js' // Relative to gulpfile.js
+				src: './js/app.js' // Relative to gulpfile.js
 			}
 		],
-		dest: assets,
+		dest: assets + '/js',
 		browserifyOptions: {
 			noParse: [
 				// require.resolve('jquery')
@@ -67,7 +67,7 @@ module.exports = {
 	browserSync: {
 		active: true,
 		server: {
-			baseDir: '../'
+			baseDir: 'test/html'
 		}
 	}
 }

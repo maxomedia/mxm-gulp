@@ -1,11 +1,11 @@
 // Many thanks to:
 // https://github.com/greypants/gulp-starter
 
-var gulp     = require('gulp');
-var options  = require('../options');
-var watchify = require('../utils/getTasks').watchify;
+var gulp    = require('gulp');
+var options = require('../options');
+var tasks   = require('../utils/getTasks');
 
-gulp.task('watch', watchify, function() {
+gulp.task('watch', tasks.watchify(), function() {
 
 	if (options.less.build) {
 		gulp.watch(options.less.src, ['less']);

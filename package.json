@@ -11,7 +11,6 @@
     "browserify": "^9.0.3",
     "gulp": "^3.8.11",
     "gulp-autoprefixer": "^2.1.0",
-    "gulp-changed": "^1.2.1",
     "gulp-consolidate": "^0.1.2",
     "gulp-iconfont": "^1.0.0",
     "gulp-jade": "^1.0.0",

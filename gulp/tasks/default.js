@@ -4,4 +4,4 @@ var options = require('../options');
 
 exec('title ' + options.name);
 
-gulp.task('default', 'watch');
+gulp.task('default', ['watch']);

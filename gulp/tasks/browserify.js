@@ -11,13 +11,17 @@ var logger       = require('../utils/bundleLogger');
 var handleErrors = require('../utils/handleErrors');
 var browserSync  = require('browser-sync');
 var options      = require('../options').js;
+var mergeStream  = require('merge-stream');
 
+function getFilename(path) {
+	return path.replace(/^.*[\\\/]/, '');
+}
 
-var browserifyJS = function(callback, dev) {
+var browserifyJS = function (dev) {
+	console.log('browserifyJS');
 
-	var queue = options.bundles.length;
-
-	var browserifyThis = function(config) {
+	var browserifyThis = function (config) {
+		console.log('browserifyThis', config);
 
 		if (dev) {
 
@@ -26,49 +30,41 @@ var browserifyJS = function(callback, dev) {
 
 			// A watchify require/external bug that prevents proper recompiling,
 			// so (for now) we'll ignore these options during development
-			//config = _.omit( config, ['external', 'require'])
+			//config = _.omit(config, ['external', 'require'])
+			config.entries = config.src;
 		}
 
-		config.entries = './' + config.src;
-
-		var b = browserify( config );
+		var b = browserify(config);
 
 		var bundle = function () {
-			logger.start( config.name || config.src );
+			logger.start(config.name || config.src);
 
 			return b
 				.bundle()
-				.on( 'error', handleErrors )
-				.pipe( source( config.src ) )
-				.pipe( gulp.dest( config.dest || options.dest ))
-				.on( 'end', report )
+				.on('error', handleErrors)
+				.pipe(source(getFilename(config.src)))
+				.pipe(gulp.dest(config.dest || options.dest))
 				.pipe(browserSync.reload({stream: true}));
+				console.log('bundled');
 		};
 
 		if (dev) {
-			b = watchify( b );
-			b.on( 'update', bundle );
-			logger.watch( config.name || config.src );
+			b = watchify(b);
+			b.on('update', bundle);
+			logger.watch(config.src);
 		} else {
-			if ( config.require ) b.require( config.require );
-			if ( config.external ) b.external( config.external );
+			if (config.require) b.require(config.require);
+			if (config.external) b.external(config.external);
 		}
-
-		var report = function () {
-			logger.end( config.name || config.src )
-
-			if (queue) {
-				queue--;
-				if (queue === 0)  callback();
-			}
-		};
 
 		return bundle();
 	};
 
-	options.bundles.forEach( browserifyThis );
+	return mergeStream.apply(gulp, _.map(options.bundles, browserifyThis));
 };
 
-gulp.task( 'browserify', browserifyJS );
+gulp.task('browserify', function () {
+	return browserifyJS(true);
+});
 
 module.exports = browserifyJS;

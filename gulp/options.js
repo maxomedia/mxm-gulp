@@ -1,4 +1,4 @@
-var assets = '../Assets'; // Relative to gulpfile.js
+var assets = 'test'; // Relative to gulpfile.js
 var webassets = '/project/media/Assets'; // Relative to webroot
 
 module.exports = {
@@ -10,8 +10,7 @@ module.exports = {
 	less: {
 		build: true,
 		minify: true,
-		src: 'less/**/*.less',
-		main: 'less/main.less', // Comment out, if you want to pass the src glob
+		src: 'less/main.less',
 		dest: assets + '/css',
 		autoprefix: [
 			'Android >= 2.3',
@@ -31,17 +30,15 @@ module.exports = {
 		minify: true,
 		bundles: [
 			{
-				name: 'Header Scripts',
-				src: 'js/header.js' // Relative to gulpfile.js
-			},
-			{
-				name: 'Angular App',
-				src: 'js/app.js' // Relative to gulpfile.js
+				name: 'App',
+				src: './js/app.js' // Relative to gulpfile.js
 			}
 		],
-		dest: assets,
+		dest: assets + '/js',
 		browserifyOptions: {
-			noParse: []
+			noParse: [
+				// require.resolve('jquery')
+			]
 		}
 	},
 
@@ -51,7 +48,8 @@ module.exports = {
 		minify: false,
 		src: 'jade/**/*.jade', // Relative to gulpfile.js
 		views: 'jade/views/**/*.jade', // Relative to gulpfile.js
-		dest: '../Styleguide' // Relative to gulpfile.js
+		dest: assets + '/html', // Relative to gulpfile.js
+		locals: {} // Local variables to pass to the compiler
 	},
 
 	// Iconfont
@@ -62,14 +60,14 @@ module.exports = {
 		name: 'fonticons',
 		class: 'gfx',
 		template: 'gulp/utils/iconfont-template.less', // Relative to gulpfile.js
-		lessDest: 'less/scaffolding/', // Relative to gulpfile.js
+		lessDest: 'less/', // Relative to gulpfile.js
 		rootPath: webassets + '/fonts/' // Relative to web root
 	},
 
 	browserSync: {
 		active: true,
 		server: {
-			baseDir: '../'
+			baseDir: 'test/html'
 		}
 	}
 }

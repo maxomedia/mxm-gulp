@@ -1,16 +1,14 @@
 // Dependencies
 // ============
 
-var gulp                 = require('gulp');
-var less                 = require('gulp-less');
-var lessPluginAutoprefix = require('less-plugin-autoprefix');
-var sourcemaps           = require('gulp-sourcemaps');
-var options              = require('../options').less;
-var browserSync = require('browser-sync');
-var handleErrors         = require('../utils/handleErrors');
+var gulp         = require('gulp');
+var less         = require('gulp-less');
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps   = require('gulp-sourcemaps');
+var options      = require('../options').less;
+var browserSync  = require('browser-sync');
+var handleErrors = require('../utils/handleErrors');
 
-// Get an autoprefixer instance
-var autoprefixer = new lessPluginAutoprefix({browsers: options.autoprefix});
 
 // Tasks
 // =====
@@ -31,9 +29,10 @@ gulp.task('less', function (){
 		.pipe( sourcemaps.init() )
 
 		// Compile and autoprefix less
-		.pipe( less({
-			plugins: [autoprefixer]
-		}) )
+		.pipe( less() )
+
+		// Autoprefix
+		.pipe( autoprefixer() )
 
 		.on('error', handleErrors)
 
@@ -42,5 +41,7 @@ gulp.task('less', function (){
 
 		// Save compiled css
 		.pipe( gulp.dest(options.dest) )
+
+		// Reload page with browsersync
 		.pipe(browserSync.reload({stream: true}));
 });

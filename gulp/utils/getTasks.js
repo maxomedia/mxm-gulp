@@ -37,6 +37,7 @@ function getWatchifyTasks () {
 	var tasks = [];
 
 	if (options.js && options.js.build) tasks.push('watchify');
+	if (options.browserSync && options.browserSync.active) tasks.push('browserSync');
 
 	return tasks;
 }
@@ -47,5 +48,6 @@ function getWatchifyTasks () {
  */
 module.exports = {
 	dev: getDevTasks,
-	stage: getStageTasks
+	stage: getStageTasks,
+	watchify: getWatchifyTasks
 }

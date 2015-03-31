@@ -31,6 +31,8 @@ gulp.task('less', function (){
 		// Compile and autoprefix less
 		.pipe( less() )
 
+		.on('error', handleErrors)
+
 		// Autoprefix
 		.pipe( autoprefixer() )
 

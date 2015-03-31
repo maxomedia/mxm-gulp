@@ -10,7 +10,8 @@ module.exports = {
 	less: {
 		build: true,
 		minify: true,
-		src: 'less/main.less',
+		main: 'less/main.less',
+		src: 'less/**/*.less',
 		dest: assets + '/css',
 		autoprefix: [
 			'Android >= 2.3',

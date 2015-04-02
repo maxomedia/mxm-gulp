@@ -2,16 +2,17 @@
 
 The buildsystem we use at maxomedia.
 
-Most of the tasks and the structure are inspired by https://github.com/greypants/gulp-starter (yes, by inspired I mean copied & pasted).
+Most of the tasks and the structure are inspired by https://github.com/greypants/gulp-starter, thanks to all contributors of this repo.
 
 #### Features
 - Less to CSS (autoprefixed, sourcemaps, minified)
-- JavaScript bundles with browserify (multiple bundles)
+- JavaScript bundles with browserify (multiple bundles, sourcemaps, minified)
 - Jade to HTML
 - Iconfont generation from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
 - Build on save
 - Separate DEV and STAGE builds to speed up development
 - Error logging with windows notification and in the console
+- BrowserSync
 
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed to use gulp.
@@ -30,7 +31,7 @@ Next, install the npm dependencies with:
   $ npm install
 ```
 
-Finally, run gulp to build your assets and start watching your development files:
+Finally, run gulp to build your assets and start developing:
 ```shell
   $ gulp
 ```

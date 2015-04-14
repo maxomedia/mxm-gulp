@@ -12,6 +12,7 @@ var handleErrors = require('../utils/handleErrors');
 var browserSync  = require('browser-sync');
 var options      = require('../options').js;
 var mergeStream  = require('merge-stream');
+var getFilename  = require('../utils/filename');
 
 function getFilename(path) {
 	return path.replace(/^.*[\\\/]/, '');

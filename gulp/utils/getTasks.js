@@ -8,9 +8,10 @@ function getDevTasks () {
 	var tasks = [];
 
 	if (options.less && options.less.build) tasks.push('less');
-	if (options.js && options.js.build) tasks.push('js');
+	if (options.js && options.js.build) tasks.push('browserify');
 	if (options.jade && options.jade.build) tasks.push('jade');
 	if (options.iconfont && options.iconfont.build) tasks.push('iconfont');
+	if (options.es6 && options.es6.build) tasks.push('es6');
 
 	return tasks;
 }
@@ -25,6 +26,7 @@ function getStageTasks () {
 	if (options.less && options.less.minify) tasks.push('minify-css');
 	if (options.js && options.js.minify) tasks.push('minify-js');
 	if (options.iconfont && options.iconfont.build) tasks.push('iconfont');
+	if (options.es6 && options.es6.build) tasks.push('es6');
 
 	return tasks;
 }

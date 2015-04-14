@@ -43,6 +43,13 @@ module.exports = {
 		}
 	},
 
+	es6: {
+		build: true,
+		minify: false,
+		src: './es6/app.js',
+		dest: assets + '/es6'
+	},
+
 	// Jade settings
 	jade: {
 		build: true,
@@ -66,7 +73,7 @@ module.exports = {
 	},
 
 	browserSync: {
-		active: true,
+		active: false,
 		server: {
 			baseDir: 'test/html'
 		}

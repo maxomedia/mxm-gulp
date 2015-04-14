@@ -18,4 +18,8 @@ gulp.task('watch', tasks.watchify(), function() {
 	if (options.iconfont.build) {
 		gulp.watch(options.iconfont.src, ['iconfont']);
 	}
+
+	if (options.es6.build) {
+		gulp.watch(options.es6.src, ['es6']);
+	}
 });

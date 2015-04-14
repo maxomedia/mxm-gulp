@@ -5,3 +5,4 @@ tests
 temp
 *.sublime-project
 *.sublime-workspace
+fonticons.*

@@ -29,8 +29,9 @@ var browserifyJS = function (dev) {
 			// A watchify require/external bug that prevents proper recompiling,
 			// so (for now) we'll ignore these options during development
 			//config = _.omit(config, ['external', 'require'])
-			config.entries = config.src;
 		}
+		
+		config.entries = config.src;
 
 		var b = browserify(config);
 

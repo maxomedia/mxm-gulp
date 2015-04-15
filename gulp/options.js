@@ -36,6 +36,9 @@ module.exports = {
 			}
 		],
 		dest: assets + '/js',
+		uglifyOptions: {
+			// Some uglify options, e.g. "mangle: false" for angular
+		},
 		browserifyOptions: {
 			noParse: [
 				// require.resolve('jquery')

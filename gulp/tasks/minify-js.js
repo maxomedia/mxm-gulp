@@ -13,6 +13,6 @@ gulp.task( 'minify-js', ['browserify'], function() {
 	}
 
 	return gulp.src(files)
-		.pipe(uglify())
+		.pipe(uglify(options.uglifyOptions))
 		.pipe(gulp.dest(options.dest));
 });

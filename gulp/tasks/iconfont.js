@@ -1,12 +1,13 @@
 // Dependencies
 // ============
 
-var consolidate = require('gulp-consolidate');
-var gulp        = require('gulp');
-var iconfont    = require('gulp-iconfont');
-var rename      = require('gulp-rename');
+var consolidate  = require('gulp-consolidate');
+var gulp         = require('gulp');
+var iconfont     = require('gulp-iconfont');
+var rename       = require('gulp-rename');
 var handleErrors = require('../utils/handleErrors');
-var options     = require('../options').iconfont;
+var options      = require('../options').iconfont;
+var _            = require('lodash');
 
 
 // Tasks
@@ -19,6 +20,14 @@ gulp.task('iconfont', buildIconfont);
 // =========
 
 function buildIconfont(){
+
+	var defaults = {
+		name: 'fonticons',
+		class: 'gfx',
+		template: 'gulp/utils/iconfont-template.less'
+	}
+
+	options = _.extend({}, defaults, options);
 	
 	// Get the icons
 	return gulp.src(options.src)

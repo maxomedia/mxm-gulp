@@ -7,19 +7,19 @@ var tasks   = require('../utils/getTasks');
 
 gulp.task('watch', tasks.watchify(), function() {
 
-	if (options.less.build) {
+	if (options.less) {
 		gulp.watch(options.less.src, ['less']);
 	}
 
-	if (options.jade.build) {
+	if (options.jade) {
 		gulp.watch(options.jade.src, ['jade']);
 	}
 
-	if (options.iconfont.build) {
+	if (options.iconfont) {
 		gulp.watch(options.iconfont.src, ['iconfont']);
 	}
 
-	if (options.es6.build) {
+	if (options.es6) {
 		gulp.watch(options.es6.src, ['es6']);
 	}
 });

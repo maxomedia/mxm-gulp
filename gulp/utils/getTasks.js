@@ -7,11 +7,11 @@ var options = require('../options');
 function getDevTasks () {
 	var tasks = [];
 
-	if (options.less && options.less.build) tasks.push('less');
-	if (options.js && options.js.build) tasks.push('browserify');
-	if (options.jade && options.jade.build) tasks.push('jade');
-	if (options.iconfont && options.iconfont.build) tasks.push('iconfont');
-	if (options.es6 && options.es6.build) tasks.push('es6');
+	if (options.less) tasks.push('less');
+	if (options.js) tasks.push('browserify');
+	if (options.jade) tasks.push('jade');
+	if (options.iconfont) tasks.push('iconfont');
+	if (options.es6) tasks.push('es6');
 
 	return tasks;
 }
@@ -23,10 +23,10 @@ function getDevTasks () {
 function getStageTasks () {
 	var tasks = [];
 
-	if (options.less && options.less.minify) tasks.push('minify-css');
-	if (options.js && options.js.minify) tasks.push('minify-js');
-	if (options.iconfont && options.iconfont.build) tasks.push('iconfont');
-	if (options.es6 && options.es6.build) tasks.push('es6');
+	if (options.less) tasks.push('minify-css');
+	if (options.js) tasks.push('minify-js');
+	if (options.iconfont) tasks.push('iconfont');
+	if (options.es6) tasks.push('es6');
 
 	return tasks;
 }
@@ -38,8 +38,8 @@ function getStageTasks () {
 function getWatchifyTasks () {
 	var tasks = [];
 
-	if (options.js && options.js.build) tasks.push('watchify');
-	if (options.browserSync && options.browserSync.active) tasks.push('browserSync');
+	if (options.js) tasks.push('watchify');
+	if (options.browserSync) tasks.push('browserSync');
 
 	return tasks;
 }

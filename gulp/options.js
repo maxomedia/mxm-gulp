@@ -1,84 +1,93 @@
+// All paths beneath are relative to gulpfile.js unless
+// a comment says otherwise
 var assets = 'test'; // Relative to gulpfile.js
 var webassets = '/project/media/Assets'; // Relative to webroot
 
+// If you don't want a task to be running,
+// comment it out
 module.exports = {
 
 	// Project name
 	name: 'mxm-gulp',
 
-	// Less settings
 	less: {
-		build: true,
-		minify: true,
+		
+		// [optional] Entry point
 		main: 'less/main.less',
+
+		// Files to watch for changes
 		src: 'less/**/*.less',
+
+		// CSS destination
 		dest: assets + '/css',
-		autoprefix: [
-			'Android >= 2.3',
-			'Chrome >= 20',
-			'Firefox >= 24', // Firefox 24 is the latest ESR
-			'Explorer >= 8',
-			'iOS >= 6',
-			'Opera >= 12',
-			'Safari >= 6'
-		],
-		sourceMapRoot: webassets + '/css/' // Relative to web root
+
+		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer
+		// autoprefix: ['last 2 versions']
 	},
 
-	// Browserify settings
 	js: {
-		build: true,
-		minify: true,
+
+		// Your bundles
 		bundles: [
-			{
-				name: 'App',
-				src: './js/app.js' // Relative to gulpfile.js
-			}
+			// Entry point of the bundle, dest is optional
+			{ src: './js/app.js', /*dest: '/xy'*/ }
 		],
+
+		// Default destination for bundled scripts
 		dest: assets + '/js',
-		uglifyOptions: {
-			// Some uglify options, e.g. "mangle: false" for angular
-		},
-		browserifyOptions: {
-			noParse: [
-				// require.resolve('jquery')
-			]
-		}
+
+		// Options for gulp-uglify, see https://www.npmjs.com/package/gulp-uglify
+		uglifyOptions: { /* uglify options */ },
+
+		// Options for browserify, see https://www.npmjs.com/package/browserify
+		browserifyOptions: { /*noParse: [ require.resolve('jquery') ]*/ }
 	},
 
-	es6: {
-		build: true,
-		minify: false,
+	/*es6: {
 		src: './es6/app.js',
 		dest: assets + '/es6'
-	},
+	},*/
 
-	// Jade settings
 	jade: {
-		build: true,
-		minify: false,
-		src: 'jade/**/*.jade', // Relative to gulpfile.js
-		views: 'jade/views/**/*.jade', // Relative to gulpfile.js
-		dest: assets + '/html', // Relative to gulpfile.js
-		locals: {} // Local variables to pass to the compiler
+
+		// Jade files to watch for changes
+		src: 'jade/**/*.jade',
+
+		// Entry points for actual pages
+		views: 'jade/views/**/*.jade',
+
+		// Destination for html files
+		dest: assets + '/html',
+
+		// Local variables to pass to the compiler
+		locals: {}
 	},
 
-	// Iconfont
 	iconfont: {
-		build: true,
-		src: 'svg/**/*.svg', // Relative to gulpfile.js
+
+		// SVG files to watch for changes
+		src: 'svg/**/*.svg',
+
+		// Destinations for font files (.eot, .ttf, .woff, .svg)
 		dest: assets + '/fonts',
-		name: 'fonticons',
-		class: 'gfx',
-		template: 'gulp/utils/iconfont-template.less', // Relative to gulpfile.js
-		lessDest: 'less/', // Relative to gulpfile.js
-		rootPath: webassets + '/fonts/' // Relative to web root
+
+		// Destination for the less files containing the mixin
+		lessDest: 'less/',
+
+		// [relative to webroot] Path to use in @fontface rule
+		rootPath: webassets + '/fonts/'
 	},
 
 	browserSync: {
-		active: false,
+
+		// If you have static html, css and js files and no server,
+		// you can use browserSync as your static file server:
 		server: {
 			baseDir: 'test/html'
-		}
+		},
+
+		// If you already have a server running,
+		// you can use browserSync as a proxy, like:
+		// proxy: 'localhost:60000'
 	}
 }

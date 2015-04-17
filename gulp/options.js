@@ -86,9 +86,7 @@ module.exports = {
 
 		// If you have static html, css and js files and no server,
 		// you can use browserSync as your static file server:
-		server: {
-			baseDir: 'test/html'
-		},
+		server: { baseDir: 'test/html' },
 
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:

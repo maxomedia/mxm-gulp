@@ -1,10 +1,14 @@
 // All paths beneath are relative to gulpfile.js unless
 // a comment says otherwise
-var assets = 'test'; // Relative to gulpfile.js
-var webassets = '/project/media/Assets'; // Relative to webroot
+
+// [relative to gulpfile.js]
+var assets = 'test';
+
+// [relative to webroot]
+var webroot = '/project/media/Assets';
 
 // If you don't want a task to be running,
-// comment it out
+// comment his options out
 module.exports = {
 
 	// Project name
@@ -75,7 +79,7 @@ module.exports = {
 		lessDest: 'less/',
 
 		// [relative to webroot] Path to use in @fontface rule
-		rootPath: webassets + '/fonts/'
+		rootPath: webroot + '/fonts/'
 	},
 
 	browserSync: {

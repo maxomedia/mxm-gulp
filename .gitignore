@@ -2,7 +2,7 @@ node_modules
 bower_components
 test
 tests
+dest
 temp
 *.sublime-project
 *.sublime-workspace
-fonticons.*

@@ -2,7 +2,7 @@
 // a comment says otherwise
 
 // [relative to gulpfile.js]
-var assets = 'test';
+var assets = './dest';
 
 // [relative to webroot]
 var webroot = '/project/media/Assets';
@@ -30,6 +30,11 @@ module.exports = {
 	},
 
 	js: {
+
+		src: [
+			'./js/app.js',
+			'./js/module.js'
+		],
 
 		// Your bundles
 		bundles: [
@@ -61,7 +66,7 @@ module.exports = {
 		views: 'jade/views/**/*.jade',
 
 		// Destination for html files
-		dest: assets + '/html',
+		dest: assets,
 
 		// Local variables to pass to the compiler
 		locals: {}
@@ -86,10 +91,26 @@ module.exports = {
 
 		// If you have static html, css and js files and no server,
 		// you can use browserSync as your static file server:
-		server: { baseDir: 'test/html' },
+		server: { baseDir: assets },
 
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:
 		// proxy: 'localhost:60000'
+	},
+
+	webpack: {
+		entry: {
+			app: './js/app.js',
+			module: './js/module.js'
+		},
+		output: {
+			path: assets + '/js/',
+			filename: '[name].js'
+		},
+		debug: true,
+		devtool: '#source-map',
+		resolve: {
+			extensions: ['', '.js']
+		}
 	}
 }

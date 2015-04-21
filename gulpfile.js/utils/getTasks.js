@@ -8,7 +8,7 @@ function getDevTasks () {
 	var tasks = [];
 
 	if (options.less) tasks.push('less');
-	if (options.js) tasks.push('browserify');
+	if (options.webpack) tasks.push('webpack');
 	if (options.jade) tasks.push('jade');
 	if (options.iconfont) tasks.push('iconfont');
 	if (options.es6) tasks.push('es6');
@@ -32,24 +32,10 @@ function getStageTasks () {
 }
 
 /**
- * Toggle watch task for javascript
- * @return {Array} List of js watcher tasks (mostly just watchify or not)
- */
-function getWatchifyTasks () {
-	var tasks = [];
-
-	if (options.js) tasks.push('watchify');
-	if (options.browserSync) tasks.push('browserSync');
-
-	return tasks;
-}
-
-/**
  * Export both functions
  * @type {Object}
  */
 module.exports = {
 	dev: getDevTasks,
-	stage: getStageTasks,
-	watchify: getWatchifyTasks
+	stage: getStageTasks
 }

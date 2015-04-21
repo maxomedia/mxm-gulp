@@ -5,7 +5,7 @@ var gulp    = require('gulp');
 var options = require('../options');
 var tasks   = require('../utils/getTasks');
 
-gulp.task('watch', tasks.watchify(), function() {
+gulp.task('watch', ['browserSync', 'webpack'], function() {
 
 	if (options.less) {
 		gulp.watch(options.less.src, ['less']);

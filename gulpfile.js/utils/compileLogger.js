@@ -1,20 +1,13 @@
-var gutil        = require("gulp-util")
-var prettifyTime = require('./prettifyTime')
-var handleErrors = require('./handleErrors')
+var gutil        = require("gulp-util");
+var prettifyTime = require('./prettifyTime');
 
-module.exports = function(err, stats) {
-  if(err) throw new gutil.PluginError("webpack", err)
+module.exports = function(err, stats, taskName) {
+	if(err) throw new gutil.PluginError("webpack", err);
 
-  var statColor = stats.compilation.warnings.length < 1 ? 'green' : 'yellow'
-
-  if(stats.compilation.errors.length > 0) {
-    stats.compilation.errors.forEach(function(error){
-      handleErrors(error)
-      statColor = 'red'
-    })
-  } else {
-    var compileTime = prettifyTime(stats.endTime - stats.startTime)
-    gutil.log(gutil.colors[statColor](stats))
-    gutil.log('Compiled with', gutil.colors.cyan('webpack:development'), 'in', gutil.colors.magenta(compileTime))
-  }
-}
+	gutil.log(
+		'Finished',
+		gutil.colors.cyan('\'' + taskName +'\''),
+		'after',
+		gutil.colors.magenta(prettifyTime(stats.endTime - stats.startTime))
+	);
+};

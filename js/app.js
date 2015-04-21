@@ -1,1 +1,2 @@
-console.log('hie ');
+console.log('app.js');
+console.log(require('./partial'));

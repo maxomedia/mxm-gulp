@@ -3,9 +3,10 @@
 
 var gulp    = require('gulp');
 var options = require('../options');
-var tasks   = require('../utils/getTasks');
+var tasks   = require('../utils/getTasks').watch();
 
-gulp.task('watch', ['browserSync', 'webpack'], function() {
+
+gulp.task('watch', tasks, function() {
 
 	if (options.less) {
 		gulp.watch(options.less.src, ['less']);
@@ -15,8 +16,8 @@ gulp.task('watch', ['browserSync', 'webpack'], function() {
 		gulp.watch(options.jade.src, ['jade']);
 	}
 
-	if (options.iconfont) {
-		gulp.watch(options.iconfont.src, ['iconfont']);
+	if (options.fonticons) {
+		gulp.watch(options.fonticons.src, ['fonticons']);
 	}
 
 	if (options.es6) {

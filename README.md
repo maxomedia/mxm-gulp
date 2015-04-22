@@ -6,13 +6,14 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 
 #### Features
 - Less to CSS (autoprefixed, sourcemaps, minified)
-- JavaScript bundles with browserify (multiple bundles, sourcemaps, minified)
+- JavaScript bundles with webpack (multiple bundles, sourcemaps, minified)
 - Jade to HTML
 - Iconfont generation from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
 - Build on save
 - Separate DEV and STAGE builds to speed up development
 - Error logging with windows notification and in the console
 - BrowserSync
+- (Experimental es6 to es5 task with babel)
 
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed to use gulp.
@@ -31,7 +32,12 @@ Next, install the npm dependencies with:
   $ npm install
 ```
 
-Finally, run gulp to build your assets and start developing:
+To initially build your assets, create the folder structure and test the installation, run:
+```shell
+  $ gulp stage
+```
+
+If `gulp stage` finished without errors, you are good to go. Run `gulp` to start developing:
 ```shell
   $ gulp
 ```

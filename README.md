@@ -1,4 +1,5 @@
 # mxm-gulp
+[![Build Status](https://travis-ci.org/maxomedia/mxm-gulp.svg?branch=develop)](https://travis-ci.org/maxomedia/mxm-gulp)
 
 The buildsystem we use at maxomedia.
 

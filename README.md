@@ -22,25 +22,27 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - gulp (http://gulpjs.com/)
 
 #### Installation
-Download the zip or clone the repository (mind the dot at the end of the command, if you want to clone to current directory):
-```shell
-  $ git clone https://github.com/maxomedia/mxm-gulp.git .
-```
+1. Download the zip or clone the repository (mind the dot at the end of the command, if you want to clone to current     directory):
+  ```shell
+    $ git clone https://github.com/maxomedia/mxm-gulp.git .
+  ```
 
-Next, install the npm dependencies with:
-```shell
-  $ npm install
-```
+2. Next, install the npm dependencies with:
+  ```shell
+    $ npm install
+  ```
 
-To initially build your assets, create the folder structure and test the installation, run:
-```shell
-  $ gulp stage
-```
+3.  Now's the time to set your options. You can find them under `gulpfile.js/options.js`. Be sure to set `dest` and `webroot` variables to your liking, these are the most important.
 
-If `gulp stage` finished without errors, you are good to go. Run `gulp` to start developing:
-```shell
-  $ gulp
-```
+4.  To initially build your assets, create the folder structure and test the installation, run:
+  ```shell
+    $ gulp stage
+  ```
+
+5. If `gulp stage` finished without errors, you are good to go. Run `gulp` to start developing:
+  ```shell
+    $ gulp
+  ```
 
 #### Documentation
 Please refer to the [wiki](https://github.com/maxomedia/mxm-gulp/wiki) of this repo for detailed information for each task.

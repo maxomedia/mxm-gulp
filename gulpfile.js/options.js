@@ -1,61 +1,47 @@
-// All paths beneath are relative to gulpfile.js unless
-// a comment says otherwise
+/*
+ *  Instructions:
+ *  =============
+ *  
+ *	1. All paths beneath are relative to gulpfile.js unless
+ *	   a comment says otherwise. If gulpfile.js is a folder,
+ *	   think of it being a file, gulp treats it the same way.
+ *	   
+ *	2. If you don't want a task to be running,
+ *	   comment his options out.
+ *	   
+ *	3. Modify dest and webroot to your liking and you are good
+ *	   to go, if your folder structure meets the defaults set.
+ */
 
 // [relative to gulpfile.js]
-var assets = './dest';
+var dest = './dest';
 
 // [relative to webroot]
-var webroot = '/project/media/Assets';
+var webroot = '';
 
-// If you don't want a task to be running,
-// comment his options out
-module.exports = {
-
-	// Project name
+var options = {
 	name: 'mxm-gulp',
 
 	less: {
-		
+
 		// [optional] Entry point
 		main: 'less/main.less',
 
 		// Files to watch for changes
 		src: 'less/**/*.less',
 
-		// CSS destination
-		dest: assets + '/css',
-
 		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer
 		// autoprefix: ['last 2 versions']
 	},
 
-	js: {
+	webpack: {
 
-		src: [
-			'./js/app.js',
-			'./js/module.js'
-		],
-
-		// Your bundles
-		bundles: [
-			// Entry point of the bundle, dest is optional
-			{ src: './js/app.js', /*dest: '/xy'*/ }
-		],
-
-		// Default destination for bundled scripts
-		dest: assets + '/js',
-
-		// Options for gulp-uglify, see https://www.npmjs.com/package/gulp-uglify
-		uglifyOptions: { /* uglify options */ },
-
-		// Options for browserify, see https://www.npmjs.com/package/browserify
-		browserifyOptions: { /*noParse: [ require.resolve('jquery') ]*/ }
+		// Define entry points for your scripts
+		entry: {
+			app: './js/app.js',
+			module: './js/module.js'
+		}
 	},
-
-	/*es6: {
-		src: './es6/app.js',
-		dest: assets + '/es6'
-	},*/
 
 	jade: {
 
@@ -66,22 +52,19 @@ module.exports = {
 		views: 'jade/views/**/*.jade',
 
 		// Destination for html files
-		dest: assets,
+		dest: dest,
 
 		// Local variables to pass to the compiler
-		locals: {}
+		//locals: {}
 	},
 
-	iconfont: {
+	fonticons: {
 
 		// SVG files to watch for changes
 		src: 'svg/**/*.svg',
 
-		// Destinations for font files (.eot, .ttf, .woff, .svg)
-		dest: assets + '/fonts',
-
 		// Destination for the less files containing the mixin
-		lessDest: 'less/',
+		lessDest: 'less/core/',
 
 		// [relative to webroot] Path to use in @fontface rule
 		rootPath: webroot + '/fonts/'
@@ -91,26 +74,18 @@ module.exports = {
 
 		// If you have static html, css and js files and no server,
 		// you can use browserSync as your static file server:
-		server: { baseDir: assets },
+		server: { baseDir: dest },
 
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:
 		// proxy: 'localhost:60000'
 	},
 
-	webpack: {
-		entry: {
-			app: './js/app.js',
-			module: './js/module.js'
-		},
-		output: {
-			path: assets + '/js/',
-			filename: '[name].js'
-		},
-		debug: true,
-		devtool: '#source-map',
-		resolve: {
-			extensions: ['', '.js']
-		}
-	}
-}
+	// These are required for the 
+	// extended options
+	dest: dest,
+	webroot: webroot	
+};
+
+// Export them options
+module.exports = options;

@@ -1,0 +1,60 @@
+@font-face {
+  font-family: "fonticons";
+  src: url('/fonts/fonticons.eot');
+  src: url('/fonts/fonticons.eot?#iefix') format('eot'),
+    url('/fonts/fonticons.woff') format('woff'),
+    url('/fonts/fonticons.ttf') format('truetype'),
+    url('/fonts/fonticons.svg#fonticons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-styling(){
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-family: "fonticons";
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  speak: none;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: top;
+  line-height: inherit;
+}
+
+.gfx{
+  &:before, &.after:after{
+    .font-styling();
+  }
+  &.after {
+    &:before{display: none;}
+  }
+}
+
+.gfx(@class, @element: before){
+  & when(@element = before){
+    &:before{
+      .glyphmap();
+    }
+  }
+  
+  & when(@element = after){
+    &:after{
+      .glyphmap();
+    }
+  }
+
+  .glyphmap(){
+    .font-styling();
+    & when (@class = gulp){ content: "\E001" }
+    
+  }
+}
+
+.gfx-gulp:before { content: "\E001" }
+
+
+.after.gfx-gulp:after { content: "\E001" }

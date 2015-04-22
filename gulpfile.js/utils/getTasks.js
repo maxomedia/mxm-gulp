@@ -8,9 +8,8 @@ function getDevTasks () {
 	var tasks = [];
 
 	if (options.less) tasks.push('less');
-	if (options.webpack) tasks.push('webpack');
 	if (options.jade) tasks.push('jade');
-	if (options.iconfont) tasks.push('iconfont');
+	if (options.fonticons) tasks.push('fonticons');
 	if (options.es6) tasks.push('es6');
 
 	return tasks;
@@ -24,9 +23,19 @@ function getStageTasks () {
 	var tasks = [];
 
 	if (options.less) tasks.push('minify-css');
-	if (options.js) tasks.push('minify-js');
-	if (options.iconfont) tasks.push('iconfont');
+	if (options.webpack) tasks.push('webpack:stage');
+	if (options.jade) tasks.push('jade');
+	if (options.fonticons) tasks.push('fonticons');
 	if (options.es6) tasks.push('es6');
+
+	return tasks;
+}
+
+function getWatchTasks () {
+	var tasks = [];
+
+	if (options.browserSync) tasks.push('browserSync');
+	if (options.webpack) tasks.push('webpack:watch');
 
 	return tasks;
 }
@@ -37,5 +46,6 @@ function getStageTasks () {
  */
 module.exports = {
 	dev: getDevTasks,
-	stage: getStageTasks
+	stage: getStageTasks,
+	watch: getWatchTasks
 }

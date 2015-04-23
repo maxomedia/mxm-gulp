@@ -1,6 +1,5 @@
 # mxm-gulp
 [![Build Status](https://travis-ci.org/maxomedia/mxm-gulp.svg?branch=develop)](https://travis-ci.org/maxomedia/mxm-gulp)
-[![devDependency Status](https://david-dm.org/maxomedia/mxm-gulp/dev-status.svg)](https://david-dm.org/maxomedia/mxm-gulp#info=devDependencies)
 
 The buildsystem we use at maxomedia.
 

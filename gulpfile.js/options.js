@@ -26,11 +26,19 @@ var options = {
 	name: 'mxm-gulp',
 
 	less: {
+		// Use experimental incremental build
+		// Files are added automatically and in
+		// random order. Every file must import
+		// its reference dependencies
+		incremental: true,
 
-		// [optional] Entry point
+		// Entry point if you don't use incremental less
+		// This can be an array of files for multiple
+		// bundles
 		main: src + '/less/main.less',
 
-		// Files to watch for changes
+		// Files to watch for changes and glob used
+		// for incremental less build
 		src: src + '/less/**/*.less',
 
 		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer

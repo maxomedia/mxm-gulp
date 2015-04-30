@@ -13,6 +13,9 @@
  *	   to go, if your folder structure meets the defaults set.
  */
 
+// Src root
+var src = './src';
+
 // [relative to gulpfile.js]
 var dest = './dest';
 
@@ -25,10 +28,10 @@ var options = {
 	less: {
 
 		// [optional] Entry point
-		main: 'less/main.less',
+		main: src + '/less/main.less',
 
 		// Files to watch for changes
-		src: 'less/**/*.less',
+		src: src + '/less/**/*.less',
 
 		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer
 		// autoprefix: ['last 2 versions']
@@ -38,18 +41,18 @@ var options = {
 
 		// Define entry points for your scripts
 		entry: {
-			app: './js/app.js',
-			module: './js/module.js'
+			app: src + '/js/app.js',
+			module: src + '/js/module.js'
 		}
 	},
 
 	jade: {
 
 		// Jade files to watch for changes
-		src: 'jade/**/*.jade',
+		src: src + '/jade/**/*.jade',
 
 		// Entry points for actual pages
-		views: 'jade/views/**/*.jade',
+		views: src + '/jade/views/**/*.jade',
 
 		// Destination for html files
 		dest: dest,
@@ -61,10 +64,10 @@ var options = {
 	fonticons: {
 
 		// SVG files to watch for changes
-		src: 'svg/**/*.svg',
+		src: src + '/svg/**/*.svg',
 
 		// Destination for the less files containing the mixin
-		lessDest: 'less/core/',
+		lessDest: src + '/less/core/',
 
 		// [relative to webroot] Path to use in @fontface rule
 		rootPath: webroot + '/fonts/'

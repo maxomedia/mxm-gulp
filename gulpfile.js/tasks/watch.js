@@ -8,8 +8,12 @@ var tasks   = require('../utils/getTasks').watch();
 
 gulp.task('watch', tasks, function() {
 
-	if (options.less) {
+	if (options.less && !options.less.incremental) {
 		gulp.watch(options.less.src, ['less']);
+	}
+
+	if (options.less && options.less.incremental) {
+		gulp.watch(options.less.src, ['incremental-less']);
 	}
 
 	if (options.jade) {

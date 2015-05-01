@@ -8,7 +8,6 @@ function getDevTasks () {
 	var tasks = [];
 
 	if (options.less && !options.less.incremental) tasks.push('less');
-	if (options.less && options.less.incremental) tasks.push('less-incremental');
 	if (options.jade) tasks.push('jade');
 	if (options.fonticons) tasks.push('fonticons');
 	if (options.es6) tasks.push('es6');
@@ -36,7 +35,10 @@ function getWatchTasks () {
 	var tasks = [];
 
 	if (options.browserSync) tasks.push('browserSync');
+	if (options.less && options.less.incremental) tasks.push('incremental-less:watch');
 	if (options.webpack) tasks.push('webpack:watch');
+
+	console.log(tasks);
 
 	return tasks;
 }

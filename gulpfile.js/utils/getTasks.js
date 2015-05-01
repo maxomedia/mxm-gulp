@@ -7,7 +7,8 @@ var options = require('../options');
 function getDevTasks () {
 	var tasks = [];
 
-	if (options.less) tasks.push('less');
+	if (options.less && !options.less.incremental) tasks.push('less');
+	if (options.less && options.less.incremental) tasks.push('less-incremental');
 	if (options.jade) tasks.push('jade');
 	if (options.fonticons) tasks.push('fonticons');
 	if (options.es6) tasks.push('es6');

@@ -17,4 +17,4 @@ var defaults = {
 }
 
 // Export them options
-module.exports = _.extend({}, defaults, fastOptions.less);
+module.exports = _.extend({}, defaults, fastOptions.less || fastOptions.incrementalLess);

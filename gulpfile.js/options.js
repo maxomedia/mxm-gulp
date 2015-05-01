@@ -28,7 +28,7 @@ var options = {
 		// Files are added automatically and in
 		// random order. Every file must import
 		// its reference dependencies
-		incremental: true,
+		incremental: false,
 
 		// Entry point if you don't use incremental less
 		// This can be an array of files for multiple

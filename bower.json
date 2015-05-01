@@ -1,0 +1,21 @@
+{
+  "name": "mxm-gulp",
+  "version": "1.0.4",
+  "homepage": "https://github.com/maxomedia/mxm-gulp",
+  "authors": [
+    "tuelsch <tuelsch@gmail.com>"
+  ],
+  "description": "Gulp buildsystem we use at maxomedia.",
+  "main": "gulpfile.js",
+  "keywords": [
+    "gulp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

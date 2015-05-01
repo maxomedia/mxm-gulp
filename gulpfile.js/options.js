@@ -4,17 +4,14 @@
  *  
  *	1. All paths beneath are relative to gulpfile.js unless
  *	   a comment says otherwise. If gulpfile.js is a folder,
- *	   think of it being a file, gulp treats it the same way.
+ *	   think of it as a file, gulp treats it the same way.
  *	   
  *	2. If you don't want a task to be running,
- *	   comment his options out.
+ *	   comment out or delete its options.
  *	   
  *	3. Modify dest and webroot to your liking and you are good
  *	   to go, if your folder structure meets the defaults set.
  */
-
-// Src root
-var src = './src';
 
 // [relative to gulpfile.js]
 var dest = './dest';
@@ -36,11 +33,11 @@ var options = {
 		// Entry point if you don't use incremental less
 		// This can be an array of files for multiple
 		// bundles
-		main: src + '/less/main.less',
+		main: 'src/less/main.less',
 
 		// Files to watch for changes and glob used
 		// for incremental less build
-		src: src + '/less/**/*.less',
+		src: 'src/less/**/*.less',
 
 		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer
 		// autoprefix: ['last 2 versions']
@@ -50,18 +47,17 @@ var options = {
 
 		// Define entry points for your scripts
 		entry: {
-			app: src + '/js/app.js',
-			module: src + '/js/module.js'
+			app: 'src/js/app.js'
 		}
 	},
 
 	jade: {
 
 		// Jade files to watch for changes
-		src: src + '/jade/**/*.jade',
+		src: 'src/jade/**/*.jade',
 
 		// Entry points for actual pages
-		views: src + '/jade/views/**/*.jade',
+		views: 'src/jade/views/**/*.jade',
 
 		// Destination for html files
 		dest: dest,
@@ -73,10 +69,10 @@ var options = {
 	fonticons: {
 
 		// SVG files to watch for changes
-		src: src + '/svg/**/*.svg',
+		src: 'src/svg/**/*.svg',
 
 		// Destination for the less files containing the mixin
-		lessDest: src + '/less/core/',
+		lessDest: 'src/less/core/',
 
 		// [relative to webroot] Path to use in @fontface rule
 		rootPath: webroot + '/fonts/'

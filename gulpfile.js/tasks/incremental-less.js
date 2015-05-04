@@ -44,7 +44,7 @@ function build () {
         }))
 
         // Log used files
-		//.pipe(filelog())
+		.pipe(filelog())
 
 		// Start sourcemapping
 		.pipe(sourcemaps.init())
@@ -127,9 +127,17 @@ function onUnlink (file) {
 
 	var fileName = replaceExtension(file.path, 'css');
 
-	delete cached.caches['less'][file.path];
+	// Delete from gulp-cached
+	if (cached.caches['less'][file.path]) {
+		delete cached.caches['less'][file.path];
+	} else {
+		console.log('gulp-cached.onUnlink: ' + file.path + ' not found in cache.')
+	}
+
+	// Delete from gulp-remember cache
 	remember.forget('less', fileName);
 
+	// Trigger rebuild
 	onChange();
 }
 

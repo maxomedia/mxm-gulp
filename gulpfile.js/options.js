@@ -31,7 +31,7 @@ var options = {
 		incremental: false,
 
 		// Exclude condition for incremental builds.
-		// Pass a '!exclude.less' style path.
+		// Pass a '!exclude.less' kind of path.
 		exclude: ['!core/*'],
 
 		// Entry point if you don't use incremental less

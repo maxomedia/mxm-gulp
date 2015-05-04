@@ -10,7 +10,6 @@ var autoprefixer  = require('gulp-autoprefixer');
 var options       = require('../options/less');
 var browserSync   = require('browser-sync');
 var watcher       = require('gulp-watch');
-var compileLogger = require('../utils/compileLogger');
 var filelog       = require('gulp-filelog');
 
 // Tasks
@@ -84,7 +83,6 @@ function watchHandler (file) {
  * finished.
  */
 function onChange () {
-	console.log('change');
 	var stream = build();
 
 	stream.on('end', function (){
@@ -101,10 +99,21 @@ function onChange () {
  */
 function onUnlink (file) {
 
-	var fileName = file.path.substr(0, file.path.lastIndexOf('.')) + '.css';
+	var fileName = replaceExtension(file.path, 'css');
 
 	delete cached.caches['less'][file.path];
 	remember.forget('less', fileName);
 
 	onChange();
+}
+
+/**
+ * Replace the extension of a file path
+ * @param  {String} path      The path
+ * @param  {String} extension The new extension, with or without the dot
+ * @return {String}           Path with the new extension
+ */
+function replaceExtension (path, extension) {
+	if (extension.indexOf('.') < 0) extension = '.' + extension;
+	return path.substr(0, path.lastIndexOf('.')) + extension;
 }

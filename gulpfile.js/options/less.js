@@ -20,5 +20,9 @@ var defaults = {
 	}
 }
 
+var options = _.extend({}, defaults, fastOptions.less || fastOptions.incrementalLess);
+
+options.exclude.push(options.src);
+
 // Export them options
-module.exports = _.extend({}, defaults, fastOptions.less || fastOptions.incrementalLess);
+module.exports = options;

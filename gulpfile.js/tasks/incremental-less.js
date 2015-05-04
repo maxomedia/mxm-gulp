@@ -14,6 +14,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var browserSync  = require('browser-sync');
 var options      = require('../options/less');
 var handleErrors = require('../utils/handleErrors');
+var logger = require('../utils/compileLogger');
 
 // Tasks
 gulp.task('incremental-less', build);
@@ -36,7 +37,7 @@ function build () {
 		.pipe(cached('less'))
 
 		// Filter unwanted files
-		.pipe(filter(options.exclude))
+		//.pipe(filter(options.exclude))
 
 		// Resolve imports
 		.pipe(progeny({
@@ -62,7 +63,9 @@ function build () {
 		.pipe(concat('main.css'))
 
 		// Write sourcemaps
-		.pipe(sourcemaps.write('.'))
+		.pipe(sourcemaps.write('/', {
+			sourceMappingURLPrefix: options.webroot + '/css'
+		}))
 
 		// Write stream to filesystem
 		.pipe(gulp.dest(options.dest));		
@@ -109,9 +112,16 @@ function watchHandler (file) {
  * finished.
  */
 function onChange () {
+	var start = new Date();
 	var stream = build();
 
 	stream.on('end', function (){
+		var end = new Date();
+		var stats = {
+			startTime: start,
+			endTime: end
+		}
+		logger(null, stats, 'incremental-less');
 		browserSync.reload();
 	});
 }

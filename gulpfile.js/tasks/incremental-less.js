@@ -1,16 +1,19 @@
 // Dependencies
-var gulp          = require('gulp');
-var less          = require('gulp-less');
-var concat        = require('gulp-concat');
-var cached        = require('gulp-cached');
-var progeny       = require('gulp-progeny');
-var remember      = require('gulp-remember');
-var sourcemaps    = require('gulp-sourcemaps');
-var autoprefixer  = require('gulp-autoprefixer');
-var options       = require('../options/less');
-var browserSync   = require('browser-sync');
-var watcher       = require('gulp-watch');
-var filelog       = require('gulp-filelog');
+var gulp         = require('gulp');
+var less         = require('gulp-less');
+var watcher      = require('gulp-watch');
+var concat       = require('gulp-concat');
+var cached       = require('gulp-cached');
+var filter       = require('gulp-filter');
+var progeny      = require('gulp-progeny');
+var filelog      = require('gulp-filelog');
+var remember     = require('gulp-remember');
+var sourcemaps   = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+
+var browserSync  = require('browser-sync');
+var options      = require('../options/less');
+var handleErrors = require('../utils/handleErrors');
 
 // Tasks
 gulp.task('incremental-less', build);
@@ -26,19 +29,42 @@ gulp.task('incremental-less:watch', watch);
 function build () {
 	return gulp.src(options.src)
 		
+		// Handle errors
+		.on('error', handleErrors)
+
 		// Add new files to cache
 		.pipe(cached('less'))
+
+		// Filter unwanted files
+		.pipe(filter(options.exclude))
+
+		// Resolve imports
 		.pipe(progeny({
             regexp: /^\s*@import\s*(?:\(\w+\)\s*)?['"]([^'"]+)['"]/
         }))
+
+        // Log used files
 		.pipe(filelog())
+
+		// Start sourcemapping
 		.pipe(sourcemaps.init())
+
+		// Start compilation
 		.pipe(less())
-		.on('error', function (err) { console.log(err); })
+
+		// Add CSS partials from cache
 		.pipe(remember('less'))
+
+		// Run autoprefixer
 		.pipe(autoprefixer())
+
+		// Concatenate to one file
 		.pipe(concat('main.css'))
+
+		// Write sourcemaps
 		.pipe(sourcemaps.write('.'))
+
+		// Write stream to filesystem
 		.pipe(gulp.dest(options.dest));		
 }
 

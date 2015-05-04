@@ -1,85 +1,145 @@
-var gulp          = require('gulp');
-var less          = require('gulp-less');
-var concat        = require('gulp-concat');
-var cached        = require('gulp-cached');
-var progeny       = require('gulp-progeny');
-var remember      = require('gulp-remember');
-var sourcemaps    = require('gulp-sourcemaps');
-var autoprefixer  = require('gulp-autoprefixer');
-var options       = require('../options/less');
-var browserSync   = require('browser-sync');
-var watch         = require('gulp-watch');
-var compileLogger = require('../utils/compileLogger');
-var filelog = require('gulp-filelog');
+// Dependencies
+var gulp         = require('gulp');
+var less         = require('gulp-less');
+var watcher      = require('gulp-watch');
+var concat       = require('gulp-concat');
+var cached       = require('gulp-cached');
+var filter       = require('gulp-filter');
+var progeny      = require('gulp-progeny');
+var filelog      = require('gulp-filelog');
+var remember     = require('gulp-remember');
+var sourcemaps   = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
 
-function build (callback) {
+var browserSync  = require('browser-sync');
+var options      = require('../options/less');
+var handleErrors = require('../utils/handleErrors');
+
+// Tasks
+gulp.task('incremental-less', build);
+gulp.task('incremental-less:watch', watch);
+
+/**
+ * The actual task to compile less
+ * to css, manage the caches, write
+ * the sourcemap and run autoprefixer.
+ * 
+ * @return {Object} Gulp stream
+ */
+function build () {
 	return gulp.src(options.src)
 		
+		// Handle errors
+		.on('error', handleErrors)
+
 		// Add new files to cache
 		.pipe(cached('less'))
+
+		// Filter unwanted files
+		.pipe(filter(options.exclude))
+
+		// Resolve imports
 		.pipe(progeny({
             regexp: /^\s*@import\s*(?:\(\w+\)\s*)?['"]([^'"]+)['"]/
         }))
-		.pipe(filelog())
+
+        // Log used files
+		//.pipe(filelog())
+
+		// Start sourcemapping
 		.pipe(sourcemaps.init())
+
+		// Start compilation
 		.pipe(less())
-		.on('error', function (err) { console.log(err); })
+
+		// Add CSS partials from cache
 		.pipe(remember('less'))
+
+		// Run autoprefixer
 		.pipe(autoprefixer())
+
+		// Concatenate to one file
 		.pipe(concat('main.css'))
+
+		// Write sourcemaps
 		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest(options.dest))
-		.on('end', callback)
 
-		// Reload page with browsersync
-		.pipe(browserSync.reload({stream: true}))
+		// Write stream to filesystem
+		.pipe(gulp.dest(options.dest));		
 }
 
-gulp.task('incremental-less', function (callback) {
-	build(callback);
-});
+/**
+ * Watcher task using gulp-watch. Uses the
+ * callback given from gulp to notify gulp
+ * the task is complete.
+ * 
+ * @param  {Function} callback Gulp task callback
+ */
+function watch (callback) {
+	watcher(options.src, watchHandler);
+	callback();
+}
 
-gulp.task('incremental-less:watch', function (callback) {
-	var callbacked = false;
-	var watcher = watch(options.src, function (file) {
+/**
+ * Decide which handler to trigger based
+ * on the event type
+ * 
+ * @param  {Object} file File that triggered the event
+ */
+function watchHandler (file) {
+	switch(file.event) {
+		case 'change':
+			onChange(file);
+			break;
+		case 'unlink':
+			onUnlink(file);
+			break;
+		case 'add':
+			onChange(file);
+			break;
+		default:
+			console.log('Unhandled incremental-less:watch event: ' + file.event);
+			break;
+	}
+}
 
-		if (typeof handleChanges[file.event] === 'function'){
-			handleChanges[file.event](file);
-		}
-		var stats = { startTime: new Date() };
-		build(function () {
+/**
+ * A file has been changed, trigger build
+ * and reload browserSync after task has
+ * finished.
+ */
+function onChange () {
+	var stream = build();
 
-			stats.endTime = new Date();
-			compileLogger(null, stats, 'incremental-less');
-			if (!callbacked) callback();
-			callbacked = true;
-		});
+	stream.on('end', function (){
+		browserSync.reload();
 	});
-	watcher.on('change', watcher_change);
-});
-
-function watcher_change (event) {
-
 }
 
-var handleChanges = {
-	change: function (file) {
+/**
+ * A file has been deleted, remove it from
+ * the caches. Then build remaining less files
+ * and reload browserSync
+ * 
+ * @param  {Object} file File that has been removed
+ */
+function onUnlink (file) {
 
-		console.log('hc change');
-	},
-	unlink: function (file) {
-		console.log(file.path);
-		console.log(JSON.stringify(cached.caches.less[file.path]));
-		console.log(remember.cacheFor('less'));
-		delete cached.caches['less'][file.path];
-		remember.forget('less', file.path.substr(0, file.path.lastIndexOf('.')) + '.css');
-	},
-	add: function (file) {
-		console.log('hc add');
-	}
-};
-function change (e) {
-	console.log('watcher ' + e.type);
-	if (e.type === 'deleted') {
-	}
+	var fileName = replaceExtension(file.path, 'css');
+
+	delete cached.caches['less'][file.path];
+	remember.forget('less', fileName);
+
+	onChange();
+}
+
+/**
+ * Replace the extension of a file path
+ * @param  {String} path      The path
+ * @param  {String} extension The new extension, with or without the dot
+ * @return {String}           Path with the new extension
+ */
+function replaceExtension (path, extension) {
+	if (extension.indexOf('.') < 0) extension = '.' + extension;
+	return path.substr(0, path.lastIndexOf('.')) + extension;
 }

@@ -28,10 +28,10 @@ var options = {
 		// Files are added automatically and in
 		// random order. Every file must import
 		// its reference dependencies
-		incremental: true,
-		
+		incremental: false,
+
 		// Exclude condition for incremental builds.
-		// Pass a '!exclude.less' style path.
+		// Pass a '!exclude.less' kind of path.
 		exclude: ['!core/*'],
 
 		// Entry point if you don't use incremental less
@@ -44,7 +44,7 @@ var options = {
 		src: 'src/less/**/*.less',
 
 		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer
-		// autoprefix: ['last 2 versions']
+		// autoprefixer: {browsers: ['last 2 versions']}
 	},
 
 	webpack: {

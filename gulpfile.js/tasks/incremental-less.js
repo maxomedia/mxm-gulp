@@ -44,7 +44,7 @@ function build () {
         }))
 
         // Log used files
-		.pipe(filelog())
+		//.pipe(filelog())
 
 		// Start sourcemapping
 		.pipe(sourcemaps.init())

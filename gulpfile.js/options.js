@@ -28,7 +28,7 @@ var options = {
 		// Files are added automatically and in
 		// random order. Every file must import
 		// its reference dependencies
-		incremental: true,
+		incremental: false,
 
 		// Exclude condition for incremental builds.
 		// Pass a '!exclude.less' style path.

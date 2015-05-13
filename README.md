@@ -33,7 +33,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
     $ npm install
   ```
 
-3.  Now's the time to set your options. You can find them under `gulpfile.js/options.js`. Be sure to set `dest` and `webroot` variables to your liking, these are the most important.
+3.  Now's the time to set your options. You can find them under `gulpfile.js/options.js`. Be sure to set `destination` and `webroot` variables to your liking, these are the most important.
 
 4.  To initially build your assets, create the folder structure and test the installation, run:
   ```shell

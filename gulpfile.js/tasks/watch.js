@@ -19,8 +19,4 @@ gulp.task('watch', tasks, function() {
 	if (options.fonticons) {
 		gulp.watch(options.fonticons.src, ['fonticons']);
 	}
-
-	if (options.es6) {
-		gulp.watch(options.es6.src, ['es6']);
-	}
 });

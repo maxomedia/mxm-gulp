@@ -19,10 +19,10 @@ var defaults = {
 
 // Add plugins
 if (!defaults.plugins) defaults.plugins = [];
-defaults.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+/*defaults.plugins.push(new webpack.optimize.CommonsChunkPlugin({
 	name: 'shared',
 	filename: '[name].js'
-}));
+}));*/
 
 // Export extended options
 module.exports = _.extend({}, defaults, fastOptions.webpack);

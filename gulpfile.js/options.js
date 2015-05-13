@@ -13,15 +13,18 @@
  *	   to go, if your folder structure meets the defaults set.
  */
 
-// [relative to gulpfile.js]
-var dest = './dest';
+// Output folder for assets, relative to gulpfile.js
+var destination = './dist';
 
-// [relative to webroot]
+// Route to your asset folder from a browser point of view
 var webroot = '';
 
 var options = {
+
+	// Project name
 	name: 'mxm-gulp',
 
+	// Less to CSS
 	less: {
 		
 		// Use experimental incremental build
@@ -32,21 +35,28 @@ var options = {
 
 		// Exclude condition for incremental builds.
 		// Pass a '!exclude.less' kind of path.
-		exclude: ['!core/*'],
+		// Do not set this option if you do not use
+		// the incremental build.
+		// exclude: ['!core/*'],
 
-		// Entry point if you don't use incremental less
+		// Entry point if you don't use incremental build.
 		// This can be an array of files for multiple
-		// bundles
+		// bundles:
+		// main: ['src/less/main.less', 'src/less/bundle1.less'],
 		main: 'src/less/main.less',
 
 		// Files to watch for changes and glob used
 		// for incremental less build
 		src: 'src/less/**/*.less',
 
-		// Autoprefixer options, see https://www.npmjs.com/package/gulp-autoprefixer
+		// Autoprefixer options, see:
+		// https://www.npmjs.com/package/gulp-autoprefixer
+		// Default used is IE8+, Chrome 20+, Firefox 11+... see:
+		// ./options/less.js for further info
 		// autoprefixer: {browsers: ['last 2 versions']}
 	},
 
+	// Javascript bundles
 	webpack: {
 
 		// Define entry points for your scripts
@@ -64,29 +74,29 @@ var options = {
 		views: 'src/jade/views/**/*.jade',
 
 		// Destination for html files
-		dest: dest,
+		dest: destination,
 
 		// Local variables to pass to the compiler
 		//locals: {}
 	},
 
+	// SVG icons to webfont
 	fonticons: {
 
 		// SVG files to watch for changes
 		src: 'src/svg/**/*.svg',
 
-		// Destination for the less files containing the mixin
-		lessDest: 'src/less/core/',
-
-		// [relative to webroot] Path to use in @fontface rule
-		rootPath: webroot + '/fonts/'
+		// Destination folder for the less files
+		// containing the mixin
+		lessDest: 'src/less/core/'
 	},
 
+	// Static webserver and livereload
 	browserSync: {
 
 		// If you have static html, css and js files and no server,
 		// you can use browserSync as your static file server:
-		server: { baseDir: dest },
+		server: { baseDir: destination },
 
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:
@@ -94,8 +104,8 @@ var options = {
 	},
 
 	// These are required for the 
-	// extended options
-	dest: dest,
+	// extended options, do not alter
+	dest: destination,
 	webroot: webroot	
 };
 

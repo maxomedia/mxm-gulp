@@ -1,19 +1,13 @@
-// Many thanks to:
-// https://github.com/greypants/gulp-starter
-
-var gulp    = require('gulp');
-var options = require('../options');
-var tasks   = require('../utils/getTasks').watch();
+var gulp        = require('gulp');
+var kickstarter = require('../utils/kickstarter');
 
 
 gulp.task('watch', tasks, function() {
 
+	kickstarter.emit('gulp.watch');
+
 	if (options.less && !options.less.incremental) {
 		gulp.watch(options.less.src, ['less']);
-	}
-
-	if (options.jade) {
-		gulp.watch(options.jade.src, ['jade']);
 	}
 
 	if (options.fonticons) {

@@ -1,8 +1,8 @@
-var gulp         = require('gulp');
-var webpack      = require('webpack');
-var browserSync  = require('browser-sync');
-var options = require('../options/webpack');
-var log          = require('../utils/compileLogger');
+var gulp        = require('gulp');
+var webpack     = require('webpack');
+var browserSync = require('browser-sync');
+var options     = require('../options/webpack');
+var log         = require('../utils/compileLogger');
 
 /**
  * Shared pack function

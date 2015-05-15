@@ -1,5 +1,6 @@
 var gulp  = require('gulp');
-var options = require('../options');
-var tasks = require('../utils/getTasks').dev();
+var events = require('../utils/events');
 
-gulp.task('dev', tasks);
+gulp.task('dev', function() {
+	events.emit('gulp.dev');
+});

@@ -4,17 +4,16 @@
 
 var gulp         = require('gulp');
 var jade         = require('gulp-jade');
-var handleErrors = require('../utils/handleErrors');
 var browserSync  = require('browser-sync');
-var syncOptions  = require('../options').browserSync;
 var options      = require('../options').jade;
+var handleErrors = require('../utils/handleErrors');
+var kickstarter  = require('../utils/kickstarter');
 
-
-// =====
-// Tasks
-// =====
-
-gulp.task('jade', function () {
+/**
+ * Compile jade files in the views directory
+ * @return {Object} Gulp stream
+ */
+function compileJade () {
 
 	// Define source files
 	return gulp.src( options.views )
@@ -25,9 +24,22 @@ gulp.task('jade', function () {
 		locals: options.locals
 	}))
 
+	// Handle them errors
 	.on( 'error', handleErrors)
 
 	// Save to destination
 	.pipe( gulp.dest( options.dest ) )
+
+	// Reolad page
 	.pipe(browserSync.reload({stream: true}));
+}
+
+// Register task
+gulp.task('jade', compileJade);
+
+// Register event handler
+kickstarter.on('gulp.dev', compileJade);
+kickstarter.on('gulp.stage', compileJade);
+kickstarter.on('gulp.watch', function () {
+	gulp.watch(options.src, ['jade']);
 });

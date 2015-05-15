@@ -26,18 +26,6 @@ var options = {
 
 	// Less to CSS
 	less: {
-		
-		// Use experimental incremental build
-		// Files are added automatically and in
-		// random order. Every file must import
-		// its reference dependencies
-		incremental: false,
-
-		// Exclude condition for incremental builds.
-		// Pass a '!exclude.less' kind of path.
-		// Do not set this option if you do not use
-		// the incremental build.
-		// exclude: ['!core/*'],
 
 		// Entry point if you don't use incremental build.
 		// This can be an array of files for multiple

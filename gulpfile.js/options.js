@@ -63,8 +63,11 @@ var options = {
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
-			app: './src/js/app.js'
-		}
+			app: './app.js'
+		},
+
+		// See https://github.com/greypants/gulp-starter/pull/139/files
+		context: require('path').resolve('src/js'),
 	},
 
 	jade: {

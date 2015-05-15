@@ -59,9 +59,11 @@ var options = {
 	// Javascript bundles
 	webpack: {
 
-		// Define entry points for your scripts
+		// Define entry points for your scripts.
+		// Use paths starting with './' (this folder)
+		// or '../' (this folders parent)
 		entry: {
-			app: 'src/js/app.js'
+			app: './src/js/app.js'
 		}
 	},
 
@@ -101,6 +103,9 @@ var options = {
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:
 		// proxy: 'localhost:60000'
+		
+		// Wether to open new tab on start or not
+		open: false
 	},
 
 	// These are required for the 

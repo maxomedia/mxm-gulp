@@ -3,48 +3,71 @@ var webpack     = require('webpack');
 var browserSync = require('browser-sync');
 var options     = require('../options/webpack');
 var log         = require('../utils/compileLogger');
+var kickstarter = require('../utils/kickstarter');
 
 /**
- * Shared pack function
- * @param  {Object}   options  webpack options
- * @param  {Function} callback Callback to tell gulp the task
- *                             has finished without errors
- * @return {Object}            webpack instance
+ * Development task with file watcher
+ * @param  {Function} callback Gulp callback for
+ *                             completing the task
+ * @return {undefined}
  */
-function pack (options, callback) {
-	return webpack(options, function () {
-		if (typeof callback === 'function') callback();
-	});
+function startWatching (callback) {
+	webpack(options).watch(200, endPackCallback(callback, true));
 }
 
-// Standalone task
-gulp.task('webpack', function (callback) {
-	pack(options, callback);
-});
-
-// Dev task with file watcher (200ms timeout for repack)
-gulp.task('webpack:watch', function (callback) {
-	var built = false;
-
-	pack(options).watch(200, function (err, stats) {
-
-		// Gulp like log message
-		log(err, stats, 'webpack');
-
-		// Reload page, if browsersync is active
-		browserSync.reload();
-
-		// Call callback only once
-		if (!built) { built = true; callback(); }
-	});
-});
-
-// Stage task with uglify passed as plugin
-gulp.task('webpack:stage', function (callback) {
+/**
+ * Staging task with uglify plugin and debug
+ * option disabled.
+ * @param  {Function} callback Gulp callback for
+ *                             completing the task
+ * @return {undefined}
+ */
+function compileAndMinify (callback) {
 
 	// Adapt stage options and push minify plugin
 	options.debug = false;
 	options.plugins.push(new webpack.optimize.UglifyJsPlugin());
 
-	pack(options, callback);
+	webpack(options, endPackCallback(callback, false));
+}
+
+/**
+ * Handle returnal to notice gulp of task
+ * completion and write a log if needed.
+ * @param  {Function} callback Callback needed by gulp
+ * @param  {Boolean}   writeLog Wether or not to output log info
+ * @return {Function}            Callback handler
+ */
+function endPackCallback (callback, writeLog) {
+	var built = false;
+
+	return function (err, stats) {
+
+		// Gulp like log message
+		if (writeLog) log(err, stats, 'webpack');
+
+		// Reload page, if browsersync is active
+		browserSync.reload();
+
+		// Call callback only once
+		if (!built) {
+			built = true;
+			if (typeof callback === 'function') callback();
+		}
+	}
+}
+
+// Register tasks
+gulp.task('webpack', function (callback) {
+	webpack(options, endPackCallback(callback, false));
 });
+gulp.task('webpack:dev', startWatching);
+gulp.task('webpack:stage', compileAndMinify);
+
+// Register event handlers
+kickstarter.on('gulp.dev', startWatching);
+kickstarter.on('gulp.stage', compileAndMinify);
+
+// Export tasks
+module.exports.dev = startWatching;
+module.exports.stage = compileAndMinify;

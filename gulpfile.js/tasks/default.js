@@ -1,7 +1,6 @@
-var gulp    = require('gulp');
-var exec    = require('child_process').exec;
-var options = require('../options');
+var gulp = require('gulp');
 
-exec('title ' + options.name);
-
-gulp.task('default', ['watch']);
+// Default gulp task, this gets
+// invoked by the 'gulp' console
+// command.
+gulp.task('default', ['dev']);

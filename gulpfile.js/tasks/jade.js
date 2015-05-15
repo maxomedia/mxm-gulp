@@ -1,7 +1,3 @@
-// ============
-// Dependencies
-// ============
-
 var gulp         = require('gulp');
 var jade         = require('gulp-jade');
 var browserSync  = require('browser-sync');
@@ -38,8 +34,7 @@ function compileJade () {
 gulp.task('jade', compileJade);
 
 // Register event handler
-kickstarter.on('gulp.dev', compileJade);
-kickstarter.on('gulp.stage', compileJade);
-kickstarter.on('gulp.watch', function () {
+kickstarter.on('gulp.dev', function () {
 	gulp.watch(options.src, ['jade']);
 });
+kickstarter.on('gulp.stage', compileJade);

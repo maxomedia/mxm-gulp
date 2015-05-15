@@ -1,14 +1,16 @@
-// Dependencies
-// ============
-
-var consolidate  = require('gulp-consolidate');
 var gulp         = require('gulp');
 var fonticons    = require('gulp-iconfont');
-var handleErrors = require('../utils/handleErrors');
+var consolidate  = require('gulp-consolidate');
 var options      = require('../options/fonticons');
+var handleErrors = require('../utils/handleErrors');
+var kickstarter  = require('../utils/kickstarter');
+var minifyCSS    = require('./minify-css');
 
-
-gulp.task('fonticons', function (){
+/**
+ * Generate font files from svg icons
+ * @return {Object} Gulp stream
+ */
+function generateFonticons () {
 
 	// Get the icons
 	return gulp.src(options.src)
@@ -23,12 +25,18 @@ gulp.task('fonticons', function (){
 	// On parsing one icon, create .less file
 	.on('codepoints', setCodepoints)
 
+	// Handle errors
 	.on('error', handleErrors)
 
 	// Save the fonticons
 	.pipe(gulp.dest(options.dest));
-});
+}
 
+/**
+ * Generate .less file with a mixin and 
+ * convenience classes for every icon.
+ * @param {Object} codepoints [description]
+ */
 function setCodepoints (codepoints) {
 
 	// Get less template
@@ -42,8 +50,28 @@ function setCodepoints (codepoints) {
 			className: options.class
 		}))
 
+		// Handle errors
 		.on('error', handleErrors)
 
 		// Save the less file
-		.pipe( gulp.dest(options.lessDest) );
+		.pipe( gulp.dest(options.lessDest) )
+
+		.on('end', function () {
+			kickstarter.emit('fonticons.end');
+		});
 }
+
+// Register task
+gulp.task('fonticons', generateFonticons);
+
+// Register event handlers
+kickstarter.on('gulp.dev', function () {
+	gulp.watch(options.src, ['fonticons']);
+});
+kickstarter.on('gulp.stage', function () {
+	kickstarter.once('fontiocns.end', minifyCSS);
+	generateFonticons();
+});
+
+// Export stream
+module.exports = generateFonticons;

@@ -38,3 +38,6 @@ kickstarter.on('gulp.dev', function () {
 	gulp.watch(options.src, ['jade']);
 });
 kickstarter.on('gulp.stage', compileJade);
+
+// Export task
+module.exports = compileJade;

@@ -5,6 +5,10 @@ var options     = require('../options/webpack');
 var log         = require('../utils/compileLogger');
 var kickstarter = require('../utils/kickstarter');
 
+function pack (opt, callback) {
+	return webpack(opt, callback);
+}
+
 /**
  * Development task with file watcher
  * @param  {Function} callback Gulp callback for
@@ -69,5 +73,6 @@ kickstarter.on('gulp.dev', startWatching);
 kickstarter.on('gulp.stage', compileAndMinify);
 
 // Export tasks
+module.exports.default = pack;
 module.exports.dev = startWatching;
 module.exports.stage = compileAndMinify;

@@ -11,3 +11,6 @@ function setTitle () {
 
 // Register event handler
 kickstarter.on('gulp.dev', setTitle);
+
+// Export task
+module.exports = setTitle;

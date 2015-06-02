@@ -1,6 +1,7 @@
 var _           = require('lodash');
 var webpack     = require('webpack');
 var fastOptions = require('../options');
+var path = require('path');
 
 // Define extended default options, they
 // can be overriden by the fast options
@@ -10,9 +11,10 @@ var defaults = {
 		filename: '[name].js',
 		publicPath: fastOptions.webroot
 	},
-	devtool: '#source-map',
+	devtool: 'source-map',
 	resolve: {
-		extensions: ['', '.js']
+		extensions: ['', '.js'],
+		root: path.resolve('./src/js')
 	},
 	debug: true
 }

@@ -5,6 +5,12 @@ var options     = require('../options/webpack');
 var log         = require('../utils/compileLogger');
 var kickstarter = require('../utils/kickstarter');
 
+/**
+ * Plain call to webpack function
+ * @param  {Object}   opt      Webpack options
+ * @param  {Function} callback Callback after packing
+ * @return {Object}            Webpack instance
+ */
 function pack (opt, callback) {
 	return webpack(opt, callback);
 }

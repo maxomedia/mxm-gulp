@@ -1,0 +1,25 @@
+{
+  "name": "mxm-gulp",
+  "version": "1.0.4",
+  "homepage": "https://github.com/maxomedia/mxm-gulp",
+  "authors": [
+    "Philipp Gfeller <philipp.gfeller@maxomedia.ch>"
+  ],
+  "description": "Gulp buildsystem we use at maxomedia.",
+  "main": "gulpfile.js",
+  "keywords": [
+    "gulp"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "*.yml",
+    "*.sublime-project",
+    "*.sublime-workspace",
+    "dist"
+  ]
+}

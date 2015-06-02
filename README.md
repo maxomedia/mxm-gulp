@@ -6,16 +6,17 @@ The buildsystem we use at maxomedia.
 Most of the tasks and the structure are inspired by https://github.com/greypants/gulp-starter, thanks to all contributors of this repo.
 
 #### Features
-- [Less to CSS](https://github.com/plus3network/gulp-less) ([autoprefixed](https://github.com/sindresorhus/gulp-autoprefixer), [sourcemaps](https://github.com/floridoo/gulp-sourcemaps), [minified](https://github.com/jonathanepollack/gulp-minify-css/))
-- JavaScript bundles with [webpack](https://github.com/webpack/webpack) (multiple bundles, sourcemaps, minified)
-- [Jade to HTML](https://github.com/phated/gulp-jade)
-- [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
+- `gulp less` [Less to CSS](https://github.com/plus3network/gulp-less) ([autoprefixed](https://github.com/sindresorhus/gulp-autoprefixer), [sourcemaps](https://github.com/floridoo/gulp-sourcemaps), [minified](https://github.com/jonathanepollack/gulp-minify-css/))
+- `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack) (multiple bundles, sourcemaps, minified)
+- `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
+- `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
+- `gulp vendor` Vendor task to copy static files to the destination folder
+- `gulp clean` Clean task to clean up all built assets
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
 - Separate DEV and STAGE builds to speed up development
 - Error logging with windows notification and in the console
-- Vendor task to copy static files to the destination folder
-- Clean task to clean up all built assets
+
 
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed in order to use gulp.

@@ -14,6 +14,8 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - Build and reload on save
 - Separate DEV and STAGE builds to speed up development
 - Error logging with windows notification and in the console
+- Vendor task to copy static files to the destination folder
+- Clean task to clean up all built assets
 
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed in order to use gulp.

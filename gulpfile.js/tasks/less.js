@@ -6,6 +6,7 @@ var browserSync  = require('browser-sync');
 var options      = require('../options/less');
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
+var minify       = require('gulp-minify-css');
 
 /**
  * Compile less files into CSS, but do 
@@ -48,10 +49,18 @@ function compileLess () {
 
 // Register task and 
 gulp.task('less', compileLess);
+gulp.task('less:dev', function () {
+	gulp.watch(options.src, ['less']);
+});
+gulp.task('less:stage', function () {
+	return compileLess()
+	.pipe(minify())
+	.pipe(gulp.dest(options.dest));
+});
 
 // Register event handlers
 kickstarter.on('gulp.dev', function () {
-	gulp.watch(options.src, ['less']);
+	gulp.start('less:dev');
 });
 
 // Export task

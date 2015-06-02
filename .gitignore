@@ -14,8 +14,4 @@ temp
 
 # Built assets
 # for vendor files use css/vendor/vendor.css
-*.map
-fonts/fonticons.*
-css/*.css
-js/*.js
-dist/**/*.html
+dist

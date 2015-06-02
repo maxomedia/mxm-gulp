@@ -32,12 +32,17 @@ function compileJade () {
 
 // Register task
 gulp.task('jade', compileJade);
+gulp.task('jade:dev', function () {
+	gulp.watch(options.src, ['jade']);
+});
 
 // Register event handler
 kickstarter.on('gulp.dev', function () {
-	gulp.watch(options.src, ['jade']);
+	gulp.start('jade:dev');
 });
-kickstarter.on('gulp.stage', compileJade);
+kickstarter.on('gulp.stage', function () {
+	gulp.start('jade');
+});
 
 // Export task
 module.exports = compileJade;

@@ -15,7 +15,9 @@ function startSyncing () {
 gulp.task('browserSync', startSyncing);
 
 // Register event handler
-kickstarter.on('gulp.dev', startSyncing);
+kickstarter.on('gulp.dev', function () {
+	gulp.start('browserSync');
+});
 
 // Export task
 module.exports = startSyncing;

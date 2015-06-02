@@ -75,8 +75,12 @@ gulp.task('webpack:dev', startWatching);
 gulp.task('webpack:stage', compileAndMinify);
 
 // Register event handlers
-kickstarter.on('gulp.dev', startWatching);
-kickstarter.on('gulp.stage', compileAndMinify);
+kickstarter.on('gulp.dev', function () {
+	gulp.start('webpack:dev');
+});
+kickstarter.on('gulp.stage', function () {
+	gulp.start('webpack:stage');
+});
 
 // Export tasks
 module.exports.default = pack;

@@ -62,6 +62,9 @@ gulp.task('less:stage', function () {
 kickstarter.on('gulp.dev', function () {
 	gulp.start('less:dev');
 });
+kickstarter.on('gulp.stage', function () {
+	gulp.start('less:stage');
+});
 
 // Export task
 module.exports = compileLess;

@@ -4,7 +4,6 @@ var consolidate  = require('gulp-consolidate');
 var options      = require('../options/fonticons');
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
-var minifyCSS    = require('./minify-css');
 
 /**
  * Generate font files from svg icons
@@ -69,8 +68,7 @@ kickstarter.on('gulp.dev', function () {
 	gulp.watch(options.src, ['fonticons']);
 });
 kickstarter.on('gulp.stage', function () {
-	kickstarter.once('fontiocns.end', minifyCSS);
-	generateFonticons();
+	gulp.start('fonticons');
 });
 
 // Export stream

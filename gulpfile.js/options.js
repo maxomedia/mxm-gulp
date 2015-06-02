@@ -24,6 +24,12 @@ var options = {
 	// Project name
 	name: 'mxm-gulp',
 
+	// All targeted files get simply copied to destination
+	// folder.
+	vendor: {
+		src: './src/vendor/**'
+	},
+
 	// Less to CSS
 	less: {
 

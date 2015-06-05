@@ -6,7 +6,7 @@ var bower = require('gulp-bower');
  * @return {Stream} Gulp stream
  */
 var bowerInstall = function () {
-	return bower().pipe(gulp.dest('lib/'));
+	return bower().pipe(gulp.dest('bower_components'));
 };
 
 // Register task

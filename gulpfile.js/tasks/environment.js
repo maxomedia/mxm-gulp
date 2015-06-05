@@ -7,6 +7,6 @@ gulp.task('dev', function() {
 });
 
 // Production build (production ready assets)
-gulp.task('stage', ['karma', 'clean'], function () {
+gulp.task('stage', ['clean', 'bower', 'karma'], function () {
 	kickstarter.emit('gulp.stage');
 });

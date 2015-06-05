@@ -1,7 +1,7 @@
 var sub = require('../sub/sub');
 
 describe('sub.js', function () {
-	return it('should output its path', function () {
-		return sub;
+	it('should equal 4', function () {
+		sub(2,2).should.equal(4);
 	});
 });

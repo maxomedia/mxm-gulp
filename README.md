@@ -47,6 +47,8 @@ You should know how to run gulp. If you are not familiar with it, here is a list
   ```shell
     gulp
   ```
+  
+  Your development files are stored at `/src`. The built assets will be stored at `/dist` by default.
 
 #### Documentation
 Please refer to the [wiki](https://github.com/maxomedia/mxm-gulp/wiki) of this repo for detailed information for each task.

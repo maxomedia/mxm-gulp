@@ -16,7 +16,7 @@ var karmaTest = function (callback) {
 }
 
 // Register task
-gulp.task('karma', karmaTest);
+gulp.task('karma', ['bower'], karmaTest);
 
 // Export test function
 module.exports = karmaTest;

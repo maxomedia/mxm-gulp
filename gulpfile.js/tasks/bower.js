@@ -10,7 +10,7 @@ var bowerInstall = function () {
 };
 
 // Register task
-gulp.task('bower', bowerInstall);
+gulp.task('bower', ['clean'], bowerInstall);
 
 // Export core function
 module.exports = bowerInstall;

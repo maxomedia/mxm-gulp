@@ -44,4 +44,6 @@ module.exports = function (env) {
 		defaults.debug = false;
 		defaults.plugins.push(new webpack.optimize.UglifyJsPlugin())
 	}
+
+	return defaults;
 };

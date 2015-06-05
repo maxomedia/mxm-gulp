@@ -1,2 +1,2 @@
-require('sub/sub.js');
-require('sub');
+console.log(require('sub/sub.js'));
+console.log(require('sub'));

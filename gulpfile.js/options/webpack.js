@@ -1,30 +1,47 @@
 var _           = require('lodash');
 var webpack     = require('webpack');
 var fastOptions = require('../options');
-var path = require('path');
+var path        = require('path');
 
-// Define extended default options, they
-// can be overriden by the fast options
-var defaults = {
-	output: {
-		path: fastOptions.dest + '/js/',
-		filename: '[name].js',
-		publicPath: fastOptions.webroot
-	},
-	devtool: 'source-map',
-	resolve: {
+module.exports = function (env) {
+
+	var defaults = _.extend({}, fastOptions.webpack);
+
+	// General options
+	defaults.plugins = defaults.plugins || [];
+
+	// Set resolve extensions and paths
+	defaults.resolve = defaults.resolve || {
 		extensions: ['', '.js'],
 		root: path.resolve('./src/js')
-	},
-	debug: true
-}
+	};
 
-// Add plugins
-if (!defaults.plugins) defaults.plugins = [];
-defaults.plugins.push(new webpack.optimize.CommonsChunkPlugin({
-	name: 'shared',
-	filename: '[name].js'
-}));
+	// Set options that do not apply to karma,
+	// so for 'dev' and 'stage'
+	if (env !== 'test') {
 
-// Export extended options
-module.exports = _.extend({}, defaults, fastOptions.webpack);
+		// Chunk up the resulting scripts
+		defaults.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+			name: 'shared',
+			filename: '[name].js'
+		}));
+
+		// Set output dirs
+		defaults.output = defaults.output || {
+			path: fastOptions.dest + '/js/',
+			filename: '[name].js',
+			publicPath: fastOptions.webroot
+		}
+	}
+
+	// Set dev options
+	if (env === 'dev') {
+		defaults.debug = true;
+	}
+
+	// Set stage options
+	if (env === 'stage') {
+		defaults.debug = false;
+		defaults.plugins.push(new webpack.optimize.UglifyJsPlugin())
+	}
+};

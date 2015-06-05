@@ -1,1 +1,1 @@
-console.log('sub/index.js');
+module.exports = 'sub/index.js';

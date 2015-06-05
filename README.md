@@ -12,6 +12,8 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
 - `gulp vendor` Vendor task to copy static files to the destination folder
 - `gulp clean` Clean task to clean up all built assets
+- `gulp bower` install bower dependencies
+- `gulp karma` Test your javascripts with mocha
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
 - Separate DEV and STAGE builds to speed up development
@@ -45,6 +47,8 @@ You should know how to run gulp. If you are not familiar with it, here is a list
   ```shell
     gulp
   ```
+  
+  Your development files are stored at `/src`. The built assets will be stored at `/dist` by default.
 
 #### Documentation
 Please refer to the [wiki](https://github.com/maxomedia/mxm-gulp/wiki) of this repo for detailed information for each task.

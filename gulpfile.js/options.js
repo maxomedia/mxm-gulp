@@ -54,9 +54,7 @@ var options = {
 	webpack: {
 
 		// Define where your javascript source files lie
-		src: {
-			'./src/js'
-		},
+		src: './src/js',
 
 		// Define entry points for your scripts.
 		// Use paths starting with './' (this folder)

@@ -12,6 +12,8 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
 - `gulp vendor` Vendor task to copy static files to the destination folder
 - `gulp clean` Clean task to clean up all built assets
+- `gulp bower` install bower dependencies
+- `gulp karma` Test your javascripts with mocha
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
 - Separate DEV and STAGE builds to speed up development

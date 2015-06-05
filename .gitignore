@@ -13,5 +13,4 @@ temp
 *.lnk
 
 # Built assets
-# for vendor files use css/vendor/vendor.css
 dist

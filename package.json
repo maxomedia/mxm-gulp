@@ -22,6 +22,7 @@
     "gulp-util": "3.0.4",
     "karma": "0.12.35",
     "karma-chrome-launcher": "0.1.12",
+    "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "0.1.10",
     "karma-nyan-reporter": "0.0.60",
     "karma-sinon-chai": "0.3.0",

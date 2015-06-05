@@ -53,12 +53,18 @@ var options = {
 	// Javascript bundles
 	webpack: {
 
+		// Define where your javascript source files lie
+		src: './src/js',
+
 		// Define entry points for your scripts.
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
 			app: './src/js/app.js'
 		}
+
+		// For all other options, it is recommended you look
+		// at the more detailed options file at /gulpfile.js/options/webpack.js
 	},
 
 	jade: {

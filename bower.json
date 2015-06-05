@@ -21,5 +21,8 @@
     "*.sublime-project",
     "*.sublime-workspace",
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "normalize.css": "~3.0.3"
+  }
 }

@@ -1,9 +1,9 @@
 var gulp        = require('gulp');
 var webpack     = require('webpack');
 var browserSync = require('browser-sync');
-var options     = require('../options/webpack');
 var log         = require('../utils/compileLogger');
 var kickstarter = require('../utils/kickstarter');
+var setOptions  = require('../options/webpack');
 
 /**
  * Plain call to webpack function
@@ -22,6 +22,7 @@ function pack (opt, callback) {
  * @return {undefined}
  */
 function startWatching (callback) {
+	var options = setOptions('dev');
 	webpack(options).watch(200, endPackCallback(callback, true));
 }
 
@@ -33,11 +34,7 @@ function startWatching (callback) {
  * @return {undefined}
  */
 function compileAndMinify (callback) {
-
-	// Adapt stage options and push minify plugin
-	options.debug = false;
-	options.plugins.push(new webpack.optimize.UglifyJsPlugin());
-
+	var options = setOptions('stage');
 	webpack(options, endPackCallback(callback, false));
 }
 
@@ -69,6 +66,7 @@ function endPackCallback (callback, writeLog) {
 
 // Register tasks
 gulp.task('webpack', function (callback) {
+	var options = setOptions('dev');
 	webpack(options, endPackCallback(callback, false));
 });
 gulp.task('webpack:dev', startWatching);

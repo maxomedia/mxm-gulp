@@ -7,6 +7,9 @@ test
 tests
 temp
 
+# Galen reports
+__tests__/reports
+
 # Project files
 *.sublime-project
 *.sublime-workspace

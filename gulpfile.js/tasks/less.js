@@ -33,29 +33,39 @@ function compileLess () {
 		.pipe( autoprefixer() )
 
 		// Handle autoprefixer errors
-		.on('error', handleErrors)
-
-		// Generate sourcemap
-		.pipe( sourcemaps.write('/', {
-			sourceMappingURLPrefix: options.webroot + '/css'
-		}) )
-
-		// Save compiled css
-		.pipe( gulp.dest(options.dest) )
-
-		// Reload page with browsersync
-		.pipe(browserSync.reload({stream: true}));
+		.on('error', handleErrors);
 }
 
 // Register task and 
-gulp.task('less', compileLess);
+gulp.task('less', function () {
+	return compileLess()
+	// Generate sourcemap
+	.pipe( sourcemaps.write('/', {
+		sourceMappingURLPrefix: options.webroot + '/css'
+	}) )
+
+	// Save compiled css
+	.pipe( gulp.dest(options.dest) )
+
+	// Reload page with browsersync
+	.pipe(browserSync.reload({stream: true}));
+});
 gulp.task('less:dev', function () {
 	gulp.watch(options.src, ['less']);
 });
 gulp.task('less:stage', function () {
 	return compileLess()
 	.pipe(minify({processImport: false}))
-	.pipe(gulp.dest(options.dest));
+	// Generate sourcemap
+	.pipe( sourcemaps.write('/', {
+		sourceMappingURLPrefix: options.webroot + '/css'
+	}) )
+
+	// Save compiled css
+	.pipe( gulp.dest(options.dest) )
+
+	// Reload page with browsersync
+	.pipe(browserSync.reload({stream: true}));
 });
 
 // Register event handlers

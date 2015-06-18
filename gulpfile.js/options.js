@@ -21,13 +21,19 @@ var webroot = '';
 
 var options = {
 
-	// Project name
+	// Project name (used as the console title)
 	name: 'mxm-gulp',
 
 	// All targeted files get simply copied to destination
 	// folder.
 	vendor: {
 		src: './src/vendor/**'
+	},
+
+	galen: {
+		reports: destination + '/reports',
+		port: 3333,
+		tests: './src/less/__tests__/tests/**/*.test'
 	},
 
 	// Less to CSS

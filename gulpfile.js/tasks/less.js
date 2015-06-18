@@ -54,7 +54,7 @@ gulp.task('less:dev', function () {
 });
 gulp.task('less:stage', function () {
 	return compileLess()
-	.pipe(minify())
+	.pipe(minify({processImport: false}))
 	.pipe(gulp.dest(options.dest));
 });
 

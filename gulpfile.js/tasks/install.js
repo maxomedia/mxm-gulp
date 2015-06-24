@@ -13,7 +13,7 @@ var installDependencies = function () {
 }
 
 // Register task
-gulp.task('install', ['clean'], installDependencies);
+gulp.task('install', installDependencies);
 
 // Export core function
 module.exports = installDependencies;

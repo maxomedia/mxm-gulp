@@ -39,5 +39,7 @@
     "serve-index": "1.6.4",
     "webpack": "1.8.9"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular": "^1.4.1"
+  }
 }

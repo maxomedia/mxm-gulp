@@ -111,7 +111,8 @@ var options = {
 		// proxy: 'localhost:60000'
 		
 		// Wether to open new tab on start or not
-		open: false
+		open: false,
+		logFileChanges: false
 	},
 
 	// These are required for the 

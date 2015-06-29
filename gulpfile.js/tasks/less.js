@@ -55,7 +55,7 @@ gulp.task('less:dev', function () {
 });
 gulp.task('less:stage', function () {
 	return compileLess()
-	.pipe(minify({processImport: false}))
+	.pipe(minify())
 	// Generate sourcemap
 	.pipe( sourcemaps.write('/', {
 		sourceMappingURLPrefix: options.webroot + '/css'

@@ -5,6 +5,6 @@ node_js:
 script:
  gulp stage
 before_script:
-  - npm isntall -g bower
+  - npm install -g bower
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start

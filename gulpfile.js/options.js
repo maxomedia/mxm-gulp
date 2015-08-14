@@ -26,8 +26,8 @@ var options = {
 
 	// All targeted files get simply copied to destination
 	// folder.
-	vendor: {
-		src: './src/vendor/**'
+	static: {
+		src: './src/static/**'
 	},
 
 	galen: {

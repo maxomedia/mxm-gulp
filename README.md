@@ -10,7 +10,7 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack) (multiple bundles, sourcemaps, minified)
 - `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
 - `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
-- `gulp vendor` Vendor task to copy static files to the destination folder
+- `gulp static` Task to copy static files to the destination folder
 - `gulp clean` Clean task to clean up all built assets
 - `gulp bower` install bower dependencies
 - `gulp karma` Test your javascripts with mocha

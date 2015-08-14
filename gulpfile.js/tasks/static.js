@@ -9,23 +9,23 @@ var kickstarter = require('../utils/kickstarter');
  * folder
  * @return {Stream} Gulp stream
  */
-var copyVendorFiles = function () {
-	return gulp.src(options.vendor.src)
+var copyStaticFiles = function () {
+	return gulp.src(options.static.src)
 		.pipe(changed(options.dest))
 		.pipe(gulp.dest(options.dest))
 		.pipe(browserSync.reload({stream: true}));
 };
 
 // Register tasks
-gulp.task('vendor', copyVendorFiles);
+gulp.task('static', copyStaticFiles);
 
 // Register event handlers
 kickstarter.on('gulp.dev', function () {
-	gulp.start('vendor');
+	gulp.start('static');
 });
 kickstarter.on('gulp.stage', function () {
-	gulp.start('vendor');
+	gulp.start('static');
 });
 
 // Export core function
-module.exports = copyVendorFiles;
+module.exports = copyStaticFiles;

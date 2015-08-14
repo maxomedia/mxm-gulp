@@ -3,8 +3,6 @@ var fastOptions = require('../options');
 
 // Default options for less
 var defaults = {
-	incremental: false,
-	exclude: ['!core/*'],
 	dest: fastOptions.dest + '/css',
 	webroot: fastOptions.webroot,
 	autoprefixer: {

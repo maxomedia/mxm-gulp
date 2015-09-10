@@ -37,6 +37,7 @@ module.exports = function (env) {
 	// Set dev options
 	if (env === 'dev') {
 		defaults.debug = true;
+		defaults.devtool = 'source-map';
 	}
 
 	// Set stage options

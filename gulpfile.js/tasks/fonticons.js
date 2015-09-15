@@ -67,9 +67,6 @@ gulp.task('fonticons', generateFonticons);
 kickstarter.on('gulp.dev', function () {
 	gulp.watch(options.src, ['fonticons']);
 });
-kickstarter.on('gulp.stage', function () {
-	gulp.start('fonticons');
-});
 
 // Export stream
 module.exports = generateFonticons;

@@ -72,7 +72,7 @@ gulp.task('less:stage', function () {
 kickstarter.on('gulp.dev', function () {
 	gulp.start('less:dev');
 });
-kickstarter.on('gulp.stage', function () {
+kickstarter.on('gulp.stage', ['fonticons'], function () {
 	gulp.start('less:stage');
 });
 

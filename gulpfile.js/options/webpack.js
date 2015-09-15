@@ -32,6 +32,9 @@ module.exports = function (env) {
 			filename: '[name].js',
 			publicPath: fastOptions.webroot
 		}
+
+		// Enable debugging
+		webpack.debug = true;
 	}
 
 	// Set dev options

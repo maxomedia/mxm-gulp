@@ -1,92 +1,44 @@
-var gulp = require('gulp');
-var options = require('../options').tinypng;
+var gulp         = require('gulp');
+var options      = require('../options').tinypng;
 var handleErrors = require('../utils/handleErrors');
-var tinypng = require('gulp-tinypng');
-
-var gutil = require('gulp-util');
-//var rimraf = require('gulp-rimraf');
-
-
-
-
-//r options      = require('../options');
-var handleErrors = require('../utils/handleErrors');
+var tinypng      = require('gulp-tinypng');
 var kickstarter  = require('../utils/kickstarter');
+var newer        = require('gulp-newer');
+var del          = require('del');
+var vinylPaths   = require('vinyl-paths');
+var watch        = require('gulp-watch');
+var cached = require('gulp-cached');
 
-
-var watcher;
-
-
-function runTinyPNG(evt){
-		//gutil.log("hello");
-
-		return;
-
-		var buff = [];
-		for (var i in evt){
-			buff.push("prop " + String(i));
-		}
-		return gutil.log(buff.join(", "));
-
-		var fs = require("fs");
-		var fileList = fs.readdirSync(options.src);
-
-		return gutil.log(fileList.join(","));
-		var fName = fileList.pop();
-		if(fName.indexOf("done/") == 0){
-			
-			return gutil.log("skipping file " + fName);
-		}
-
-		var sourceFile = options.src + fName;
-		var targFile = options.src + "done/" + fName;
-		fs.renameSync(sourceFile,targFile)
-
-		//var sourceFile = options.src+options.types;
-
-	    return gulp.src(targFile)
-        .pipe(tinypng(options.apikey))
-        //.on( 'error', handleErrors)
-        .pipe(gulp.dest(options.dest));
-        //.on('end',cleanUpFiles);
+/**
+ * Minify images in src folder and
+ * save them at dest, deleting the src.
+ * @return {Stream} Gulp stream
+ */
+function tinyPNG () {
+	return gulp.src(options.src)
+		.pipe(newer())
+		.pipe(cached())
+		.pipe(tinypng(options.apikey))
+		.pipe(vinylPaths(del))
+		.pipe(gulp.dest(options.dest));
 }
-function onChangeHandler(evt){
-	console.log(evt.path + " "+ evt.type);
 
-	if(evt.type == "added"){
-		return gulp.src(evt.path)
-        .pipe(tinypng(options.apikey))
-        //.on( 'error', handleErrors)
-        .pipe(gulp.dest(options.dest));
-
-	}
-
+/**
+ * Use gulp watch to detect file changes in src
+ * folder and kick off tinyPNG to compile the file
+ * @return {Stream} gulp-watch stream
+ */
+function dev () {[]
+	return watch(options.src).on('add', tinyPNG);
 }
-/*
-function cleanUpFiles(){
-	
-	
-	
-}*/
-
-
-
-
 
 // Register task
-gulp.task('tinypng', runTinyPNG);
-gulp.task('tinypng:dev', function () {
-	watcher = gulp.watch(options.src+options.types, ['tinypng']);
-	watcher.on("change",onChangeHandler);
-});
+gulp.task('tinypng', tinyPNG);
+gulp.task('tinypng:dev', dev);
 
 // Register event handler
-kickstarter.on('gulp.dev', function () {
-	gulp.start('tinypng:dev');
-});
-kickstarter.on('gulp.stage', function () {
-	gulp.start('tinypng');
-});
+kickstarter.on('gulp.dev', dev);
+kickstarter.on('gulp.stage', tinyPNG);
 
 // Export task
-module.exports = runTinyPNG;
+module.exports = tinyPNG;

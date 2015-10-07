@@ -103,11 +103,10 @@ var options = {
 		//change api key!
 		apikey: "37Y9xQpd3cb1fGBVOfwRSS-D3Ktmi_K7",
 		// SVG files to watch for changes
-		src: 'src/tinypng/',
-		types : '*.{png,jpg,jpeg}',
+		src: 'src/tinypng/**/*.{png,jpg,jpeg}',
 		// Destination folder for the less files
 		// containing the mixin
-		dest: 'src/static/img/'
+		dest: 'src/static/img'
 	},
 
 	// Static webserver and livereload

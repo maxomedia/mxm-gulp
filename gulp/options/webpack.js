@@ -21,10 +21,10 @@ module.exports = function (env) {
 	if (env !== 'test') {
 
 		// Chunk up the resulting scripts
-		defaults.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+		/*defaults.plugins.push(new webpack.optimize.CommonsChunkPlugin({
 			name: 'shared',
 			filename: '[name].js'
-		}));
+		}));*/
 
 		// Set output dirs
 		defaults.output = defaults.output || {
@@ -41,6 +41,20 @@ module.exports = function (env) {
 	if (env === 'dev') {
 		defaults.debug = true;
 		defaults.devtool = 'source-map';
+		defaults.module = {
+			preLoaders: [
+				{
+					test: /\.js$/,
+					exclude: /node_modules/,
+					loader: 'jshint-loader'
+				}
+			]
+		};
+		defaults.jshint = {
+			camelcase: true,
+			emitErrors: true,
+			failOnHint: false
+		};
 	}
 
 	// Set stage options

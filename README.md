@@ -14,9 +14,10 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp clean` Clean task to clean up all built assets
 - `gulp bower` install bower dependencies
 - `gulp karma` Test your javascripts with mocha
+- `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
-- Separate DEV and STAGE builds to speed up development
+- Separate DEV and STAGE builds to speed up development. Add `:dev` to any task to start it in dev mode or `:stage`. For example `gulp less:stage` for a minified build.
 - Error logging with windows notification and in the console
 
 
@@ -36,7 +37,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
     npm install
   ```
 
-4.  Now's the time to set your options. You can find them under `gulpfile.js/options.js`. Be sure to set `destination` and `webroot` variables to your liking, these are the most important.
+4.  Now's the time to set your options. You can find them under `gulp/options.js`. Be sure to set `destination` and `webroot` variables to your liking, these are the most important.
 
 5.  To initially build your assets, create the folder structure and test the installation, run:
   ```shell

@@ -99,6 +99,16 @@ var options = {
 		lessDest: 'src/less/core/'
 	},
 
+	tinypng: {
+		//change api key!
+		apikey: "37Y9xQpd3cb1fGBVOfwRSS-D3Ktmi_K7",
+		// SVG files to watch for changes
+		src: 'src/tinypng/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}',
+		// Destination folder for the less files
+		// containing the mixin
+		dest: 'src/static/img'
+	},
+
 	// Static webserver and livereload
 	browserSync: {
 

@@ -14,6 +14,7 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp clean` Clean task to clean up all built assets
 - `gulp bower` install bower dependencies
 - `gulp karma` Test your javascripts with mocha
+- `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
 - Separate DEV and STAGE builds to speed up development

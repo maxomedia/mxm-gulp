@@ -53,7 +53,7 @@ gulp.task('less', function () {
 gulp.task('less:dev', function () {
 	gulp.watch(options.src, ['less']);
 });
-gulp.task('less:stage', function () {
+gulp.task('less:stage', ['fonticons'], function () {
 	return compileLess()
 	.pipe(minify())
 	// Generate sourcemap
@@ -72,7 +72,7 @@ gulp.task('less:stage', function () {
 kickstarter.on('gulp.dev', function () {
 	gulp.start('less:dev');
 });
-kickstarter.on('gulp.stage', ['fonticons'], function () {
+kickstarter.on('gulp.stage', function () {
 	gulp.start('less:stage');
 });
 

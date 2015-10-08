@@ -4,7 +4,6 @@ var async = require('async');
 var index = require('serve-index');
 var serve = require('gulp-serve');
 var tap = require('gulp-tap');
-var rimraf = require('rimraf');
 var options = require('../options').galen;
 
 

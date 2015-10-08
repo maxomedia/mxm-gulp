@@ -32,13 +32,14 @@ function tinyPNG () {
  * folder and kick off tinyPNG to compile the file
  * @return {Stream} gulp-watch stream
  */
-function dev () {[]
+function dev () {
 	return watch(options.src).on('add', tinyPNG);
 }
 
 // Register task
 gulp.task('tinypng', tinyPNG);
 gulp.task('tinypng:dev', dev);
+gulp.task('tinypng:stage', tinyPNG);
 
 // Register event handler
 kickstarter.on('gulp.dev', dev);

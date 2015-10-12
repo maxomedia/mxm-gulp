@@ -2,6 +2,7 @@ var gulp         = require('gulp');
 var tinypng      = require('gulp-tinypng');
 var newer        = require('gulp-newer');
 var watch        = require('gulp-watch');
+var gutil        = require('gulp-util');
 var cached       = require('gulp-cached');
 var del          = require('del');
 var vinylPaths   = require('vinyl-paths');
@@ -33,7 +34,9 @@ function tinyPNG () {
  * @return {Stream} gulp-watch stream
  */
 function dev () {
-	return watch(options.src).on('add', tinyPNG);
+	return watch(options.src).on('add', function () {
+		gulp.start('tinypng');
+	});
 }
 
 // Register task
@@ -43,7 +46,9 @@ gulp.task('tinypng:stage', tinyPNG);
 
 // Register event handler
 kickstarter.on('gulp.dev', dev);
-kickstarter.on('gulp.stage', tinyPNG);
+kickstarter.on('gulp.stage', function () {
+	gulp.start('tinypng');
+});
 
 // Export task
 module.exports = tinyPNG;

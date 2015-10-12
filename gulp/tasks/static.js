@@ -4,7 +4,7 @@ var browserSync = require('browser-sync');
 var options     = require('../options');
 var watch       = require('gulp-watch');
 var kickstarter = require('../utils/kickstarter');
-var gutil = require('gulp-util');
+var gutil       = require('gulp-util');
 
 /**
  * Copy static vendor files to destination
@@ -24,8 +24,7 @@ var copyStaticFiles = function () {
  */
 var dev = function () {
 	return watch(options.static.src, function () {
-		gutil.log('Finished ', "'" + gutil.colors.cyan('static') + "'");
-		return copyStaticFiles();
+		gulp.start('static');
 	});
 }
 

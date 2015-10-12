@@ -1,9 +1,9 @@
-var gulp = require('gulp');
-var spawn = require('child_process').spawn;
-var async = require('async');
-var index = require('serve-index');
-var serve = require('gulp-serve');
-var tap = require('gulp-tap');
+var gulp    = require('gulp');
+var spawn   = require('child_process').spawn;
+var async   = require('async');
+var index   = require('serve-index');
+var serve   = require('gulp-serve');
+var tap     = require('gulp-tap');
 var options = require('../options').galen;
 
 

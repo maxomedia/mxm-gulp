@@ -26,7 +26,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - npm v3.3.5 (recommended) (https://www.npmjs.com/)
 - gulp (http://gulpjs.com/)
 
-### Roadmap
+#### Roadmap
 - Clean up all tasks and the options, use `gulp-watch` consistently, improve consistency
 - Find a way to avoid `gulp.start` in development environmet
 - Get rid of the event system and use gulp dependencies instead

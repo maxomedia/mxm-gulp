@@ -20,12 +20,17 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - Separate DEV and STAGE builds to speed up development. Add `:dev` to any task to start it in dev mode or `:stage`. For example `gulp less:stage` for a minified build.
 - Error logging with windows notification and in the console
 
-
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed in order to use gulp.
-- node.js (http://nodejs.org/)
-- npm (https://www.npmjs.com/)
+- node.js v4.1.2 (recommended) (http://nodejs.org/)
+- npm v3.3.5 (recommended) (https://www.npmjs.com/)
 - gulp (http://gulpjs.com/)
+
+#### Roadmap
+- Clean up all tasks and the options, use `gulp-watch` consistently, improve consistency
+- Find a way to avoid `gulp.start` in development environmet
+- Get rid of the event system and use gulp dependencies instead
+- Migrate to gulp 4.0 once it is released or prepeare already
 
 #### Installation
 1. Download the zip and place its contents where you want to use them
@@ -50,6 +55,10 @@ You should know how to run gulp. If you are not familiar with it, here is a list
   ```
   
   Your development files are stored at `/src`. The built assets will be stored at `/dist` by default.
+  
+If you work on windows and run into `node-gyp rebuild errors`, this pages might help resolve the issue. It can have many causes, here are a few listed with resources to help you resolve these issues:
+ - python not installed or set in PATH (https://github.com/nodejs/node-v0.x-archive/issues/4047)
+ - wrong Visual Studio version configured in node (http://stackoverflow.com/questions/14278417/cannot-install-node-modules-that-require-compilation-on-windows-7-x64-vs2012)
 
 #### Documentation
 Please refer to the [wiki](https://github.com/maxomedia/mxm-gulp/wiki) of this repo for detailed information for each task.

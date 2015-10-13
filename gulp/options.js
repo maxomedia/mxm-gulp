@@ -1,3 +1,5 @@
+var path = require('path');
+
 /*
  *  Instructions:
  *  =============
@@ -75,14 +77,29 @@ var options = {
 	webpack: {
 
 		// Define where your javascript source files lie
-		src: './src/js',
+		src: './src/js/**/*.js',
 
 		// Define entry points for your scripts.
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
 			app: './src/js/app.js'
-		}
+		},
+
+		// Set resolve paths
+		resolve: {
+			extensions: ['', '.js'],
+			root: path.resolve('./src/js')
+		},
+
+		// Destination folder
+		output: {
+			path: destination + '/js/',
+			publicPath: webroot
+		},
+
+		// Use common chunks plugin?
+		commonChunks: true
 
 		// For all other options, it is recommended you look
 		// at the more detailed options file at /gulpfile.js/options/webpack.js

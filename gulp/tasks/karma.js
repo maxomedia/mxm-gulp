@@ -7,6 +7,7 @@ var karma = require('karma');
  * @return {undefined}
  */
 var karmaTest = function (callback) {
+	
 	karma.server.start( {
 		configFile: process.cwd() + '/karma.conf.js',
 		singleRun: true

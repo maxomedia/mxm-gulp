@@ -31,7 +31,7 @@ var dev = function () {
 // Register tasks
 gulp.task('static', copyStaticFiles);
 gulp.task('static:dev', dev);
-gulp.task('static:stage', copyStaticFiles);
+gulp.task('static:stage', ['tinypng'], copyStaticFiles);
 
 // Register event handlers
 kickstarter.on('gulp.dev', dev);

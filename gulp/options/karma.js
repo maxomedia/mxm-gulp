@@ -1,16 +1,15 @@
 var karmaWebpack = require('karma-webpack')
-var webpackConfig = require('./webpack')('test');
 var options = require('../options').webpack;
 
 // Define test source folder
-var src = options.src + '/**/__tests__/*';
+var src = 'src/js/__tests__/**/*.js';
 
 // Set up config
 var config = {
   frameworks: ['mocha', 'sinon-chai'],
   files: [src],
   preprocessors: {},
-  webpack: webpackConfig,
+  webpack: options,
   singleRun: process.env.TRAVIS_CI === 'true',
   reporters: ['nyan'],
   browsers: [(process.env.TRAVIS_CI === 'true'? 'Firefox' : 'Chrome')]

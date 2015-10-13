@@ -3,7 +3,6 @@ var jade         = require('gulp-jade');
 var browserSync  = require('browser-sync');
 var watch        = require('gulp-watch');
 var gutil        = require('gulp-util');
-var batch = require('gulp-batch');
 var options      = require('../options').jade;
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
@@ -42,11 +41,7 @@ var dev = function () {
 	// Exit criteria
 	if (!options) return;
 
-	/*return watch(options.src, batch(function (events, done) {
-		gulp.start('jade', done);
-	}));*/
-
-return watch(options.src, function () {
+	return watch(options.src, function () {
 		gulp.start('jade');
 	});
 }

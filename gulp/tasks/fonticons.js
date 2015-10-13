@@ -20,7 +20,7 @@ function generateFonticons () {
 
 	// Create fonticons
 	.pipe( fonticons({
-		fontName: options.name,
+		fontName: 'fonticons',
 		normalize: true,
 		appendCodepoints: true
 	}))

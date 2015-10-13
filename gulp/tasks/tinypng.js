@@ -46,9 +46,6 @@ gulp.task('tinypng:stage', tinyPNG);
 
 // Register event handler
 kickstarter.on('gulp.dev', dev);
-kickstarter.on('gulp.stage', function () {
-	gulp.start('tinypng');
-});
 
 // Export task
 module.exports = tinyPNG;

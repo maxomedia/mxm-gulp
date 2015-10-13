@@ -1,7 +1,9 @@
 var gulp         = require('gulp');
+var watch        = require('gulp-watch');
+var gutil        = require('gulp-util');
 var fonticons    = require('gulp-iconfont');
 var consolidate  = require('gulp-consolidate');
-var options      = require('../options/fonticons');
+var options      = require('../options').fonticons;
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
 
@@ -10,6 +12,8 @@ var kickstarter  = require('../utils/kickstarter');
  * @return {Object} Gulp stream
  */
 function generateFonticons () {
+
+	if (!options) return;
 
 	// Get the icons
 	return gulp.src(options.src)
@@ -39,14 +43,14 @@ function generateFonticons () {
 function setCodepoints (codepoints) {
 
 	// Get less template
-	gulp.src(options.template)
+	gulp.src('gulpfile.js/utils/fonticons.less')
 
 		// Create less file
 		.pipe( consolidate('lodash', {
 			glyphs: codepoints,
-			fontName: options.name,
-			fontPath: options.rootPath,
-			className: options.class
+			fontName: 'fonticons',
+			fontPath: options.root,
+			className: 'gfx'
 		}))
 
 		// Handle errors
@@ -60,16 +64,22 @@ function setCodepoints (codepoints) {
 		});
 }
 
+function dev () {
+	if (!options) return;
+
+	watch(options.src, function () {
+		gulp.start('fonticons');
+	});
+}
+
 // Register task
 gulp.task('fonticons', generateFonticons);
+gulp.task('fonticons:dev', dev);
+gulp.task('fonticons:stage', generateFonticons);
 
 // Register event handlers
-kickstarter.on('gulp.dev', function () {
-	gulp.watch(options.src, ['fonticons']);
-});
-kickstarter.on('gulp.stage', function () {
-	gulp.start('fonticons');
-});
+kickstarter.on('gulp.dev', dev);
+// Staging fonticon event is handled in less task
 
 // Export stream
 module.exports = generateFonticons;

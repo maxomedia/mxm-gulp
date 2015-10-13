@@ -3,74 +3,126 @@ var webpack     = require('webpack');
 var browserSync = require('browser-sync');
 var log         = require('../utils/compileLogger');
 var kickstarter = require('../utils/kickstarter');
-var setOptions  = require('../options/webpack');
+var options     = require('../options').webpack;
+var gulpWatch   = require('gulp-watch');
+var gutil = require('gulp-util');
+var notifier = require('node-notifier');
+var path = require('path');
+
+// Set shared options
+options.plugins = options.plugins || [];
+options.output.filename = options.output.filename || '[name].js';
 
 /**
- * Plain call to webpack function
- * @param  {Object}   opt      Webpack options
- * @param  {Function} callback Callback after packing
- * @return {Object}            Webpack instance
+ * Test build for karma
+ * @param  {Function} callback Gulp callback
  */
-function pack (opt, callback) {
-	return webpack(opt, callback);
+function test (callback) {
+	if (!options) return;
+
+	pack(options, callback);
 }
 
 /**
- * Development task with file watcher
- * @param  {Function} callback Gulp callback for
- *                             completing the task
- * @return {undefined}
+ * Dev build. Non minified but with sourcemaps
+ * @param  {Function} callback Gulp callback
  */
-function startWatching (callback) {
-	var options = setOptions('dev');
-	webpack(options).watch(200, endPackCallback(callback, true));
-}
+function dev (callback) {
+	if (!options) return;
 
-/**
- * Staging task with uglify plugin and debug
- * option disabled.
- * @param  {Function} callback Gulp callback for
- *                             completing the task
- * @return {undefined}
- */
-function compileAndMinify (callback) {
-	var options = setOptions('stage');
-	webpack(options, endPackCallback(callback, false));
-}
-
-/**
- * Handle returnal to notice gulp of task
- * completion and write a log if needed.
- * @param  {Function} callback Callback needed by gulp
- * @param  {Boolean}   writeLog Wether or not to output log info
- * @return {Function}            Callback handler
- */
-function endPackCallback (callback, writeLog) {
-	var built = false;
-
-	return function (err, stats) {
-
-		// Gulp like log message
-		if (writeLog) log(err, stats, 'webpack');
-
-		// Reload page, if browsersync is active
-		browserSync.reload();
-
-		// Call callback only once
-		if (!built) {
-			built = true;
-			if (typeof callback === 'function') callback();
-		}
+	// Common chunks
+	if (options.commonChunks) {
+		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+			name: 'shared',
+			filename: '[name].js'
+		}));
 	}
+
+	// Enable debug mode and sourcemaps
+	webpack.debug = true;
+	options.devtool = 'source-map';
+	pack(options, callback);
+}
+
+/**
+ * Stage build with minification and source maps
+ * @param  {Function} callback Gulp callback
+ */
+function stage (callback) {
+	if (!options) return;
+
+	// Common chunks
+	if (options.commonChunks) {
+		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+			name: 'shared',
+			filename: '[name].js'
+		}));
+	}
+
+	// Sourcemaps
+	options.devtool = 'source-map';
+
+	// Minify
+	options.plugins.push(new webpack.optimize.UglifyJsPlugin())
+
+	pack(options, callback);
+}
+
+/**
+ * Use gulp-watch to wait for file changes. gulp-watch is used over
+ * webpack.watch for consistency over all tasks.
+ */
+function watch () {
+	if (!options) return;
+
+	gulpWatch(options.src, function () {
+		gulp.start('webpack').on('end', function () {console.log('yes')});
+	});
+}
+
+/**
+ * Start webpack and log errors to the console and with the error handler.
+ * If there is an error, do not reload with browsersync.
+ * @param  {Object}   options  Options for webpack
+ * @param  {Function} callback Callback for gulp
+ */
+function pack (options, callback) {	
+	webpack(options, function (err, stats) {
+		var errors = stats.compilation.errors;
+
+		if (errors.length > 0) {
+			
+			// Log errors
+			for (var i = 0; i < errors.length; i++) {
+				var error = errors[i];
+
+				// TODO: replace this with generic error logger
+				gutil.log(
+					'Error in file ' + gutil.colors.magenta(error.module.resource + ':' + error.error.lineNumber + '\n')
+					+ gutil.colors.red(error.message)
+				);
+				notifier.notify({
+					title: 'gulp webpack error:',
+					message: error.message,
+					icon: path.join(__dirname, '../utils/gulp.png')
+				});
+			}
+		} else {
+
+			// Reload page
+			browserSync.reload();
+		}
+
+		// Finished, with or without errors
+		callback();
+	});
 }
 
 // Register tasks
-gulp.task('webpack', function (callback) {
-	var options = setOptions('dev');
-	webpack(options, endPackCallback(callback, false));
-});
-gulp.task('webpack:dev', startWatching);
-gulp.task('webpack:stage', compileAndMinify);
+gulp.task('webpack', dev);
+gulp.task('webpack:test', test);
+gulp.task('webpack:dev', watch);
+gulp.task('webpack:stage', stage);
 
 // Register event handlers
 kickstarter.on('gulp.dev', function () {
@@ -81,6 +133,4 @@ kickstarter.on('gulp.stage', function () {
 });
 
 // Export tasks
-module.exports.default = pack;
-module.exports.dev = startWatching;
-module.exports.stage = compileAndMinify;
+module.exports = dev;

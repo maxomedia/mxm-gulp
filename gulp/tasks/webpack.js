@@ -88,13 +88,13 @@ function watch () {
  */
 function pack (options, callback) {	
 	webpack(options, function (err, stats) {
-		var errors = stats.compilation.errors;
 
-		if (errors.length > 0) {
+
+		if (stats.compilation.errors && stats.compilation.errors.length > 0) {
 			
 			// Log errors
-			for (var i = 0; i < errors.length; i++) {
-				var error = errors[i];
+			for (var i = 0; i < stats.compilation.errors.length; i++) {
+				var error = stats.compilation.errors[i];
 
 				// TODO: replace this with generic error logger
 				gutil.log(

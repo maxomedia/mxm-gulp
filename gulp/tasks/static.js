@@ -24,8 +24,7 @@ var copyStaticFiles = function () {
  */
 var dev = function () {
 	return watch(options.static.src, function () {
-		gutil.log('Finished ', "'" + gutil.colors.cyan('static') + "'");
-		return copyStaticFiles();
+		gulp.start('static');
 	});
 }
 

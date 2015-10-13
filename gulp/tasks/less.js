@@ -1,12 +1,13 @@
 var gulp         = require('gulp');
 var less         = require('gulp-less');
-var autoprefixer = require('gulp-autoprefixer');
-var sourcemaps   = require('gulp-sourcemaps');
+var watch        = require('gulp-watch');
 var browserSync  = require('browser-sync');
-var options      = require('../options/less');
+var sourcemaps   = require('gulp-sourcemaps');
+var minify       = require('gulp-minify-css');
+var autoprefixer = require('gulp-autoprefixer');
+var options      = require('../options').less;
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
-var minify       = require('gulp-minify-css');
 
 /**
  * Compile less files into CSS, but do 
@@ -24,54 +25,68 @@ function compileLess () {
 		.pipe( sourcemaps.init() )
 
 		// Compile less
-		.pipe( less() )
+		.pipe( less(options.options.less) )
 
 		// Handle errors
 		.on('error', handleErrors)
 
 		// Autoprefix
-		.pipe( autoprefixer() )
+		.pipe( autoprefixer(options.options.autoprefixer) )
 
 		// Handle autoprefixer errors
 		.on('error', handleErrors);
 }
 
+/**
+ * Watch static files for changes
+ * @return {Stream} Gulp stream
+ */
+var dev = function () {
+	if (!options) return;
+
+	return watch(options.src, function () {
+		gulp.start('less');
+	});
+};
+
 // Register task and 
 gulp.task('less', function () {
+
+	if (!options) return;
+
 	return compileLess()
-	// Generate sourcemap
-	.pipe( sourcemaps.write('/', {
-		sourceMappingURLPrefix: options.webroot + '/css'
-	}) )
 
-	// Save compiled css
-	.pipe( gulp.dest(options.dest) )
+		// Generate sourcemap
+		.pipe( sourcemaps.write('/', options.options.sourcemaps) )
 
-	// Reload page with browsersync
-	.pipe(browserSync.reload({stream: true}));
+		// Save compiled css
+		.pipe( gulp.dest(options.dest) )
+
+		// Reload page with browsersync
+		.pipe(browserSync.reload({stream: true}));
 });
-gulp.task('less:dev', function () {
-	gulp.watch(options.src, ['less']);
-});
+
+gulp.task('less:dev', dev);
+
 gulp.task('less:stage', ['fonticons'], function () {
+
+	if (!options) return;
+	
 	return compileLess()
-	.pipe(minify())
-	// Generate sourcemap
-	.pipe( sourcemaps.write('/', {
-		sourceMappingURLPrefix: options.webroot + '/css'
-	}) )
+		.pipe(minify())
 
-	// Save compiled css
-	.pipe( gulp.dest(options.dest) )
+		// Generate sourcemap
+		.pipe( sourcemaps.write('/', options.options.sourcemaps) )
 
-	// Reload page with browsersync
-	.pipe(browserSync.reload({stream: true}));
+		// Save compiled css
+		.pipe( gulp.dest(options.dest) )
+
+		// Reload page with browsersync
+		.pipe(browserSync.reload({stream: true}));
 });
 
 // Register event handlers
-kickstarter.on('gulp.dev', function () {
-	gulp.start('less:dev');
-});
+kickstarter.on('gulp.dev', dev);
 kickstarter.on('gulp.stage', function () {
 	gulp.start('less:stage');
 });

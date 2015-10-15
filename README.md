@@ -11,12 +11,11 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
 - `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
 - `gulp static` Task to copy static files to the destination folder
-- `gulp clean` Clean task to clean up all built assets
 - `gulp bower` install bower dependencies
 - `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
-- Separate DEV and STAGE builds to speed up development. Add `:dev` to any task to start it in dev mode or `:stage`. For example `gulp less:stage` for a minified build.
+- Separate DEV and STAGE builds (`gulp` or `gulp dev` and `gulp stage`) to speed up development. Add `:dev` to any task to start it in dev mode or `:stage` for a production ready build. For example `gulp less:stage` for a minified build.
 - Error logging with windows notification and in the console
 
 #### Prerequisites

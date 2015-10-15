@@ -11,13 +11,11 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
 - `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
 - `gulp static` Task to copy static files to the destination folder
-- `gulp clean` Clean task to clean up all built assets
 - `gulp bower` install bower dependencies
-- `gulp karma` Test your javascripts with mocha
 - `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
-- Separate DEV and STAGE builds to speed up development. Add `:dev` to any task to start it in dev mode or `:stage`. For example `gulp less:stage` for a minified build.
+- Separate DEV and STAGE builds (`gulp` or `gulp dev` and `gulp stage`) to speed up development. Add `:dev` to any task to start it in dev mode or `:stage` for a production ready build. For example `gulp less:stage` for a minified build.
 - Error logging with windows notification and in the console
 
 #### Prerequisites
@@ -26,11 +24,11 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - npm v3.3.5 (recommended) (https://www.npmjs.com/)
 - gulp (http://gulpjs.com/)
 
-#### Roadmap
-- Clean up all tasks and the options, use `gulp-watch` consistently, improve consistency
+#### Planned features
 - Find a way to avoid `gulp.start` in development environmet
 - Get rid of the event system and use gulp dependencies instead
 - Migrate to gulp 4.0 once it is released or prepeare already
+- Reimplement JS testing
 
 #### Installation
 1. Download the zip and place its contents where you want to use them

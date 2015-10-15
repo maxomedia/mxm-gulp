@@ -13,7 +13,6 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp static` Task to copy static files to the destination folder
 - `gulp clean` Clean task to clean up all built assets
 - `gulp bower` install bower dependencies
-- `gulp karma` Test your javascripts with mocha
 - `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
@@ -26,11 +25,11 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - npm v3.3.5 (recommended) (https://www.npmjs.com/)
 - gulp (http://gulpjs.com/)
 
-#### Roadmap
-- Clean up all tasks and the options, use `gulp-watch` consistently, improve consistency
+#### Planned features
 - Find a way to avoid `gulp.start` in development environmet
 - Get rid of the event system and use gulp dependencies instead
 - Migrate to gulp 4.0 once it is released or prepeare already
+- Reimplement JS testing
 
 #### Installation
 1. Download the zip and place its contents where you want to use them

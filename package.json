@@ -1,6 +1,6 @@
 {
   "name": "mxm-gulp",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/maxomedia/mxm-gulp"
@@ -16,7 +16,6 @@
     "del": "2.0.2",
     "gulp": "3.9.0",
     "gulp-autoprefixer": "3.0.2",
-    "gulp-batch": "1.0.5",
     "gulp-cached": "1.1.0",
     "gulp-consolidate": "0.1.2",
     "gulp-iconfont": "5.0.0",
@@ -33,17 +32,7 @@
     "gulp-tinypng": "1.0.2",
     "gulp-util": "3.0.6",
     "gulp-watch": "4.3.5",
-    "karma": "0.13.10",
-    "karma-chrome-launcher": "0.2.1",
-    "karma-cli": "0.1.1",
-    "karma-firefox-launcher": "0.1.6",
-    "karma-mocha": "0.2.0",
-    "karma-nyan-reporter": "0.2.2",
-    "karma-sinon-chai": "1.1.0",
-    "karma-webpack": "1.7.0",
     "lodash": "3.10.1",
-    "mocha": "2.3.3",
-    "node-libs-browser": "0.5.3",
     "node-notifier": "4.3.1",
     "pretty-hrtime": "1.0.1",
     "require-dir": "0.3.0",

@@ -12,6 +12,7 @@ var path = require('path');
 // Set shared options
 options.plugins = options.plugins || [];
 options.output.filename = options.output.filename || '[name].js';
+options.bail = true;
 
 /**
  * Test build for karma
@@ -61,6 +62,7 @@ function stage (callback) {
 
 	// Sourcemaps
 	options.devtool = 'source-map';
+	console.log(options);
 
 	// Minify
 	options.plugins.push(new webpack.optimize.UglifyJsPlugin())
@@ -89,24 +91,20 @@ function watch () {
 function pack (options, callback) {	
 	webpack(options, function (err, stats) {
 
+		if (err) {
 
-		if (stats.compilation.errors && stats.compilation.errors.length > 0) {
-			
 			// Log errors
-			for (var i = 0; i < stats.compilation.errors.length; i++) {
-				var error = stats.compilation.errors[i];
 
-				// TODO: replace this with generic error logger
-				gutil.log(
-					'Error in file ' + gutil.colors.magenta(error.module.resource + ':' + error.error.lineNumber + '\n')
-					+ gutil.colors.red(error.message)
-				);
-				notifier.notify({
-					title: 'gulp webpack error:',
-					message: error.message,
-					icon: path.join(__dirname, '../utils/gulp.png')
-				});
-			}
+			// TODO: replace this with generic error logger
+			gutil.log(
+				'Error in file ' + gutil.colors.magenta(err.module.resource + ':' + err.error.lineNumber + '\n')
+				+ gutil.colors.red(err.message)
+			);
+			notifier.notify({
+				title: 'gulp webpack error:',
+				message: err.message,
+				icon: path.join(__dirname, '../utils/gulp.png')
+			});
 		} else {
 
 			// Reload page

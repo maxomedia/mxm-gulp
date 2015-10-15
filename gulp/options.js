@@ -99,7 +99,7 @@ var options = {
 		},
 
 		// Use common chunks plugin?
-		commonChunks: true
+		commonChunks: false
 
 		// For all other options, it is recommended you look
 		// at the more detailed options file at /gulpfile.js/options/webpack.js

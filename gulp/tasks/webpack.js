@@ -62,7 +62,6 @@ function stage (callback) {
 
 	// Sourcemaps
 	options.devtool = 'source-map';
-	console.log(options);
 
 	// Minify
 	options.plugins.push(new webpack.optimize.UglifyJsPlugin())

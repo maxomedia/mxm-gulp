@@ -10,6 +10,9 @@ temp
 # Galen reports
 __tests__/reports
 
+# Cache files
+*.gulp
+
 # Project files
 *.sublime-project
 *.sublime-workspace

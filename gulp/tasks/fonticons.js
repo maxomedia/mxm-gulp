@@ -29,7 +29,7 @@ function generateFonticons () {
 		timestamp: runTimestamp
 	}))
 
-	// On parsing one icon, create .less file
+	// Write the less file
 	.on('glyphs', setCodepoints)
 
 	// Handle errors

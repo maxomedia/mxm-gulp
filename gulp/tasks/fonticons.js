@@ -7,6 +7,9 @@ var options      = require('../options').fonticons;
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
 
+// Create a timestamp, recommended to get consistent builds when watching files
+var runTimestamp = Math.round(Date.now()/1000);
+
 /**
  * Generate font files from svg icons
  * @return {Object} Gulp stream
@@ -22,11 +25,12 @@ function generateFonticons () {
 	.pipe( fonticons({
 		fontName: 'fonticons',
 		normalize: true,
-		appendCodepoints: true
+		appendUnicode: true,
+		timestamp: runTimestamp
 	}))
 
 	// On parsing one icon, create .less file
-	.on('codepoints', setCodepoints)
+	.on('glyphs', setCodepoints)
 
 	// Handle errors
 	.on('error', handleErrors)
@@ -40,14 +44,14 @@ function generateFonticons () {
  * convenience classes for every icon.
  * @param {Object} codepoints [description]
  */
-function setCodepoints (codepoints) {
-
+function setCodepoints (glyphs) {
+	
 	// Get less template
-	gulp.src('gulpfile.js/utils/fonticons.less')
+	gulp.src('gulp/utils/fonticons.less')
 
 		// Create less file
 		.pipe( consolidate('lodash', {
-			glyphs: codepoints,
+			glyphs: glyphs,
 			fontName: 'fonticons',
 			fontPath: options.root,
 			className: 'gfx'

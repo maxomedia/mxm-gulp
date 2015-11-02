@@ -1,10 +1,10 @@
 @font-face {
   font-family: "<%= fontName %>";
-  src: url('<%= fontPath %><%= fontName %>.eot');
-  src: url('<%= fontPath %><%= fontName %>.eot?#iefix') format('eot'),
-    url('<%= fontPath %><%= fontName %>.woff') format('woff'),
-    url('<%= fontPath %><%= fontName %>.ttf') format('truetype'),
-    url('<%= fontPath %><%= fontName %>.svg#<%= fontName %>') format('svg');
+  src: url('<%= fontPath %>/<%= fontName %>.eot');
+  src: url('<%= fontPath %>/<%= fontName %>.eot?#iefix') format('eot'),
+    url('<%= fontPath %>/<%= fontName %>.woff') format('woff'),
+    url('<%= fontPath %>/<%= fontName %>.ttf') format('truetype'),
+    url('<%= fontPath %>/<%= fontName %>.svg#<%= fontName %>') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -49,13 +49,13 @@
 
   .glyphmap(){
     .font-styling();
-    <% _.each(glyphs, function(glyph) { %>& when (@class = <%= glyph.name %>){ content: "\<%= glyph.codepoint.toString(16).toUpperCase() %>" }
+    <% _.each(glyphs, function(glyph) { %>& when (@class = <%= glyph.name %>){ content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>" }
     <% }); %>
   }
 }
 
-<% _.each(glyphs, function(glyph) { %>.<%= className %>-<%= glyph.name %>:before { content: "\<%= glyph.codepoint.toString(16).toUpperCase() %>" }
+<% _.each(glyphs, function(glyph) { %>.<%= className %>-<%= glyph.name %>:before { content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>" }
 <% }); %>
 
-<% _.each(glyphs, function(glyph) { %>.after.<%= className %>-<%= glyph.name %>:after { content: "\<%= glyph.codepoint.toString(16).toUpperCase() %>" }
+<% _.each(glyphs, function(glyph) { %>.after.<%= className %>-<%= glyph.name %>:after { content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>" }
 <% }); %>

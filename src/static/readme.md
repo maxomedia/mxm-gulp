@@ -1,0 +1,1 @@
+Place static files here, they will be copied to the destination you provided in the gulp options.

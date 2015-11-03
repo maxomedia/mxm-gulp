@@ -17,7 +17,6 @@ __tests__/reports
 *.sublime-project
 *.sublime-workspace
 *.lnk
-src/tinypng/*.*
 
 # Built assets
 dist

@@ -25,7 +25,7 @@ function generateFonticons () {
 	.pipe( fonticons({
 		fontName: 'fonticons',
 		normalize: true,
-		appendUnicode: true,
+		appendUnicode: false,
 		timestamp: runTimestamp
 	}))
 

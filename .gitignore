@@ -20,3 +20,4 @@ __tests__/reports
 
 # Built assets
 dist
+dest

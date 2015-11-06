@@ -28,7 +28,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 #### Planned features
 - Find a way to avoid `gulp.start` in development environmet
 - Get rid of the event system and use gulp dependencies instead
-- Migrate to gulp 4.0 once it is released or prepeare already
+- Migrate to gulp 4.0 once it is released
 - Reimplement JS testing
 - Generated styleguides with hologram or similar
 - Use yeoman

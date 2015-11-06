@@ -9,6 +9,9 @@
   "files": [
     "gulp"
   ],
+  "scripts": {
+    "gulp": "gulp"
+  },
   "license": "MIT",
   "description": "Project setup with gulp",
   "devDependencies": {

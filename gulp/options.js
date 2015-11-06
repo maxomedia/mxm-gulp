@@ -34,12 +34,6 @@ var options = {
 		src: source + '/static/**'
 	},
 
-	galen: {
-		reports: destination + '/reports',
-		port: 3333,
-		tests: source + '/less/__tests__/tests/**/*.test'
-	},
-
 	// Less to CSS
 	less: {
 

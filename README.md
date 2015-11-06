@@ -7,11 +7,12 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 
 #### Features
 - `gulp less` [Less to CSS](https://github.com/plus3network/gulp-less) ([autoprefixed](https://github.com/sindresorhus/gulp-autoprefixer), [sourcemaps](https://github.com/floridoo/gulp-sourcemaps), [minified](https://github.com/jonathanepollack/gulp-minify-css/))
-- `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack) (multiple bundles, sourcemaps, minified)
+- `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack) (multiple bundles, sourcemaps, minified, CommonJS)
 - `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
-- `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot])
+- `gulp svg-sprite` to concat svg files, create a LESS with dimension info and a demo HTML page
+- `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot]) as fallback for svg sprites (works in IE8) or if you don't want multicolored scalable icons
 - `gulp static` Task to copy static files to the destination folder
-- `gulp bower` install bower dependencies
+- `gulp install` install missing bower and npm dependencies, useful for CI Servers.
 - `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
 - Build and reload on save
@@ -29,6 +30,8 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - Get rid of the event system and use gulp dependencies instead
 - Migrate to gulp 4.0 once it is released or prepeare already
 - Reimplement JS testing
+- Generated styleguides with hologram or similar
+- Use yeoman
 
 #### Installation
 1. Download the zip and place its contents where you want to use them
@@ -52,11 +55,8 @@ You should know how to run gulp. If you are not familiar with it, here is a list
     gulp
   ```
   
-  Your development files are stored at `/src`. The built assets will be stored at `/dist` by default.
+  Your development files are stored at `/src`. The built assets will be stored at `/dest` by default.
   
 If you work on windows and run into `node-gyp rebuild errors`, this pages might help resolve the issue. It can have many causes, here are a few listed with resources to help you resolve these issues:
  - python not installed or set in PATH (https://github.com/nodejs/node-v0.x-archive/issues/4047)
  - wrong Visual Studio version configured in node (http://stackoverflow.com/questions/14278417/cannot-install-node-modules-that-require-compilation-on-windows-7-x64-vs2012)
-
-#### Documentation
-Please refer to the [wiki](https://github.com/maxomedia/mxm-gulp/wiki) of this repo for detailed information for each task.

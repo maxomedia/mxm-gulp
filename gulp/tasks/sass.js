@@ -8,6 +8,11 @@ var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
 var passedOpt    = options.options;
 
+/**
+ * Compile the sass, handle errors, use autoprefixer
+ * and write the sourcemap
+ * @return {[type]} [description]
+ */
 var compileSass = function () {
 	return gulp.src(options.main)
 		.pipe(sourcemaps.init())
@@ -17,6 +22,10 @@ var compileSass = function () {
 		.pipe(gulp.dest(options.dest));
 }
 
+/**
+ * Development build with watchers
+ * @return {Stream} Gulp stream
+ */
 var dev = function () {
 	if (!options) return;
 
@@ -25,16 +34,23 @@ var dev = function () {
 	});
 };
 
+/**
+ * Production build with minification
+ * @return {Stream} Gulp stream
+ */
 var stage = function () {
 	passedOpt.outputStyle = 'compressed';
 	return compileSass();
 };
 
+// Register tasks
 gulp.task('sass', compileSass);
 gulp.task('sass:dev', dev);
 gulp.task('sass:stage', stage);
 
+// Register event handlers
 kickstarter.on('gulp.dev', dev);
 kickstarter.on('gulp.stage', stage);
 
+// Expose sass task
 module.exports = compileSass;

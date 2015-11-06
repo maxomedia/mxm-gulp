@@ -68,6 +68,10 @@ function setCodepoints (glyphs) {
 		});
 }
 
+/**
+ * Development function with watchers
+ * @return {Stream} Gulp stream
+ */
 function dev () {
 	if (!options) return;
 

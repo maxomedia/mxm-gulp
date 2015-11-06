@@ -1,7 +1,6 @@
 var gulp        = require('gulp');
 var webpack     = require('webpack');
 var browserSync = require('browser-sync');
-var log         = require('../utils/compileLogger');
 var kickstarter = require('../utils/kickstarter');
 var options     = require('../options').webpack;
 var gulpWatch   = require('gulp-watch');

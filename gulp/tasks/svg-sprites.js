@@ -1,5 +1,6 @@
 var gulp         = require('gulp');
 var svgSprite    = require('gulp-svg-sprite');
+var watch        = require('gulp-watch');
 var options      = require('../options').svgSprite;
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');

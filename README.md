@@ -1,5 +1,6 @@
 # mxm-[gulp](https://github.com/gulpjs/gulp)
 [![Build Status](https://travis-ci.org/maxomedia/mxm-gulp.svg?branch=develop)](https://travis-ci.org/maxomedia/mxm-gulp)
+[![Inline docs](http://inch-ci.org/github/maxomedia/mxm-gulp.svg?branch=develop)](http://inch-ci.org/github/maxomedia/mxm-gulp)
 
 The buildsystem we use at maxomedia.
 

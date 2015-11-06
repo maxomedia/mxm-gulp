@@ -61,6 +61,24 @@ var options = {
 		}
 	},
 
+	sass: {
+		src: source + '/sass/**/*.scss',
+		main: source + '/sass/main.scss',
+		dest: destination + '/css',
+		
+		options: {
+			nodeSass: {
+				includePaths: ['node_modules'],
+			},
+			autoprefixer: {
+				browsers: ['last 2 versions']
+			},
+			sourcemaps: {
+				sourceMappingURLPrefix: webroot + '/css'
+			}
+		}
+	},
+
 	svgSprite: {
 		src: source + '/svg/**/*.svg',
 		dest: './',

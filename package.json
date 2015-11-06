@@ -6,6 +6,9 @@
     "url": "https://github.com/maxomedia/mxm-gulp"
   },
   "main": "./gulpfile.js",
+  "files": [
+    "gulp"
+  ],
   "license": "MIT",
   "description": "Project setup with gulp",
   "devDependencies": {

@@ -2,7 +2,10 @@ var notifier = require('node-notifier');
 var gutil = require('gulp-util');
 var path = require('path');
 
-// TODO: use this function instead of the ugly one above
+/**
+ * Log an error using node-notifier
+ * @param  {Object} err The error object
+ */
 function logError (err) {
 
 	// Windows Balloon, growl or toast notification popup

@@ -7,16 +7,34 @@ The buildsystem we use at maxomedia.
 Most of the tasks and the structure are inspired by https://github.com/greypants/gulp-starter, thanks to all contributors of this repo.
 
 #### Features
-- `gulp less` [Less to CSS](https://github.com/plus3network/gulp-less) ([autoprefixed](https://github.com/sindresorhus/gulp-autoprefixer), [sourcemaps](https://github.com/floridoo/gulp-sourcemaps), [minified](https://github.com/jonathanepollack/gulp-minify-css/))
-- `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack) (multiple bundles, sourcemaps, minified, CommonJS)
+- `gulp less` [Less to CSS](https://github.com/plus3network/gulp-less)
+  - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
+  - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
+  - [minified](https://github.com/jonathanepollack/gulp-minify-css/)
+- `gulp sass` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
+  - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
+  - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
+  - Compressed on `gulp stage` or `gulp sass:stage`
+- `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack)
+  - multiple bundles
+  - sourcemaps
+  - minified
+  - CommonJS
 - `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
-- `gulp svg-sprite` to concat svg files, create a LESS with dimension info and a demo HTML page
-- `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg (with Less mixin and class references, [ttf, woff, svg, eot]) as fallback for svg sprites (works in IE8) or if you don't want multicolored scalable icons
-- `gulp static` Task to copy static files to the destination folder
-- `gulp install` install missing bower and npm dependencies, useful for CI Servers.
-- `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`.
+- `gulp svg-sprite` to concat svg files
+  - concatenated svg file
+  - create a LESS with dimension info
+  - a demo HTML page
+- `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg
+  - Less mixin and class references
+  - ttf, woff, svg, eot
+  - fallback for svg sprites (works in IE8) or if you don't want multicolored scalable icons
+- `gulp static` Task to copy static files to the destination folder, e.g. fonts or images
+- `gulp install` install missing bower and npm dependencies, useful for CI Servers
+- `gulp tinypng` Minify any images (.png, .jpg) dropped at `src/tinypng`
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
-- Build and reload on save
+  - Livereload on save
+  - Mind the settings at `localhost:3001` for input syncing and weinre remote debugger
 - Separate DEV and STAGE builds (`gulp` or `gulp dev` and `gulp stage`) to speed up development. Add `:dev` to any task to start it in dev mode or `:stage` for a production ready build. For example `gulp less:stage` for a minified build.
 - Error logging with windows notification and in the console
 

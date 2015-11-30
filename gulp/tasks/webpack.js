@@ -76,7 +76,7 @@ function watch () {
 	if (!options) return;
 
 	gulpWatch(options.src, function () {
-		gulp.start('webpack').on('end', function () {console.log('yes')});
+		gulp.start('webpack');
 	});
 }
 

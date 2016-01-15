@@ -1,0 +1,10 @@
+﻿{
+    "compilerOptions": {
+        "module": "system",
+        "sourceMap": true,
+        "noImplicitAny": true
+    },
+    "files": [
+        "./src/ts/app.ts"        
+    ]
+}

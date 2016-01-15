@@ -33,6 +33,7 @@
     "gulp-tinypng": "1.0.2",
     "gulp-util": "3.0.7",
     "gulp-watch": "4.3.5",
+    "gulp-typescript": "2.5.0",
     "lodash": "3.10.1",
     "node-notifier": "4.3.1",
     "pretty-hrtime": "1.0.1",
@@ -40,5 +41,7 @@
     "vinyl-paths": "2.0.0",
     "webpack": "1.12.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "ts-loader": "^0.7.2"
+  }
 }

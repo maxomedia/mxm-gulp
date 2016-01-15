@@ -97,12 +97,13 @@ var options = {
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
-			app: source + '/js/app.js'
+			//app: source + '/js/app.js'
+			app: source + '/ts/app.ts'
 		},
 
 		// Set resolve paths
 		resolve: {
-			extensions: ['', '.js'],
+			extensions: ['', '.js','.ts'],
 			root: path.resolve('./src/js')
 		},
 
@@ -110,6 +111,11 @@ var options = {
 		output: {
 			path: destination + '/js/',
 			publicPath: webroot
+		},
+		module: {
+		    loaders: [
+		      { test: /\.ts$/, loader: 'ts-loader' }
+		    ]
 		},
 
 		// Use common chunks plugin?
@@ -178,6 +184,11 @@ var options = {
 		// Wether to open new tab on start or not
 		open: true,
 		logFileChanges: false
+	},
+	typescript:{
+		src: source + '/ts/**/*.ts',
+		dest: destination + "/js"
+
 	},
 
 	// These are required for the 

@@ -115,10 +115,10 @@ function pack (options, callback) {
 }
 
 // Register tasks
-gulp.task('webpack', dev);
-gulp.task('webpack:test', test);
-gulp.task('webpack:dev', watch);
-gulp.task('webpack:stage', stage);
+gulp.task('webpack',['typescript'], dev);
+gulp.task('webpack:test',['typescript'], test);
+gulp.task('webpack:dev',['typescript'], watch);
+gulp.task('webpack:stage',['typescript'], stage);
 
 // Register event handlers
 kickstarter.on('gulp.dev', function () {

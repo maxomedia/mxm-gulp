@@ -1,7 +1,7 @@
 ﻿{
     "compilerOptions": {
-        "module": "system",
-        "sourceMap": true,
+        "module": "commonjs",
+        "sourceMap": false,
         "noImplicitAny": true
     },
     "files": [

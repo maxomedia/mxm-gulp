@@ -97,8 +97,7 @@ var options = {
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
-			//app: source + '/js/app.js'
-			app: source + '/ts/app.ts'
+			app: source + '/js/app.js'			
 		},
 
 		// Set resolve paths
@@ -187,7 +186,7 @@ var options = {
 	},
 	typescript:{
 		src: source + '/ts/**/*.ts',
-		dest: destination + "/js"
+		dest: source +"/js/_compiled-ts/"
 
 	},
 

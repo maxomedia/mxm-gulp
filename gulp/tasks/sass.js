@@ -16,7 +16,7 @@ var passedOpt    = options.options;
 var compileSass = function () {
 	return gulp.src(options.main)
 		.pipe(sourcemaps.init())
-		.pipe(sass(passedOpt.sass).on('error', handleErrors))
+		.pipe(sass(passedOpt.nodeSass).on('error', handleErrors))
 		.pipe(autoprefixer(passedOpt.autoprefixer))
 		.pipe(sourcemaps.write('/', passedOpt.sourcemaps))
 		.pipe(gulp.dest(options.dest));
@@ -39,14 +39,14 @@ var dev = function () {
  * @return {Stream} Gulp stream
  */
 var stage = function () {
-	passedOpt.outputStyle = 'compressed';
+	passedOpt.nodeSass.outputStyle = 'compressed';
 	return compileSass();
 };
 
 // Register tasks
 gulp.task('sass', compileSass);
 gulp.task('sass:dev', dev);
-gulp.task('sass:stage', stage);
+gulp.task('sass:stage', ['fonticons:stage'], stage);
 
 // Register event handlers
 kickstarter.on('gulp.dev', dev);

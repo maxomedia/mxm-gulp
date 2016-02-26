@@ -15,8 +15,10 @@ var path = require('path');
  *	   to go, if your folder structure meets the defaults set.
  */
 
+var source = './src';
+
 // Output folder for assets, relative to gulpfile.js
-var destination = './dist';
+var destination = './dest';
 
 // Route to your asset folder from a browser point of view
 var webroot = '';
@@ -29,43 +31,20 @@ var options = {
 	// All targeted files get simply copied to destination
 	// folder.
 	static: {
-		src: './src/static/**'
+		src: source + '/static/**'
 	},
 
-	galen: {
-		reports: destination + '/reports',
-		port: 3333,
-		tests: './src/less/__tests__/tests/**/*.test'
-	},
-
-	// Less to CSS
-	less: {
-
-		// Entry point. This can be an array of files for multiple bundles:
-		// main: ['src/less/main.less', 'src/less/bundle1.less'],
-		main: 'src/less/main.less',
-
-		// Files to watch for changes
-		src: 'src/less/**/*.less',
-
-		// Destination for .css files
+	sass: {
+		src: source + '/sass/**/*.scss',
+		main: source + '/sass/main.scss',
 		dest: destination + '/css',
-
-		// Options for respective gulp-??? plugins
+		
 		options: {
-			less: {
-				//paths: ''
+			nodeSass: {
+				includePaths: ['node_modules'],
 			},
 			autoprefixer: {
-				browsers: [
-					'Android >= 2.3',
-					'Chrome >= 20',
-					'Firefox >= 24',
-					'Explorer >= 9',
-					'iOS >= 6',
-					'Opera >= 12',
-					'Safari >= 6'
-				]
+				browsers: ['last 2 versions']
 			},
 			sourcemaps: {
 				sourceMappingURLPrefix: webroot + '/css'
@@ -73,17 +52,25 @@ var options = {
 		}
 	},
 
+	svgSprite: {
+		src: source + '/svg/**/*.svg',
+		dest: './',
+		svgDest: destination + '/img/svg-sprite.svg',
+		sassDest: source + '/sass/core/svg-sprite.scss',
+		htmlDest: destination + '/svg-sprite.html'
+	},
+
 	// Javascript bundles
 	webpack: {
 
 		// Define where your javascript source files lie
-		src: './src/js/**/*.js',
+		src: source + '/js/**/*.js',
 
 		// Define entry points for your scripts.
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
-			app: './src/js/app.js'
+			app: source + '/js/app.js'
 		},
 
 		// Set resolve paths
@@ -91,6 +78,11 @@ var options = {
 			extensions: ['', '.js'],
 			root: path.resolve('./src/js')
 		},
+
+		// Use this if you load jquery over a cdn
+		/*externals: {
+		    'jquery': 'jQuery'
+		},*/
 
 		// Destination folder
 		output: {
@@ -109,13 +101,13 @@ var options = {
 	jade: {
 
 		// Jade files to watch for changes
-		src: 'src/jade/**/*.jade',
+		src: source + '/jade/**/*.jade',
 
 		// Destination for html files
 		dest: destination,
 
 		// Entry points for views resulting in HTML pages
-		views: 'src/jade/views/**/*.jade',
+		views: source + '/jade/views/**/*.jade',
 
 		// Options to pass to gulp-jade
 		options: {
@@ -127,14 +119,14 @@ var options = {
 	fonticons: {
 
 		// SVG files to watch for changes
-		src: 'src/svg/**/*.svg',
+		src: source + '/svg/**/*.svg',
 
 		// Destination for font files
 		dest: destination + '/fonts',
 
 		// Destination folder for the less files
 		// containing the mixin
-		lessDest: 'src/less/core/',
+		sassDest: source + '/sass/core/',
 
 		// Where the browser can find your font files
 		root: webroot + '/fonts'
@@ -144,10 +136,10 @@ var options = {
 		//change api key!
 		apikey: "37Y9xQpd3cb1fGBVOfwRSS-D3Ktmi_K7",
 		// SVG files to watch for changes
-		src: 'src/tinypng/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}',
+		src: source + '/tinypng/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}',
 		// Destination folder for the less files
 		// containing the mixin
-		dest: 'src/static/img'
+		dest: source + '/static/img'
 	},
 
 	// Static webserver and livereload
@@ -169,7 +161,8 @@ var options = {
 	// These are required for the 
 	// extended options, do not alter
 	dest: destination,
-	webroot: webroot	
+	webroot: webroot,
+	src: source
 };
 
 // Export them options

@@ -47,7 +47,7 @@ function generateFonticons () {
 function setCodepoints (glyphs) {
 	
 	// Get less template
-	gulp.src('gulp/utils/fonticons.less')
+	gulp.src('gulp/utils/fonticons.scss')
 
 		// Create less file
 		.pipe( consolidate('lodash', {
@@ -61,7 +61,7 @@ function setCodepoints (glyphs) {
 		.on('error', handleErrors)
 
 		// Save the less file
-		.pipe( gulp.dest(options.lessDest) )
+		.pipe( gulp.dest(options.sassDest) )
 
 		.on('end', function () {
 			kickstarter.emit('fonticons.end');

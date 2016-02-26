@@ -25,7 +25,7 @@
     "gulp-install": "0.6.0",
     "gulp-jade": "1.1.0",
     "gulp-newer": "1.1.0",
-    "gulp-sass": "2.1.0",
+    "gulp-sass": "2.2.0",
     "gulp-sourcemaps": "1.6.0",
     "gulp-svg-sprite": "1.2.19",
     "gulp-tinypng": "1.0.2",
@@ -35,7 +35,7 @@
     "node-notifier": "4.5.0",
     "pretty-hrtime": "1.0.2",
     "require-dir": "0.3.0",
-    "vinyl-paths": "2.0.0",
+    "vinyl-paths": "2.1.0",
     "webpack": "1.12.14"
   },
   "dependencies": {}

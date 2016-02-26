@@ -19,10 +19,10 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - `gulp jade` [Jade to HTML](https://github.com/phated/gulp-jade)
 - `gulp svg-sprite` to concat svg files
   - concatenated svg file
-  - create a LESS with dimension info
+  - create a Scss with dimension info
   - a demo HTML page
 - `gulp fonticons` [Iconfont generation](https://github.com/backflip/gulp-iconfont-css) from .svg
-  - Less mixin and class references
+  - Scss mixin and class references
   - ttf, woff, svg, eot
   - fallback for svg sprites (works in IE8) or if you don't want multicolored scalable icons
 - `gulp static` Task to copy static files to the destination folder, e.g. fonts or images
@@ -31,13 +31,13 @@ Most of the tasks and the structure are inspired by https://github.com/greypants
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
   - Livereload on save
   - Mind the settings at `localhost:3001` for input syncing and weinre remote debugger
-- Separate DEV and STAGE builds (`gulp` or `gulp dev` and `gulp stage`) to speed up development. Add `:dev` to any task to start it in dev mode or `:stage` for a production ready build. For example `gulp less:stage` for a minified build.
+- Separate DEV and STAGE builds (`gulp` or `gulp dev` and `gulp stage`) to speed up development. Add `:dev` to any task to start it in dev mode or `:stage` for a production ready build. For example `gulp sass:stage` for a minified build.
 - Error logging with windows notification and in the console
 
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed in order to use gulp.
-- node.js v4.1.2 (recommended) (http://nodejs.org/)
-- npm v3.3.5 (recommended) (https://www.npmjs.com/)
+- node.js v4+ (recommended) (http://nodejs.org/)
+- npm v3+ (recommended) (https://www.npmjs.com/)
 - gulp (http://gulpjs.com/)
 
 #### Planned features
@@ -46,7 +46,6 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - Migrate to gulp 4.0 once it is released
 - Reimplement JS testing
 - Generated styleguides with hologram or similar
-- Use yeoman
 
 #### Installation
 1. Download the zip and place its contents where you want to use them

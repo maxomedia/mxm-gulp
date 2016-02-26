@@ -13,14 +13,15 @@ var kickstarter  = require('../utils/kickstarter');
 var createSprite = function () {
 	return gulp.src(options.src)
 		.pipe(svgSprite({
+			cssFile: options.sassDest,
 			mode: {				
 				symbol: {
 					dest: './',
 					inline: true,
 					sprite: options.svgDest,
 					render: {
-						less: {
-							dest: options.lessDest
+						scss: {
+							dest: options.sassDest
 						}
 					},
 					prefix: '.gfx-%s',

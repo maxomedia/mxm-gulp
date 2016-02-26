@@ -7,10 +7,6 @@ The buildsystem we use at maxomedia.
 Most of the tasks and the structure are inspired by https://github.com/greypants/gulp-starter, thanks to all contributors of this repo.
 
 #### Features
-- `gulp less` [Less to CSS](https://github.com/plus3network/gulp-less)
-  - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
-  - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
-  - [minified](https://github.com/jonathanepollack/gulp-minify-css/)
 - `gulp sass` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
   - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
   - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)

@@ -9,7 +9,7 @@
   font-style: normal;
 }
 
-.font-styling(){
+.fonticon {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;
@@ -27,30 +27,23 @@
 
 .<%= className %>{
   &:before, &.after:after{
-    .font-styling();
+    @extend .fonticon;
   }
   &.after {
-    &:before{display: none;}
+    &:before{content: none;}
   }
 }
 
-.<%= className %>(@class, @element: before){
-  & when(@element = before){
-    &:before{
-      .glyphmap();
-    }
-  }
-  
-  & when(@element = after){
-    &:after{
-      .glyphmap();
-    }
-  }
+@mixin glyphmap ($class){
+  @extend .fonticon;
+  <% _.each(glyphs, function(glyph) { %>@if $class = <%= glyph.name %>{ content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>" }<% }); %>
+}
 
-  .glyphmap(){
-    .font-styling();
-    <% _.each(glyphs, function(glyph) { %>& when (@class = <%= glyph.name %>){ content: "\<%= glyph.unicode[0].charCodeAt(0).toString(16).toUpperCase() %>" }
-    <% }); %>
+@mixin <%= className %>($class, $element: before){
+  @if $element == before{
+    &:before{ @include glyphmap($class); }
+  } @else {
+    &:after{ @include glyphmap($class); }
   }
 }
 

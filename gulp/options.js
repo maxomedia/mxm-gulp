@@ -3,14 +3,14 @@ var path = require('path');
 /*
  *  Instructions:
  *  =============
- *  
+ *
  *	1. All paths beneath are relative to gulpfile.js unless
  *	   a comment says otherwise. If gulpfile.js is a folder,
  *	   think of it as a file, gulp treats it the same way.
- *	   
+ *
  *	2. If you don't want a task to be running,
  *	   comment out or delete its options.
- *	   
+ *
  *	3. Modify dest and webroot to your liking and you are good
  *	   to go, if your folder structure meets the defaults set.
  */
@@ -34,38 +34,11 @@ var options = {
 		src: source + '/static/**'
 	},
 
-	// Less to CSS
-	less: {
-
-		// Entry point. This can be an array of files for multiple bundles:
-		// main: ['src/less/main.less', 'src/less/bundle1.less'],
-		main: 'src/less/main.less',
-
-		// Files to watch for changes
-		src: source + '/less/**/*.less',
-
-		// Destination for .css files
-		dest: destination + '/css',
-
-		// Options for respective gulp-??? plugins
-		options: {
-			less: {
-				//paths: ''
-			},
-			autoprefixer: {
-				browsers: ['last 2 versions']
-			},
-			sourcemaps: {
-				sourceMappingURLPrefix: webroot + '/css'
-			}
-		}
-	},
-
 	sass: {
 		src: source + '/sass/**/*.scss',
 		main: source + '/sass/main.scss',
 		dest: destination + '/css',
-		
+
 		options: {
 			nodeSass: {
 				includePaths: ['node_modules'],
@@ -82,9 +55,10 @@ var options = {
 	svgSprite: {
 		src: source + '/svg/**/*.svg',
 		dest: './',
-		svgDest: source + '/jade/shared/svg-sprite.svg',
-		lessDest: source + '/less/core/svg-sprite.less',
-		htmlDest: destination + '/svg-sprite.html'
+		svgDest: destination + '/img/svg-sprite.svg',
+		sassDest: source + '/sass/core/svg-sprite.scss',
+		htmlDest: destination + '/svg-sprite.html',
+		namespaceClassnames: false
 	},
 
 	// Javascript bundles
@@ -105,6 +79,11 @@ var options = {
 			extensions: ['', '.js','.ts'],
 			root: path.resolve('./src/js')
 		},
+
+		// Use this if you load jquery over a cdn
+		/*externals: {
+		    'jquery': 'jQuery'
+		},*/
 
 		// Destination folder
 		output: {
@@ -153,7 +132,7 @@ var options = {
 
 		// Destination folder for the less files
 		// containing the mixin
-		lessDest: source + '/less/core/',
+		sassDest: source + '/sass/core/',
 
 		// Where the browser can find your font files
 		root: webroot + '/fonts'
@@ -179,7 +158,7 @@ var options = {
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:
 		// proxy: 'localhost:60000'
-		
+
 		// Wether to open new tab on start or not
 		open: true,
 		logFileChanges: false
@@ -190,7 +169,7 @@ var options = {
 
 	},
 
-	// These are required for the 
+	// These are required for the
 	// extended options, do not alter
 	dest: destination,
 	webroot: webroot,

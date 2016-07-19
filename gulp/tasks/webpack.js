@@ -92,12 +92,7 @@ function pack (options, callback) {
 		if (err) {
 
 			// Log errors
-
-			// TODO: replace this with generic error logger
-			gutil.log(
-				'Error in file ' + gutil.colors.magenta(err.module.resource + ':' + err.error.lineNumber + '\n')
-				+ gutil.colors.red(err.message)
-			);
+			gutil.log(gutil.colors.red(err.message));
 			notifier.notify({
 				title: 'gulp webpack error:',
 				message: err.message,

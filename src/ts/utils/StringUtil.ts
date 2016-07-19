@@ -1,10 +1,9 @@
 export default class StringUtil{
+
 	constructor(){
 	}
-	foo():string{
-		return "bar";
-	}
-	/*static padLeft(str:string, padChar:string, count:Number) {
+
+	static padLeft(str:string, padChar:string, count:Number) {
 		if (padChar.length < 1) {
 			return null;
 		}		
@@ -35,9 +34,5 @@ export default class StringUtil{
 		}
 
 		return pUrl;
-	}*/
+	}
 }
-
-//declare var module: any;
-//(module).exports = StringUtil;
-//export = StringUtil;

@@ -112,6 +112,7 @@ function pack (options, callback) {
 		// Finished, with or without errors
 		callback();
 	});
+	//webpack.on("error",function(){});
 }
 
 // Register tasks

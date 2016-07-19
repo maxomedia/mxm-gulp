@@ -31,7 +31,7 @@
     "gulp-tinypng": "1.0.2",
     "gulp-util": "3.0.7",
     "gulp-watch": "4.3.5",
-    "gulp-typescript": "2.5.0",
+    "gulp-typescript": "2.8.2",
     "lodash": "4.5.1",
     "node-notifier": "4.5.0",
     "pretty-hrtime": "1.0.2",

@@ -1,13 +1,28 @@
 /// <reference path="./typings/jquery.d.ts"/>
-var DemoClass = (function () {
-    function DemoClass() {
-        this.winEl = $(window);
+var StringUtil_1 = require("./utils/StringUtil");
+var TSDemo = (function () {
+    function TSDemo() {
+        var hello = StringUtil_1["default"].getUrlParam(window.location.href, "hello");
+        alert(hello);
+        $(document).on("click", this.handler);
     }
-    DemoClass.prototype.boom = function () {
-        alert("Demo !" + this.winEl.width());
+    TSDemo.prototype.handler = function (event) {
+        event.preventDefault();
     };
-    return DemoClass;
+    //add a message 
+    TSDemo.prototype.boom = function (message) {
+        return "foo " + message;
+    };
+    return TSDemo;
 })();
+exports.TSDemo = TSDemo;
+var demo = new TSDemo();
+var fobar = demo.boom("bar");
+alert(fobar);
+/*
+declare var module: any;
 (module).exports = DemoClass;
+var result = StringUtil.padLeft("foo", "0", 8);
+        console.log(result);
 
-//# sourceMappingURL=demo.js.map
+*/ 

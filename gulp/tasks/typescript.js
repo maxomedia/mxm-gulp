@@ -18,7 +18,7 @@ function compileTypescript(){
 	return gulp.src(options.src)
 		.pipe(ts({
 			"noImplicitAny" : true,
-			"module": "system",
+			"module": "commonjs",
 			//"out" : './app-ts.js',
 			//"outDir" :  "./js/compiled-ts/",			
 		}))

@@ -1,46 +1,45 @@
 ﻿/// <reference path="./typings/jquery.d.ts"/>
 
-
-//import StringUtil from "./utils/StringUtil";
-
-//import StringUtil = require("./utils/StringUtil");
+import StringUtil from "./utils/StringUtil";
+import AppVars from "./AppVars";
 
 
-class DemoClass{
-    winEl: JQuery;
-    doc: Document;
+export class TSDemo{
 	constructor(){
-		this.winEl = $(window);
-        this.doc = document;
+
+        
+        var hello:string = StringUtil.getUrlParam(window.location.href, "hello");
+        alert(hello);       
+        $(document).on("click",this.handler);
+        
         
 	}
-    boom(){
-		var main:JQuery = $(".main");
+	handler(event:JQueryEventObject ){
+		event.preventDefault();
+	}
+	//add a message 
+    boom(message:string):string{
+    	
 
-		main.on("click", this.mainClick);
-
-
-        console.log("Demo !" + this.winEl.width());
-        var myArray: Array<Number> = [];
-        myArray.push(0);
-        myArray.push(10);
-
-       /* var strU = new StringUtil();
-        strU.foo();
-        console.log(myArray.join(", ")); */       
-        //var str = strUtil.padLeft("1", "0", 10);
-        //var fooStr = strUtil.foo();
-        //console.log(fooStr);
-
-        //myArray.pus
+        return "foo " + message;
 
     }
-    mainClick(event:JQueryEventObject){
-		console.log(event.target);
-    }
+    
 }
 
+var demo:TSDemo = new TSDemo();
+
+var fobar:string = demo.boom("bar");
 
 
+
+alert(fobar);
+
+
+/*
 declare var module: any;
 (module).exports = DemoClass;
+var result = StringUtil.padLeft("foo", "0", 8);
+        console.log(result);
+
+*/

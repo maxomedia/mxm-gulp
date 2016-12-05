@@ -46,7 +46,7 @@ var stage = function () {
 // Register tasks
 gulp.task('sass', compileSass);
 gulp.task('sass:dev', dev);
-gulp.task('sass:stage', ['fonticons:stage'], stage);
+gulp.task('sass:stage', stage);
 
 // Register event handlers
 kickstarter.on('gulp.dev', dev);

@@ -116,23 +116,6 @@ var options = {
 		}
 	},
 
-	// SVG icons to webfont
-	fonticons: {
-
-		// SVG files to watch for changes
-		src: source + '/svg/**/*.svg',
-
-		// Destination for font files
-		dest: destination + '/fonts',
-
-		// Destination folder for the less files
-		// containing the mixin
-		sassDest: source + '/sass/core/',
-
-		// Where the browser can find your font files
-		root: webroot + '/fonts'
-	},
-
 	tinypng: {
 		//change api key!
 		apikey: "37Y9xQpd3cb1fGBVOfwRSS-D3Ktmi_K7",

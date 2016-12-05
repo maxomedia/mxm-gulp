@@ -99,16 +99,16 @@ var options = {
 	},
 
 	// Jade to HTML
-	jade: {
+	pug: {
 
 		// Jade files to watch for changes
-		src: source + '/jade/**/*.jade',
+		src: source + '/pug/**/*.pug',
 
 		// Destination for html files
 		dest: destination,
 
 		// Entry points for views resulting in HTML pages
-		views: source + '/jade/views/**/*.jade',
+		views: source + '/pug/views/**/*.pug',
 
 		// Options to pass to gulp-jade
 		options: {

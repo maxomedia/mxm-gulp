@@ -1,17 +1,17 @@
 var gulp         = require('gulp');
-var jade         = require('gulp-jade');
+var pug         = require('gulp-pug');
 var browserSync  = require('browser-sync');
 var watch        = require('gulp-watch');
 var gutil        = require('gulp-util');
-var options      = require('../options').jade;
+var options      = require('../options').pug;
 var handleErrors = require('../utils/handleErrors');
 var kickstarter  = require('../utils/kickstarter');
 
 /**
- * Compile jade files in the views directory
+ * Compile pug files in the views directory
  * @return {Object} Gulp stream
  */
-function compileJade () {
+function compilePug () {
 
 	// Exit criteria
 	if (!options) return;
@@ -20,7 +20,7 @@ function compileJade () {
 	return gulp.src( options.views )
 
 	// Compile files
-	.pipe( jade(options.options))
+	.pipe( pug(options.options))
 
 	// Handle them errors
 	.on( 'error', handleErrors)
@@ -33,7 +33,7 @@ function compileJade () {
 }
 
 /**
- * Watch jade files for changes
+ * Watch pug files for changes
  * @return {Stream} Gulp stream
  */
 var dev = function () {
@@ -42,20 +42,20 @@ var dev = function () {
 	if (!options) return;
 
 	return watch(options.src, function () {
-		gulp.start('jade');
+		gulp.start('pug');
 	});
 }
 
 // Register task
-gulp.task('jade', compileJade);
-gulp.task('jade:dev', dev);
-gulp.task('jade:stage', compileJade);
+gulp.task('pug', compilePug);
+gulp.task('pug:dev', dev);
+gulp.task('pug:stage', compilePug);
 
 // Register event handler
 kickstarter.on('gulp.dev', dev);
 kickstarter.on('gulp.stage', function () {
-	gulp.start('jade');
+	gulp.start('pug');
 });
 
 // Export task
-module.exports = compileJade;
+module.exports = compilePug;

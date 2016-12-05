@@ -20,10 +20,7 @@
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.0",
     "gulp-cached": "1.1.0",
-    "gulp-consolidate": "0.1.2",
-    "gulp-iconfont": "6.0.0",
     "gulp-install": "0.6.0",
-    "gulp-jade": "1.1.0",
     "gulp-newer": "1.1.0",
     "gulp-sass": "2.2.0",
     "gulp-sourcemaps": "1.6.0",
@@ -38,5 +35,7 @@
     "vinyl-paths": "2.1.0",
     "webpack": "1.12.14"
   },
-  "dependencies": {}
+  "dependencies": {
+    "gulp-pug": "^3.2.0"
+  }
 }

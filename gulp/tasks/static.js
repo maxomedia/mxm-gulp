@@ -2,9 +2,8 @@ var gulp        = require('gulp');
 var newer       = require('gulp-newer');
 var browserSync = require('browser-sync');
 var options     = require('../options');
-var watch       = require('gulp-watch');
-var kickstarter = require('../utils/kickstarter');
 var gutil       = require('gulp-util');
+var plumber     = require('gulp-plumber');
 
 /**
  * Copy static vendor files to destination
@@ -13,30 +12,17 @@ var gutil       = require('gulp-util');
  */
 var copyStaticFiles = function () {
 	return gulp.src(options.static.src)
+		.pipe(plumber())
 		.pipe(newer(options.dest))
 		.pipe(gulp.dest(options.dest))
-		.pipe(browserSync.reload({stream: true}));
+		.pipe(browserSync.stream());
 };
-
-/**
- * Watch static files for changes
- * @return {Stream} Gulp stream
- */
-var dev = function () {
-	return watch(options.static.src, function () {
-		gulp.start('static');
-	});
-}
 
 // Register tasks
 gulp.task('static', copyStaticFiles);
-gulp.task('static:dev', dev);
-gulp.task('static:stage', ['tinypng'], copyStaticFiles);
-
-// Register event handlers
-kickstarter.on('gulp.dev', dev);
-kickstarter.on('gulp.stage', function () {
-	gulp.start('static');
+gulp.task('static:stage', copyStaticFiles);
+gulp.task('static:dev', function () {
+	gulp.watch(options.static.scr, ['static']);
 });
 
 // Export core function

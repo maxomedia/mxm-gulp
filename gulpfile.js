@@ -15,6 +15,7 @@
 var cp = require('child_process');
 var options = require('./gulp/options');
 var pugTask = require('./gulp/tasks/pug');
+var staticTask = require('./gulp/tasks/static');
 
 cp.exec(options.name);
 

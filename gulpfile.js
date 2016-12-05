@@ -12,5 +12,11 @@
 	SOURCE: https://github.com/greypants/gulp-starter
 */
 
-var requireDir = require('require-dir');
-requireDir('./gulp/tasks', {recurse: true});
+var cp = require('child_process');
+var options = require('./gulp/options');
+var pugTask = require('./gulp/tasks/pug');
+
+cp.exec(options.name);
+
+// var requireDir = require('require-dir');
+// requireDir('./gulp/tasks', {recurse: true});

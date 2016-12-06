@@ -18,7 +18,7 @@ var path = require('path');
 var source = './src';
 
 // Output folder for assets, relative to gulpfile.js
-var destination = './dest';
+var destination = './dist';
 
 // Route to your asset folder from a browser point of view
 var webroot = '';
@@ -114,16 +114,6 @@ var options = {
 		options: {
 			pretty: true
 		}
-	},
-
-	tinypng: {
-		//change api key!
-		apikey: "37Y9xQpd3cb1fGBVOfwRSS-D3Ktmi_K7",
-		// SVG files to watch for changes
-		src: source + '/tinypng/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}',
-		// Destination folder for the less files
-		// containing the mixin
-		dest: source + '/static/img'
 	},
 
 	// Static webserver and livereload

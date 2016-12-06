@@ -12,12 +12,34 @@
 	SOURCE: https://github.com/greypants/gulp-starter
 */
 
-var cp = require('child_process');
-var options = require('./gulp/options');
-var pugTask = require('./gulp/tasks/pug');
-var staticTask = require('./gulp/tasks/static');
+var gulp          = require('gulp');
+var childProcess  = require('child_process');
+var options       = require('./gulp/options');
+var browserSync   = require('./gulp/tasks/browser-sync')
+var pugTask       = require('./gulp/tasks/pug');
+var staticTask    = require('./gulp/tasks/static');
+var sassTask      = require('./gulp/tasks/sass');
+var svgSpriteTask = require('./gulp/tasks/svg-sprite');
+var webpackTask   = require('./gulp/tasks/webpack');
 
-cp.exec(options.name);
+gulp.task('default', ['dev']);
 
-// var requireDir = require('require-dir');
-// requireDir('./gulp/tasks', {recurse: true});
+gulp.task('dev', [
+	'static:dev',
+	'sass:dev',
+	'svg-sprite:dev',
+	'webpack:dev',
+	'pug:dev',
+	'browser-sync'
+]);
+
+gulp.task('stage', [
+	'static:stage',
+	'sass:stage',
+	'svg-sprite:stage',
+	'webpack:stage',
+	'pug:stage',
+]);
+
+
+childProcess.exec('title ' + options.name);

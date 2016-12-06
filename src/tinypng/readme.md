@@ -1,1 +1,0 @@
-Place large (up to 5MB) images here, they will be uploaded to tynipng.com and minified. Once downloaded, the images will be placed in the destination you provided in the gulp options and the original files will be deleted from this folder.

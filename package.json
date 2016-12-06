@@ -5,6 +5,7 @@
     "type": "git",
     "url": "https://github.com/maxomedia/mxm-gulp"
   },
+  "author": "Philipp Gfeller <philipp.gfeller@maxomedia.ch>",
   "main": "./gulpfile.js",
   "files": [
     "gulp"
@@ -15,40 +16,18 @@
   "license": "MIT",
   "description": "Project setup with gulp",
   "devDependencies": {
-    "browser-sync": "2.11.1",
-    "del": "2.2.0",
-    "gulp": "3.9.1",
-    "gulp-autoprefixer": "3.1.0",
-    "gulp-cached": "1.1.0",
-    "gulp-install": "0.6.0",
-    "gulp-newer": "1.1.0",
-    "gulp-sass": "2.2.0",
-    "gulp-sourcemaps": "1.6.0",
-    "gulp-svg-sprite": "1.2.19",
-    "gulp-tinypng": "1.0.2",
-    "gulp-util": "3.0.7",
-    "gulp-watch": "4.3.5",
-    "lodash": "4.5.1",
-    "node-notifier": "4.5.0",
-    "pretty-hrtime": "1.0.2",
-    "require-dir": "0.3.0",
-    "vinyl-paths": "2.1.0",
-    "webpack": "1.12.14"
-  },
-  "dependencies": {
     "browser-sync": "2.18.2",
-    "del": "2.2.2",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "3.1.1",
-    "gulp-cached": "1.1.1",
     "gulp-newer": "1.3.0",
-    "gulp-pug": "^3.2.0",
+    "gulp-plumber": "1.1.0",
+    "gulp-pug": "3.2.0",
     "gulp-sass": "2.3.2",
     "gulp-sourcemaps": "1.9.1",
     "gulp-svg-sprite": "1.3.6",
-    "lodash": "4.17.2",
-    "node-notifier": "4.6.1",
-    "pretty-hrtime": "1.0.3",
-    "require-dir": "0.3.1",
     "webpack": "1.13.3"
+  },
+  "dependencies": {
+    "gulp-util": "^3.0.7"
   }
 }

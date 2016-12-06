@@ -3,7 +3,6 @@ var pug         = require('gulp-pug');
 var browserSync = require('browser-sync');
 var plumber     = require('gulp-plumber');
 var options     = require('../options').pug;
-var watch       = require('gulp-watch');
 
 /**
  * Compile pug files in the views directory

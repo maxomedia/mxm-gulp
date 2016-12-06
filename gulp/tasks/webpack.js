@@ -1,27 +1,13 @@
 var gulp        = require('gulp');
 var webpack     = require('webpack');
 var browserSync = require('browser-sync');
-var kickstarter = require('../utils/kickstarter');
 var options     = require('../options').webpack;
-var gulpWatch   = require('gulp-watch');
-var gutil = require('gulp-util');
-var notifier = require('node-notifier');
-var path = require('path');
+var gutil       = require('gulp-util');
 
 // Set shared options
 options.plugins = options.plugins || [];
 options.output.filename = options.output.filename || '[name].js';
 options.bail = true;
-
-/**
- * Test build for karma
- * @param  {Function} callback Gulp callback
- */
-function test (callback) {
-	if (!options) return;
-
-	pack(options, callback);
-}
 
 /**
  * Dev build. Non minified but with sourcemaps
@@ -69,18 +55,6 @@ function stage (callback) {
 }
 
 /**
- * Use gulp-watch to wait for file changes. gulp-watch is used over
- * webpack.watch for consistency over all tasks.
- */
-function watch () {
-	if (!options) return;
-
-	gulpWatch(options.src, function () {
-		gulp.start('webpack');
-	});
-}
-
-/**
  * Start webpack and log errors to the console and with the error handler.
  * If there is an error, do not reload with browsersync.
  * @param  {Object}   options  Options for webpack
@@ -93,11 +67,6 @@ function pack (options, callback) {
 
 			// Log errors
 			gutil.log(gutil.colors.red(err.message));
-			notifier.notify({
-				title: 'gulp webpack error:',
-				message: err.message,
-				icon: path.join(__dirname, '../utils/gulp.png')
-			});
 		} else {
 
 			// Reload page
@@ -111,17 +80,10 @@ function pack (options, callback) {
 
 // Register tasks
 gulp.task('webpack', dev);
-gulp.task('webpack:test', test);
-gulp.task('webpack:dev', watch);
+gulp.task('webpack:dev', function () {
+	gulp.watch(options.src, ['webpack'])
+});
 gulp.task('webpack:stage', stage);
-
-// Register event handlers
-kickstarter.on('gulp.dev', function () {
-	gulp.start('webpack:dev');
-});
-kickstarter.on('gulp.stage', function () {
-	gulp.start('webpack:stage');
-});
 
 // Export tasks
 module.exports = dev;

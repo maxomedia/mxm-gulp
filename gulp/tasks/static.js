@@ -2,7 +2,6 @@ var gulp        = require('gulp');
 var newer       = require('gulp-newer');
 var browserSync = require('browser-sync');
 var options     = require('../options');
-var gutil       = require('gulp-util');
 var plumber     = require('gulp-plumber');
 
 /**
@@ -11,6 +10,8 @@ var plumber     = require('gulp-plumber');
  * @return {Stream} Gulp stream
  */
 var copyStaticFiles = function () {
+	if (!options) return;
+
 	return gulp.src(options.static.src)
 		.pipe(plumber())
 		.pipe(newer(options.dest))

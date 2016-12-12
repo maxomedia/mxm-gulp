@@ -13,7 +13,7 @@ The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
   - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
   - Run `gulp sass --production` for minified CSS
 - `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack)
-  - ES6 to ES5 (stage 3 babel transpiler)
+  - Babel transpiler with [es2015](https://babeljs.io/docs/plugins/preset-es2015/) presets
   - multiple bundles
   - sourcemaps
   - minified

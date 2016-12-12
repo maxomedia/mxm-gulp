@@ -8,6 +8,7 @@ var gutil       = require('gulp-util');
 options.plugins = options.plugins || [];
 options.output.filename = options.output.filename || '[name].js';
 options.bail = true;
+options.devtool = 'source-map';
 
 /**
  * Start webpack and log errors to the console and with the error handler.
@@ -26,15 +27,14 @@ function pack (callback) {
 		}));
 	}
 
+	// Production or not?
 	if (process.argv.indexOf('--production') > -1) {
+
 		// Minify
 		options.plugins.push(new webpack.optimize.UglifyJsPlugin());
 	} else {
 		webpack.debug = true;
 	}
-
-	// Sourcemaps
-	options.devtool = 'source-map';
 
 	webpack(options, function (err, stats) {
 

@@ -36,15 +36,8 @@ var createSprite = function () {
 			}
 		}))
 		.pipe(gulp.dest(options.dest))
-		.on('done', browserSync.reload);
+		.pipe(browserSync.stream());
 }
-
-// Register task
-gulp.task('svg-sprite', createSprite);
-gulp.task('svg-sprite:dev', function () {
-	gulp.watch(options.src, ['svg-sprite']);
-});
-gulp.task('svg-sprite:stage', createSprite);
 
 // Export task
 module.exports = createSprite;

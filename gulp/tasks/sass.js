@@ -16,6 +16,10 @@ var errorHandler = require('../utils/errorHandler');
 var compileSass = function () {
 	if (!options) return;
 
+	if (process.argv.indexOf('--production')) {
+		passedOpt.nodeSass.outputStyle = 'compressed';
+	}
+
 	return gulp.src(options.main)
 		.pipe(plumber(errorHandler))
 		.pipe(sourcemaps.init())
@@ -25,16 +29,6 @@ var compileSass = function () {
 		.pipe(gulp.dest(options.dest))
 		.pipe(browserSync.stream());
 }
-
-// Register tasks
-gulp.task('sass', compileSass);
-gulp.task('sass:dev', function () {
-	gulp.watch(options.src, ['sass']);
-});
-gulp.task('sass:stage', function () {
-	passedOpt.nodeSass.outputStyle = 'compressed';
-	return compileSass();
-});
 
 // Expose sass task
 module.exports = compileSass;

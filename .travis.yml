@@ -1,10 +1,9 @@
 language: node_js
 env: TRAVIS_CI=true
 node_js:
- - "0.12"
+ - "6"
 script:
- gulp stage
+ gulp build --production
 before_script:
- - npm install -g bower
  - export DISPLAY=:99.0
  - sh -e /etc/init.d/xvfb start

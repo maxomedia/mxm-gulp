@@ -11,7 +11,8 @@
     "gulp"
   ],
   "scripts": {
-    "gulp": "gulp"
+    "dev": "gulp",
+    "build": "gulp stage"
   },
   "license": "MIT",
   "description": "Project setup with gulp",

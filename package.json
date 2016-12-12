@@ -12,7 +12,9 @@
   ],
   "scripts": {
     "dev": "gulp",
-    "build": "gulp stage"
+    "build": "gulp build --production",
+    "stage": "gulp build --production",
+    "watch": "gulp"
   },
   "license": "MIT",
   "description": "Project setup with gulp",

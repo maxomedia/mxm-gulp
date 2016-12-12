@@ -1,24 +1,25 @@
 var path = require('path');
+var root = process.cwd();
 
 /*
  *  Instructions:
  *  =============
  *
  *	1. All paths beneath are relative to gulpfile.js unless
- *	   a comment says otherwise. If gulpfile.js is a folder,
- *	   think of it as a file, gulp treats it the same way.
+ *	   a comment says otherwise.
  *
  *	2. If you don't want a task to be running,
  *	   comment out or delete its options.
  *
  *	3. Modify dest and webroot to your liking and you are good
- *	   to go, if your folder structure meets the defaults set.
+ *	   to go.
  */
 
+// Source files folder, root is where the command line is run
 var source = 'src';
 
 // Output folder for assets, relative to gulpfile.js
-var destination = './dist';
+var destination = root + '/dist';
 
 // Route to your asset folder from a browser point of view
 var webroot = '';
@@ -68,16 +69,15 @@ var options = {
 		// Use paths starting with './' (this folder)
 		// or '../' (this folders parent)
 		entry: {
-			app: source + '/js/app.js'
+			app: './' + source + '/js/app.js'
 		},
 
 		// Set resolve paths
 		resolve: {
 			extensions: ['', '.js'],
-			root: path.resolve('./'),
-			alias: {
-				src: path.resolve(__dirname, source + '/js')
-			},
+			alias: { 
+        src: path.resolve(root, source + '/js') 
+      },
 		},
 
 		// Use this if you load jquery over a cdn
@@ -136,7 +136,8 @@ var options = {
 	// extended options, do not alter
 	dest: destination,
 	webroot: webroot,
-	src: source
+	src: source,
+	root: root,
 };
 
 // Export them options

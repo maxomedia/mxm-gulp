@@ -25,9 +25,6 @@ var webroot = '';
 
 var options = {
 
-	// Project name (used as the console title)
-	name: 'mxm-gulp',
-
 	// All targeted files get simply copied to destination
 	// folder.
 	static: {

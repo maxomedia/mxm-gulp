@@ -15,7 +15,7 @@ var path = require('path');
  *	   to go, if your folder structure meets the defaults set.
  */
 
-var source = './src';
+var source = 'src';
 
 // Output folder for assets, relative to gulpfile.js
 var destination = './dist';
@@ -77,7 +77,10 @@ var options = {
 		// Set resolve paths
 		resolve: {
 			extensions: ['', '.js'],
-			root: path.resolve('./src/js')
+			root: path.resolve('./'),
+			alias: {
+				src: path.resolve(__dirname, source + '/js')
+			},
 		},
 
 		// Use this if you load jquery over a cdn

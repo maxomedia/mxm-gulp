@@ -26,12 +26,6 @@ var webroot = '';
 
 var options = {
 
-	// All targeted files get simply copied to destination
-	// folder.
-	static: {
-		src: source + '/static/**'
-	},
-
 	sass: {
 		src: source + '/sass/**/*.scss',
 		main: source + '/sass/main.scss',
@@ -50,16 +44,6 @@ var options = {
 		}
 	},
 
-	svgSprite: {
-		src: source + '/svg/**/*.svg',
-		dest: './',
-		svgDest: destination + '/img/svg-sprite.svg',
-		sassDest: source + '/sass/core/svg-sprite.scss',
-		htmlDest: destination + '/svg-sprite.html',
-		namespaceClassnames: false
-	},
-
-	// Javascript bundles
 	webpack: {
 
 		// Define where your javascript source files lie
@@ -92,13 +76,25 @@ var options = {
 		},
 
 		// Use common chunks plugin?
-		commonChunks: false
+		commonChunks: false,
+
+		module: {
+			loaders: [
+				{
+					test: /\.js$/,
+					loader: 'babel-loader',
+					exclude: /node_modules/,
+					query: {
+						presets: ['es2015']
+					}
+				}
+			]
+		},
 
 		// For all other options, it is recommended you look
 		// at the more detailed options file at /gulpfile.js/options/webpack.js
 	},
 
-	// Jade to HTML
 	pug: {
 
 		// Jade files to watch for changes
@@ -117,7 +113,19 @@ var options = {
 		}
 	},
 
-	// Static webserver and livereload
+	svgSprite: {
+		src: source + '/svg/**/*.svg',
+		dest: './',
+		svgDest: destination + '/img/svg-sprite.svg',
+		sassDest: source + '/sass/core/svg-sprite.scss',
+		htmlDest: destination + '/svg-sprite.html',
+		namespaceClassnames: false
+	},
+
+	static: {
+		src: source + '/static/**'
+	},
+
 	browserSync: {
 
 		// If you have static html, css and js files and no server,

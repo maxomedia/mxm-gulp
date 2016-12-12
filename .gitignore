@@ -2,17 +2,6 @@
 node_modules
 bower_components
 
-# Test files
-test
-tests
-temp
-
-# Galen reports
-__tests__/reports
-
-# Cache files
-*.gulp
-
 # Project files
 *.sublime-project
 *.sublime-workspace
@@ -20,4 +9,4 @@ __tests__/reports
 
 # Built assets
 dist
-dest
+Assets

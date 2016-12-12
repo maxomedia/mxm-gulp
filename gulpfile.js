@@ -1,45 +1,38 @@
-/*
-	gulpfile.js
-	===========
-	Rather than manage one giant configuration file responsible
-	for creating multiple tasks, each task has been broken out into
-	its own file in gulpfile.js/tasks. Any files in that directory get
-	automatically required below.
-	To add a new task, simply add a new task file that directory.
-	gulpfile.js/tasks/default.js specifies the default set of tasks to run
-	when you run `gulp`.
-
-	SOURCE: https://github.com/greypants/gulp-starter
-*/
-
 var gulp          = require('gulp');
 var childProcess  = require('child_process');
+var package       = require('./package.json');
 var options       = require('./gulp/options');
-var browserSync   = require('./gulp/tasks/browser-sync')
+var browserSync   = require('./gulp/tasks/browser-sync');
 var pugTask       = require('./gulp/tasks/pug');
 var staticTask    = require('./gulp/tasks/static');
 var sassTask      = require('./gulp/tasks/sass');
 var svgSpriteTask = require('./gulp/tasks/svg-sprite');
 var webpackTask   = require('./gulp/tasks/webpack');
 
-gulp.task('default', ['dev']);
+gulp.task('default', ['watch']);
 
-gulp.task('dev', [
-	'static:dev',
-	'sass:dev',
-	'svg-sprite:dev',
-	'webpack:dev',
-	'pug:dev',
-	'browser-sync'
+gulp.task('watch', ['build', 'serve'], function () {
+	gulp.watch(options.pug.src, ['pug']);
+	gulp.watch(options.sass.src, ['sass']);
+	gulp.watch(options.static.src, ['static']);
+	gulp.watch(options.svgSprite.src, ['svg-sprite']);
+	gulp.watch(options.webpack.src, ['webpack']);
+});
+
+gulp.task('build', [
+	'static',
+	'sass',
+	'svg-sprite',
+	'webpack',
+	'pug',
 ]);
 
-gulp.task('stage', [
-	'static:stage',
-	'sass:stage',
-	'svg-sprite:stage',
-	'webpack:stage',
-	'pug:stage',
-]);
+gulp.task('serve', browserSync.task);
+gulp.task('pug', ['svg-sprite'], pugTask);
+gulp.task('sass', sassTask);
+gulp.task('static', staticTask);
+gulp.task('svg-sprite', svgSpriteTask);
+gulp.task('webpack', webpackTask);
 
-
-childProcess.exec('title ' + options.name);
+// Set console title to package name
+childProcess.exec('title ' + package.name);

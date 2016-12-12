@@ -1,8 +1,9 @@
 var gulp        = require('gulp');
 var svgSprite   = require('gulp-svg-sprite');
 var plumber     = require('gulp-plumber');
-var browserSync = require('./browser-sync');
+var browserSync = require('./browser-sync').server;
 var options     = require('../options').svgSprite;
+var errorHandler = require('../utils/errorHandler');
 
 /**
  * Create svg sprite with less classes for dimensions
@@ -13,12 +14,7 @@ var createSprite = function () {
 	if (!options) return;
 
 	return gulp.src(options.src)
-		.pipe(plumber({
-			errorHandler: function (err) {
-				console.log(err.toString());
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber(errorHandler))
 		.pipe(svgSprite({
 			cssFile: options.sassDest,
 			mode: {				
@@ -40,15 +36,8 @@ var createSprite = function () {
 			}
 		}))
 		.pipe(gulp.dest(options.dest))
-		.on('done', browserSync.reload);
+		.pipe(browserSync.stream());
 }
-
-// Register task
-gulp.task('svg-sprite', createSprite);
-gulp.task('svg-sprite:dev', function () {
-	gulp.watch(options.src, ['svg-sprite']);
-});
-gulp.task('svg-sprite:stage', createSprite);
 
 // Export task
 module.exports = createSprite;

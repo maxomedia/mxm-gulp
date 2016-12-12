@@ -4,8 +4,9 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var options      = require('../options').sass;
 var plumber      = require('gulp-plumber');
-var browserSync  = require('./browser-sync');
+var browserSync  = require('./browser-sync').server;
 var passedOpt    = options.options;
+var errorHandler = require('../utils/errorHandler');
 
 /**
  * Compile the sass, handle errors, use autoprefixer
@@ -15,13 +16,12 @@ var passedOpt    = options.options;
 var compileSass = function () {
 	if (!options) return;
 
+	if (process.argv.indexOf('--production')) {
+		passedOpt.nodeSass.outputStyle = 'compressed';
+	}
+
 	return gulp.src(options.main)
-		.pipe(plumber({
-			errorHandler: function (err) {
-				console.log(err.toString());
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber(errorHandler))
 		.pipe(sourcemaps.init())
 		.pipe(sass(passedOpt.nodeSass))
 		.pipe(autoprefixer(passedOpt.autoprefixer))
@@ -29,16 +29,6 @@ var compileSass = function () {
 		.pipe(gulp.dest(options.dest))
 		.pipe(browserSync.stream());
 }
-
-// Register tasks
-gulp.task('sass', compileSass);
-gulp.task('sass:dev', function () {
-	gulp.watch(options.src, ['sass']);
-});
-gulp.task('sass:stage', function () {
-	passedOpt.nodeSass.outputStyle = 'compressed';
-	return compileSass();
-});
 
 // Expose sass task
 module.exports = compileSass;

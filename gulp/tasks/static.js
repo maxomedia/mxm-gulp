@@ -13,7 +13,12 @@ var copyStaticFiles = function () {
 	if (!options) return;
 
 	return gulp.src(options.static.src)
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: function (err) {
+				console.log(err.toString());
+				this.emit('end');
+			}
+		}))
 		.pipe(newer(options.dest))
 		.pipe(gulp.dest(options.dest))
 		.pipe(browserSync.stream());

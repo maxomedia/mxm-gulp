@@ -17,7 +17,12 @@ function compilePug () {
 	return gulp.src( options.views )
 
 	// Catch and log errors
-	.pipe(plumber())
+	.pipe(plumber({
+		errorHandler: function (err) {
+			console.log(err.toString());
+			this.emit('end');
+		}
+	}))
 
 	// Compile files
 	.pipe( pug(options.options))

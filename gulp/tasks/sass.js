@@ -16,7 +16,12 @@ var compileSass = function () {
 	if (!options) return;
 
 	return gulp.src(options.main)
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: function (err) {
+				console.log(err.toString());
+				this.emit('end');
+			}
+		}))
 		.pipe(sourcemaps.init())
 		.pipe(sass(passedOpt.nodeSass))
 		.pipe(autoprefixer(passedOpt.autoprefixer))

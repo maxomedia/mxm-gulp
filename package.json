@@ -17,7 +17,7 @@
     "watch": "gulp"
   },
   "license": "MIT",
-  "description": "Project setup with gulp",
+  "description": "Gulp buildtools for frontend files",
   "devDependencies": {
     "browser-sync": "2.18.2",
     "gulp": "3.9.1",

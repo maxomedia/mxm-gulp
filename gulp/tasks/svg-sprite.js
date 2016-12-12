@@ -1,7 +1,7 @@
 var gulp        = require('gulp');
 var svgSprite   = require('gulp-svg-sprite');
 var plumber     = require('gulp-plumber');
-var browserSync = require('browser-sync');
+var browserSync = require('./browser-sync');
 var options     = require('../options').svgSprite;
 
 /**

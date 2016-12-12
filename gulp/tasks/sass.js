@@ -4,7 +4,7 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var options      = require('../options').sass;
 var plumber      = require('gulp-plumber');
-var browserSync  = require('./browser-sync');
+var browserSync  = require('./browser-sync').server;
 var passedOpt    = options.options;
 var errorHandler = require('../utils/errorHandler');
 

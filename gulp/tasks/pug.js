@@ -1,6 +1,6 @@
 var gulp        = require('gulp');
 var pug         = require('gulp-pug');
-var browserSync = require('./browser-sync');
+var browserSync = require('./browser-sync').server;
 var plumber     = require('gulp-plumber');
 var options     = require('../options').pug;
 var errorHandler = require('../utils/errorHandler');

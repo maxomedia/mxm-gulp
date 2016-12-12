@@ -112,7 +112,8 @@ var options = {
 
 		// Options to pass to gulp-jade
 		options: {
-			pretty: true
+			pretty: true,
+			basedir: root,
 		}
 	},
 

@@ -13,5 +13,5 @@ function startSyncing () {
 // Register task
 gulp.task('browser-sync', startSyncing);
 
-// Export task
-module.exports = startSyncing;
+// Export server
+module.exports = browserSync;

@@ -1,7 +1,7 @@
 var gulp        = require('gulp');
 var svgSprite   = require('gulp-svg-sprite');
 var plumber     = require('gulp-plumber');
-var browserSync = require('browser-sync');
+var browserSync = require('./browser-sync');
 var options     = require('../options').svgSprite;
 
 /**
@@ -13,7 +13,12 @@ var createSprite = function () {
 	if (!options) return;
 
 	return gulp.src(options.src)
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: function (err) {
+				console.log(err.toString());
+				this.emit('end');
+			}
+		}))
 		.pipe(svgSprite({
 			cssFile: options.sassDest,
 			mode: {				

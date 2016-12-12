@@ -1,6 +1,6 @@
 var gulp        = require('gulp');
 var webpack     = require('webpack');
-var browserSync = require('browser-sync');
+var browserSync = require('./browser-sync');
 var options     = require('../options').webpack;
 var gutil       = require('gulp-util');
 

@@ -4,7 +4,7 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var options      = require('../options').sass;
 var plumber      = require('gulp-plumber');
-var browserSync  = require('browser-sync');
+var browserSync  = require('./browser-sync');
 var passedOpt    = options.options;
 
 /**
@@ -16,7 +16,12 @@ var compileSass = function () {
 	if (!options) return;
 
 	return gulp.src(options.main)
-		.pipe(plumber())
+		.pipe(plumber({
+			errorHandler: function (err) {
+				console.log(err.toString());
+				this.emit('end');
+			}
+		}))
 		.pipe(sourcemaps.init())
 		.pipe(sass(passedOpt.nodeSass))
 		.pipe(autoprefixer(passedOpt.autoprefixer))

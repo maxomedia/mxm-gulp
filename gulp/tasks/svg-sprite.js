@@ -13,12 +13,7 @@ var createSprite = function () {
 	if (!options) return;
 
 	return gulp.src(options.src)
-		.pipe(plumber({
-			errorHandler: function (err) {
-				console.log(err.toString());
-				this.emit('end');
-			}
-		}))
+		.pipe(plumber(errorHandler))
 		.pipe(svgSprite({
 			cssFile: options.sassDest,
 			mode: {				

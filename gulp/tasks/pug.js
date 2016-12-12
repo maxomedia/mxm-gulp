@@ -3,6 +3,7 @@ var pug         = require('gulp-pug');
 var browserSync = require('./browser-sync');
 var plumber     = require('gulp-plumber');
 var options     = require('../options').pug;
+var errorHandler = require('../utils/errorHandler');
 
 /**
  * Compile pug files in the views directory
@@ -17,12 +18,7 @@ function compilePug () {
 	return gulp.src( options.views )
 
 	// Catch and log errors
-	.pipe(plumber({
-		errorHandler: function (err) {
-			console.log(err.toString());
-			this.emit('end');
-		}
-	}))
+	.pipe(plumber(errorHandler))
 
 	// Compile files
 	.pipe( pug(options.options))

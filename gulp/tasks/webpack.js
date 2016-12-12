@@ -1,8 +1,9 @@
 var gulp        = require('gulp');
 var webpack     = require('webpack');
+var gutil       = require('gulp-util');
 var browserSync = require('./browser-sync').server;
 var options     = require('../options').webpack;
-var gutil       = require('gulp-util');
+var notify      = require('../utils/notify');
 
 // Set shared options
 options.plugins = options.plugins || [];
@@ -29,8 +30,6 @@ function pack (callback) {
 
 	// Production or not?
 	if (process.argv.indexOf('--production') > -1) {
-
-		// Minify
 		options.plugins.push(new webpack.optimize.UglifyJsPlugin());
 	} else {
 		webpack.debug = true;
@@ -42,6 +41,9 @@ function pack (callback) {
 
 			// Log errors
 			gutil.log(gutil.colors.red(err.message));
+			if (process.argv.indexOf('--production') < 0) {
+        notify(err);
+      }
 		} else {
 
 			// Reload page

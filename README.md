@@ -4,11 +4,13 @@
 The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
 
 #### Features
-- `gulp`
+- `gulp` / `gulp watch`
   - Watch files and start local dev server (port and other info is logged to the console)
-- `gulp build`
+- `gulp build` / `gulp build --production`
   - Build all files once (fast build, not minified)
-- `gulp sass` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
+- `gulp serve`
+  - Build and serve files without watchers
+- `gulp sass` / `gulp sass --production` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
   - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
   - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
   - Run `gulp sass --production` for minified CSS

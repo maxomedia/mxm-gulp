@@ -10,9 +10,6 @@ function startSyncing () {
 	return browserSync.init(options);
 }
 
-// Register task
-gulp.task('browser-sync', startSyncing);
-
 // Export server
 module.exports = {
 	task: startSyncing,

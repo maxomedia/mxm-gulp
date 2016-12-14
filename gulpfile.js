@@ -10,7 +10,7 @@ var svgSpriteTask = require('./gulp/tasks/svg-sprite');
 var webpackTask   = require('./gulp/tasks/webpack');
 
 gulp.task('default', ['watch']);
-gulp.task('build', ['static','sass','svg-sprite','webpack','pug']);
+gulp.task('build', ['static', 'sass', 'svg-sprite', 'webpack', 'pug']);
 
 gulp.task('watch', ['build', 'serve'], function () {
 	gulp.watch(options.pug.src, ['pug']);
@@ -20,7 +20,7 @@ gulp.task('watch', ['build', 'serve'], function () {
 	gulp.watch(options.webpack.src, ['webpack']);
 });
 
-gulp.task('serve', browserSync.task);
+gulp.task('serve', ['build'], browserSync.task);
 gulp.task('pug', ['svg-sprite'], pugTask);
 gulp.task('sass', sassTask);
 gulp.task('static', staticTask);

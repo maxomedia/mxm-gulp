@@ -20,12 +20,5 @@ var copyStaticFiles = function () {
 		.pipe(browserSync.stream());
 };
 
-// Register tasks
-gulp.task('static', copyStaticFiles);
-gulp.task('static:stage', copyStaticFiles);
-gulp.task('static:dev', function () {
-	gulp.watch(options.static.scr, ['static']);
-});
-
 // Export core function
 module.exports = copyStaticFiles;

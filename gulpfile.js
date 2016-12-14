@@ -20,7 +20,7 @@ gulp.task('watch', ['build', 'serve'], function () {
 	gulp.watch(options.webpack.src, ['webpack']);
 });
 
-gulp.task('serve', browserSync.task);
+gulp.task('serve', ['build'], browserSync.task);
 gulp.task('pug', ['svg-sprite'], pugTask);
 gulp.task('sass', sassTask);
 gulp.task('static', staticTask);

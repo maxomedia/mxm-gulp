@@ -2,7 +2,7 @@ var notify = require('./notify');
 
 module.exports = {
   errorHandler: function (err) {
-    if (!err) {
+    if (err) {
 
       // Log the error to console
       console.log(err.toString());

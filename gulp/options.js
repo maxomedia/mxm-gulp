@@ -101,7 +101,7 @@ var options = {
 		src: source + '/pug/**/*.pug',
 
 		// Destination for html files
-		dest: destination,
+		dest: destination + '/pug',
 
 		// Entry points for views resulting in HTML pages
 		views: source + '/pug/views/**/*.pug',
@@ -113,10 +113,27 @@ var options = {
 		}
 	},
 
+	// Handlebars to HTML
+	handlebars: {
+
+		// Jade files to watch for changes
+		src: source + '/handlebars/**/*.hbs',
+		data: source + '/data/**/*.json',
+
+		// Destination for html files
+		dest: destination,
+
+		partials: source + '/handlebars/Partials/**/*.hbs',
+		layout: source + '/handlebars/Shared/layout.hbs',
+
+		// Entry points for views resulting in HTML pages
+		views: source + '/handlebars/Views/**/*.hbs',
+	},
+
 	svgSprite: {
 		src: source + '/svg/**/*.svg',
 		dest: './',
-		svgDest: destination + '/img/svg-sprite.svg',
+		svgDest: source + '/handlebars/Partials/svg-sprite.svg',
 		sassDest: source + '/sass/core/svg-sprite.scss',
 		htmlDest: destination + '/svg-sprite.html',
 		namespaceClassnames: false

@@ -3,7 +3,7 @@ var pug          = require('gulp-pug');
 var deepAssign   = require('deep-assign');
 var browserSync  = require('./browser-sync').server;
 var plumber      = require('gulp-plumber');
-var gulpOptions  = require('../options').pug;
+var gulpOptions  = require('../options');
 var errorHandler = require('../utils/errorHandler');
 
 var defaultOptions = {

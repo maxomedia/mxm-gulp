@@ -1,8 +1,8 @@
-var gulp        = require('gulp');
-var newer       = require('gulp-newer');
-var browserSync = require('./browser-sync').server;
-var options     = require('../options');
-var plumber     = require('gulp-plumber');
+var gulp         = require('gulp');
+var newer        = require('gulp-newer');
+var browserSync  = require('./browser-sync').server;
+var options      = require('../options');
+var plumber      = require('gulp-plumber');
 var errorHandler = require('../utils/errorHandler');
 
 /**

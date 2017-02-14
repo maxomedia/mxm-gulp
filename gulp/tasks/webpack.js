@@ -1,9 +1,55 @@
 var gulp        = require('gulp');
+var path        = require('path');
 var webpack     = require('webpack');
 var gutil       = require('gulp-util');
+var deepAssign  = require('deep-assign');
 var browserSync = require('./browser-sync').server;
-var options     = require('../options').webpack;
+var gulpOptions = require('../options');
 var notify      = require('../utils/notify');
+
+var defaultOptions = {
+
+	// Define where your javascript source files lie
+	src: gulpOptions.src + '/js/**/*.js',
+
+	// Define entry points for your scripts.
+	// Use paths starting with './' (this folder)
+	// or '../' (this folders parent)
+	entry: {
+		app: './' + gulpOptions.src + '/js/app.js'
+	},
+
+	// Set resolve paths
+	resolve: {
+		extensions: ['', '.js'],
+		alias: { 
+      src: path.resolve(gulpOptions.root, gulpOptions.src + '/js') 
+    },
+	},
+
+	// Destination folder
+	output: {
+		path: gulpOptions.dest + '/js/',
+		publicPath: gulpOptions.webroot
+	},
+
+	// Use common chunks plugin?
+	commonChunks: false,
+
+	module: {
+		loaders: [
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/,
+				query: {
+					presets: ['es2015']
+				}
+			}
+		]
+	},
+};
+var options = deepAssign(defaultOptions, gulpOptions.webpack);
 
 // Set shared options
 options.plugins = options.plugins || [];
@@ -18,7 +64,6 @@ options.devtool = 'source-map';
  * @param  {Function} callback Callback for gulp
  */
 function pack (callback) {
-	if (!options) return;
 
 	// Common chunks
 	if (options.commonChunks) {

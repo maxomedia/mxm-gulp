@@ -4,12 +4,11 @@ var hbLayouts    = require('handlebars-layouts');
 var browserSync  = require('browser-sync');
 var rename       = require('gulp-rename');
 var gutil        = require('gulp-util');
+var plumber      = require('gulp-plumber');
 var options      = require('../options').handlebars;
 var handleErrors = require('../utils/errorHandler');
 
 function compileHandlebars () {
-	// Exit criteria
-	if (!options) return;
 	
 	var hbStream = hb()
 	.partials(options.layout)
@@ -18,19 +17,19 @@ function compileHandlebars () {
 	.data(options.data);	
 	// Define source files
 	return gulp.src( options.views )
+		.pipe(plumber(handleErrors))
 
-	// Compile files
-	.pipe(hbStream)
-	.pipe(rename({
-		extname: '.html',
-	}))
-	// Handle them errors
+		// Compile files
+		.pipe(hbStream)
+		.pipe(rename({
+			extname: '.html',
+		}))
 
-	// Save to destination
-	.pipe( gulp.dest( options.dest ) )
+		// Save to destination
+		.pipe( gulp.dest( options.dest ) )
 
-	// Reolad page
-	.pipe(browserSync.reload({stream: true}));
+		// Reolad page
+		.pipe(browserSync.reload({stream: true}));
 }
 
 module.exports = compileHandlebars;

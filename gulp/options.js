@@ -2,52 +2,33 @@ var path = require('path');
 var root = process.cwd();
 
 /*
- *  Instructions:
- *  =============
- *
  *	1. All paths beneath are relative to gulpfile.js unless
  *	   a comment says otherwise.
  *
- *	2. If you don't want a task to be running,
- *	   comment out or delete its options.
- *
- *	3. Modify dest and webroot to your liking and you are good
+ *	2. Modify the paths to your liking and you are good
  *	   to go.
+ *
+ * 	3. npm run start
+ * 	
+ * 	4. Profit.
  */
 
-// Source files folder, root is where the command line is run
-var source = 'src';
+// Frontend folder
+var source = 'Frontend';
 
 // Output folder for assets, relative to gulpfile.js
-var destination = root + '/dist';
+var destination = 'Assets';
 
 // Route to your asset folder from a browser point of view
 var webroot = '';
 
+// Per task options
 var options = {
-
 	sass: {
-		src: source + '/sass/**/*.scss',
 		main: source + '/sass/main.scss',
-		dest: destination + '/css',
-
-		options: {
-			nodeSass: {
-				includePaths: ['node_modules'],
-			},
-			autoprefixer: {
-				browsers: ['last 2 versions']
-			},
-			sourcemaps: {
-				sourceMappingURLPrefix: webroot + '/css'
-			}
-		}
 	},
 
 	webpack: {
-
-		// Define where your javascript source files lie
-		src: source + '/js/**/*.js',
 
 		// Define entry points for your scripts.
 		// Use paths starting with './' (this folder)
@@ -56,68 +37,20 @@ var options = {
 			app: './' + source + '/js/app.js'
 		},
 
-		// Set resolve paths
-		resolve: {
-			extensions: ['', '.js'],
-			alias: { 
-        src: path.resolve(root, source + '/js') 
-      },
-		},
-
 		// Use this if you load jquery over a cdn
 		/*externals: {
 		    'jquery': 'jQuery'
 		},*/
 
-		// Destination folder
-		output: {
-			path: destination + '/js/',
-			publicPath: webroot
-		},
-
 		// Use common chunks plugin?
 		commonChunks: false,
-
-		module: {
-			loaders: [
-				{
-					test: /\.js$/,
-					loader: 'babel-loader',
-					exclude: /node_modules/,
-					query: {
-						presets: ['es2015']
-					}
-				}
-			]
-		},
-
-		// For all other options, it is recommended you look
-		// at the more detailed options file at /gulpfile.js/options/webpack.js
-	},
-
-	pug: {
-
-		// Jade files to watch for changes
-		src: source + '/pug/**/*.pug',
-
-		// Destination for html files
-		dest: destination + '/pug',
-
-		// Entry points for views resulting in HTML pages
-		views: source + '/pug/views/**/*.pug',
-
-		// Options to pass to gulp-jade
-		options: {
-			pretty: true,
-			basedir: root,
-		}
 	},
 
 	// Handlebars to HTML
 	handlebars: {
 
 		// Jade files to watch for changes
-		src: source + '/handlebars/**/*.hbs',
+		src: [source + '/handlebars/**/*.hbs', source + '/data/**/*.json'],
 		data: source + '/data/**/*.json',
 
 		// Destination for html files
@@ -131,7 +64,7 @@ var options = {
 	},
 
 	svgSprite: {
-		src: source + '/svg/**/*.svg',
+		src: source + '/svgsprite/**/*.svg',
 		dest: './',
 		svgDest: source + '/handlebars/Partials/svg-sprite.svg',
 		sassDest: source + '/sass/core/svg-sprite.scss',

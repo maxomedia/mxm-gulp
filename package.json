@@ -26,6 +26,7 @@
     "babel-loader": "6.2.9",
     "babel-preset-es2015": "6.18.0",
     "browser-sync": "2.18.2",
+    "deep-assign": "^2.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "3.1.1",
     "gulp-hb": "^6.0.2",

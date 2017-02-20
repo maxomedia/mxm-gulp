@@ -6,8 +6,8 @@ var options     = require('../options').browserSync;
  * Start browserSync with given options
  * @return {undefined}
  */
-function startSyncing () {
-	return browserSync.init(options);
+function startSyncing (done) {
+	return browserSync.init(options, done);
 }
 
 // Export server

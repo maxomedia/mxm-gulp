@@ -6,7 +6,7 @@ The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
 #### Features
 - `gulp` / `gulp watch`
   - Watch files and start local dev server (port and other info is logged to the console)
-- `gulp build` / `gulp build --production`
+- `gulp build` / `gulp build --production` / `gulp stage`
   - Build all files once (fast build, not minified)
 - `gulp serve`
   - Build and serve files without watchers
@@ -62,12 +62,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 
 4.  Now's the time to set your options. You can find them under `gulp/options.js`. Be sure to set `destination` and `webroot` variables to your liking, these are the most important.
 
-5.  To initially build your assets, create the folder structure and test the installation, run:
-  ```bash
-    gulp build
-  ```
-
-6. If `gulp build` finished without errors, you are good to go. Run `gulp` to start developing:
+5. Run `gulp` to start developing:
   ```bash
     gulp
   ```

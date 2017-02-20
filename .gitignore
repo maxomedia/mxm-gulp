@@ -6,6 +6,7 @@ bower_components
 *.sublime-project
 *.sublime-workspace
 *.lnk
+.vscode
 
 # Built assets
 dist

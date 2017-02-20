@@ -11,8 +11,9 @@ var webpackTask    = require('./gulp/tasks/webpack');
 var handlebarsTask = require('./gulp/tasks/handlebars');
 var options        = require('./gulp/options');
 
-function setProduction() {
+function setProduction(done) {
 	process.argv.push('--production');
+	done();
 }
 
 var buildTask = gulp.series(
@@ -20,13 +21,13 @@ var buildTask = gulp.series(
 	gulp.parallel(sassTask, webpackTask, handlebarsTask)
 );
 
-var watchTask = function () {
-	gulp.watch(options.pug.src, pugTask);
+var watchTask = function (done) {
 	gulp.watch(options.handlebars.src, handlebarsTask);
 	gulp.watch(options.sass.src, sassTask);
 	gulp.watch(options.static.src, staticTask);
 	gulp.watch(options.webpack.src, webpackTask);
 	gulp.watch(options.svgSprite.src, svgSpriteTask);
+	browserSync.task(done);
 }
 
 gulp.task('default', gulp.series(buildTask, watchTask));
@@ -39,7 +40,7 @@ gulp.task('webpack', webpackTask);
 gulp.task('svg-sprite', svgSpriteTask);
 gulp.task('pug', gulp.series(svgSpriteTask, pugTask));
 gulp.task('handlebars', gulp.series(svgSpriteTask, handlebarsTask));
-gulp.task('serve', gulp.series(buildTask, watchTask));
+gulp.task('serve', gulp.series(buildTask, browserSync.task));
 gulp.task('watch', watchTask);
 
 // Set console title to package name

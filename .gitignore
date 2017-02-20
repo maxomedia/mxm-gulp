@@ -11,4 +11,5 @@ bower_components
 # Built assets
 dist
 Assets
-src/sass/core/svg-sprite\.scss
+svg-sprite.scss
+svg-sprite.svg

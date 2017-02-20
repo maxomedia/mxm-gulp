@@ -21,6 +21,9 @@ The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
   - minified
   - CommonJS
   - Run `gulp webpack --production` for minified JS
+- `gulp handlebars` [Handlebars to HTML](https://github.com/shannonmoeller/handlebars-layouts)
+  - Uses Handlebars Layouts so you can use a master layout file, partials and pages
+  - Pass in data as JSON ()
 - `gulp pug` [Pug to HTML](https://github.com/pugjs/gulp-pug)
 - `gulp svg-sprite` to concat svg files
   - concatenated svg file

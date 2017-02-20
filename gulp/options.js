@@ -25,10 +25,12 @@ var webroot = '';
 // Per task options
 var options = {
 	sass: {
+		src: source + '/sass/**/*.scss',
 		main: source + '/sass/main.scss',
 	},
 
 	webpack: {
+		src: source + '/js/**/*.js',
 
 		// Define entry points for your scripts.
 		// Use paths starting with './' (this folder)
@@ -37,7 +39,7 @@ var options = {
 			app: './' + source + '/js/app.js'
 		},
 
-		// Use this if you load jquery over a cdn
+		// Define globals if you use CDN scripts
 		/*externals: {
 		    'jquery': 'jQuery'
 		},*/

@@ -48,7 +48,7 @@ var compileSass = function () {
 		.pipe(autoprefixer(passedOpt.autoprefixer))
 		.pipe(sourcemaps.write('/', passedOpt.sourcemaps))
 		.pipe(gulp.dest(options.dest))
-		.pipe(browserSync.stream());
+		.pipe(browserSync.stream({match: '**/*.css'}));
 }
 
 // Expose sass task

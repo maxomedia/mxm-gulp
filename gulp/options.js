@@ -45,6 +45,10 @@ var options = {
 		},*/
 
 		// Use common chunks plugin?
+		// If you are using multiple bundles, this plugin can
+		// identify modules used by all bundles and it places them in a separate
+		// script 'shared.js', so those common modules are not duplicated in all bundles.
+		// The shared.js needs to be loaded before all other bundles.
 		commonChunks: false,
 	},
 

@@ -4,52 +4,49 @@
 The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
 
 #### Features
-- `gulp` / `gulp watch`
-  - Watch files and start local dev server (port and other info is logged to the console)
-- `gulp build` / `gulp build --production` / `gulp stage`
+- `gulp` / `npm run gulp`
+  - Build all files once, watch files for changes and start local dev server (port and other info is logged to the console)
+- `gulp build` / `npm run build`
   - Build all files once (fast build, not minified)
-- `gulp serve`
-  - Build and serve files without watchers
-- `gulp sass` / `gulp sass --production` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
+- `gulp stage` / `npm run build --production`
+  - Build and minify all files
+- `gulp sass` / `npm run sass` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
   - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
   - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
-  - Run `gulp sass --production` for minified CSS
-- `gulp webpack` JavaScript bundles with [webpack](https://github.com/webpack/webpack)
-  - Babel transpiler with [es2015](https://babeljs.io/docs/plugins/preset-es2015/) presets
+  - Add `--production` flag for minified CSS
+- `gulp webpack` / `npm run webpack`
+  - JavaScript bundles with [webpack](https://github.com/webpack/webpack)
+  - ES6 with [Babel transpiler](https://babeljs.io/docs/plugins/preset-es2015/) presets
   - multiple bundles
   - sourcemaps
   - minified
   - CommonJS
-  - Run `gulp webpack --production` for minified JS
-- `gulp handlebars` [Handlebars to HTML](https://github.com/shannonmoeller/handlebars-layouts)
-  - Uses Handlebars Layouts so you can use a master layout file, partials and pages
-  - Pass in data as JSON ()
-- `gulp pug` [Pug to HTML](https://github.com/pugjs/gulp-pug)
-- `gulp svg-sprite` to concat svg files
-  - concatenated svg file
-  - create a Scss with dimension info
-  - a demo HTML page
-- `gulp static` Task to copy static files to the destination folder, e.g. fonts or images
+  - Add `--production` flag for minified JS
+- `gulp handlebars` / `npm run handlebars`
+  - Uses [Handlebars Layouts](https://github.com/shannonmoeller/handlebars-layouts) so you can use a master layout file, partials and pages
+  - Pass in data as JSON
+- `gulp pug` / `npm run pug`
+  - [Pug to HTML](https://github.com/pugjs/gulp-pug)
+- `gulp svg-sprite` / `npm run svg-sprite`
+  - Build a [svg-sprite](https://github.com/jkphl/gulp-svg-sprite)
+  - Create a Scss with dimension info
+  - A HTML page displaying all available icons
+- `gulp static` / `npm run static`
+  - Task to copy static files to the destination folder, e.g. fonts or images
+- `gulp serve` / `npm run serve`
+  - Build and serve all files without watchers
 - [BrowserSync](https://github.com/BrowserSync/browser-sync)
   - Livereload on save
   - Mind the settings at `localhost:3001` for input syncing and weinre remote debugger
-- Use the `--production` flag if you want minified files
-  - Build everything minified and ready: `gulp build --production`
-  - Watch files and start local dev server: `gulp`
 - Error logging with system notifications and in the console
-- There are the following npm scripts available if you don't want to install gulp globally
-  - `npm run gulp` -> `gulp`
-  - `npm run build` -> `gulp build`
-  - `npm run watch` -> `gulp watch`
 
 #### Prerequisites
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed in order to use gulp.
 - node.js v6+ (recommended) (http://nodejs.org/)
 - npm v3+ (recommended) (https://www.npmjs.com/)
-- gulp v3.9+ (http://gulpjs.com/)
+- gulp v4+ (http://gulpjs.com/)
 
 #### Planned features
-- Migrate to gulp 4.0 once it is released
 - Reimplement JS testing
 - Generated styleguides with hologram or similar
 
@@ -70,7 +67,7 @@ You should know how to run gulp. If you are not familiar with it, here is a list
     gulp
   ```
   
-  Your development files are stored at `/src`. The built assets will be stored at `/dist` by default.
+  Your development files are stored at `/Frontend`. The built assets will be stored at `/Assets` by default.
   
 If you work on windows and run into `node-gyp rebuild errors`, this pages might help resolve the issue. It can have many causes, here are a few listed with resources to help you resolve these issues:
  - python not installed or set in PATH (https://github.com/nodejs/node-v0.x-archive/issues/4047)

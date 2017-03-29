@@ -35,7 +35,7 @@ var createSprite = function () {
 				}
 			}
 		}))
-		.pipe(gulp.dest(options.dest))
+		.pipe(gulp.dest('./'))
 		.pipe(browserSync.stream());
 }
 

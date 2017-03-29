@@ -1,42 +1,55 @@
 {
   "name": "mxm-gulp",
-  "version": "2.5.0",
+  "version": "4.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/maxomedia/mxm-gulp"
   },
+  "author": "Philipp Gfeller <philipp.gfeller@maxomedia.ch>",
   "main": "./gulpfile.js",
   "files": [
     "gulp"
   ],
   "scripts": {
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "dev": "gulp",
+    "start": "gulp",
+    "build": "gulp build --production",
+    "stage": "gulp build --production",
+    "watch": "gulp watch",
+    "serve": "gulp serve",
+    "sass": "gulp sass",
+    "webpack": "gulp webpack",
+    "handlebars": "gulp handlebars",
+    "pug": "gulp pug",
+    "svg-sprite": "gulp svg-sprite",
+    "static": "gulp static"
   },
   "license": "MIT",
-  "description": "Project setup with gulp",
+  "description": "Gulp buildtools for frontend files",
   "devDependencies": {
-    "browser-sync": "2.11.1",
-    "del": "2.2.0",
-    "gulp": "3.9.1",
-    "gulp-autoprefixer": "3.1.0",
-    "gulp-cached": "1.1.0",
-    "gulp-consolidate": "0.1.2",
-    "gulp-iconfont": "6.0.0",
-    "gulp-install": "0.6.0",
-    "gulp-jade": "1.1.0",
-    "gulp-newer": "1.1.0",
-    "gulp-sass": "2.2.0",
-    "gulp-sourcemaps": "1.6.0",
-    "gulp-svg-sprite": "1.2.19",
-    "gulp-tinypng": "1.0.2",
+    "babel-core": "6.20.0",
+    "babel-loader": "6.2.9",
+    "babel-preset-es2015": "6.18.0",
+    "browser-sync": "2.18.2",
+    "deep-assign": "^2.0.0",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "3.1.1",
+    "gulp-hb": "^6.0.2",
+    "gulp-newer": "^1.3.0",
+    "gulp-plumber": "1.1.0",
+    "gulp-pug": "3.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "2.3.2",
+    "gulp-sourcemaps": "1.9.1",
+    "gulp-svg-sprite": "1.3.6",
     "gulp-util": "3.0.7",
-    "gulp-watch": "4.3.5",
-    "lodash": "4.5.1",
-    "node-notifier": "4.5.0",
-    "pretty-hrtime": "1.0.2",
-    "require-dir": "0.3.0",
-    "vinyl-paths": "2.1.0",
-    "webpack": "1.12.14"
+    "handlebars-layouts": "^3.1.4",
+    "node-notifier": "^4.6.1",
+    "node-process-windows": "^0.0.2",
+    "webpack": "1.13.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "mxm-core": "^1.0.1"
+  }
 }

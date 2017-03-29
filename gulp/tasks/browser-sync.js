@@ -1,23 +1,17 @@
 var gulp        = require('gulp');
-var browserSync = require('browser-sync');
+var browserSync = require('browser-sync').create();
 var options     = require('../options').browserSync;
-var kickstarter = require('../utils/kickstarter');
 
 /**
  * Start browserSync with given options
  * @return {undefined}
  */
-function startSyncing () {
-	browserSync(options);
+function startSyncing (done) {
+	return browserSync.init(options, done);
 }
 
-// Register task
-gulp.task('browserSync', startSyncing);
-
-// Register event handler
-kickstarter.on('gulp.dev', function () {
-	gulp.start('browserSync');
-});
-
-// Export task
-module.exports = startSyncing;
+// Export server
+module.exports = {
+	task: startSyncing,
+	server: browserSync
+}

@@ -2,22 +2,14 @@
 node_modules
 bower_components
 
-# Test files
-test
-tests
-temp
-
-# Galen reports
-__tests__/reports
-
-# Cache files
-*.gulp
-
 # Project files
 *.sublime-project
 *.sublime-workspace
 *.lnk
+.vscode
 
 # Built assets
 dist
-dest
+Assets
+svg-sprite.scss
+svg-sprite.svg

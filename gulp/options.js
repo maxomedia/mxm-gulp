@@ -1,148 +1,85 @@
 var path = require('path');
+var root = process.cwd();
 
 /*
- *  Instructions:
- *  =============
- *  
  *	1. All paths beneath are relative to gulpfile.js unless
- *	   a comment says otherwise. If gulpfile.js is a folder,
- *	   think of it as a file, gulp treats it the same way.
- *	   
- *	2. If you don't want a task to be running,
- *	   comment out or delete its options.
- *	   
- *	3. Modify dest and webroot to your liking and you are good
- *	   to go, if your folder structure meets the defaults set.
+ *	   a comment says otherwise.
+ *
+ *	2. Modify the paths to your liking and you are good
+ *	   to go.
+ *
+ * 	3. npm run start
+ * 	
+ * 	4. Profit.
  */
 
-var source = './src';
+// Frontend source folder
+var source = 'Frontend';
 
-// Output folder for assets, relative to gulpfile.js
-var destination = './dest';
+// Output folder for assets
+var destination = 'Assets';
 
 // Route to your asset folder from a browser point of view
 var webroot = '';
 
+// Per task options
 var options = {
-
-	// Project name (used as the console title)
-	name: 'mxm-gulp',
-
-	// All targeted files get simply copied to destination
-	// folder.
-	static: {
-		src: source + '/static/**'
-	},
-
 	sass: {
 		src: source + '/sass/**/*.scss',
 		main: source + '/sass/main.scss',
-		dest: destination + '/css',
-		
-		options: {
-			nodeSass: {
-				includePaths: ['node_modules'],
-			},
-			autoprefixer: {
-				browsers: ['last 2 versions']
-			},
-			sourcemaps: {
-				sourceMappingURLPrefix: webroot + '/css'
-			}
-		}
 	},
 
-	svgSprite: {
-		src: source + '/svg/**/*.svg',
-		dest: './',
-		svgDest: destination + '/img/svg-sprite.svg',
-		sassDest: source + '/sass/core/svg-sprite.scss',
-		htmlDest: destination + '/svg-sprite.html'
-	},
-
-	// Javascript bundles
 	webpack: {
-
-		// Define where your javascript source files lie
 		src: source + '/js/**/*.js',
 
-		// Define entry points for your scripts.
-		// Use paths starting with './' (this folder)
-		// or '../' (this folders parent)
+		// Define entry points for your scripts
 		entry: {
-			app: source + '/js/app.js'
+			app: './' + source + '/js/app.js'
 		},
 
-		// Set resolve paths
-		resolve: {
-			extensions: ['', '.js'],
-			root: path.resolve('./src/js')
-		},
-
-		// Use this if you load jquery over a cdn
+		// Define globals if you use CDN scripts so you can require('jquery')
+		// without actually including jquery in your bundle
 		/*externals: {
 		    'jquery': 'jQuery'
 		},*/
 
-		// Destination folder
-		output: {
-			path: destination + '/js/',
-			publicPath: webroot
-		},
-
 		// Use common chunks plugin?
-		commonChunks: false
-
-		// For all other options, it is recommended you look
-		// at the more detailed options file at /gulpfile.js/options/webpack.js
+		// If you are using multiple bundles, this plugin
+		// identifies modules used by all bundles and places them in a separate
+		// script 'shared.js', so those common modules are not duplicated in all bundles.
+		// The shared.js needs to be loaded before all other bundles.
+		commonChunks: false,
 	},
 
-	// Jade to HTML
-	jade: {
+	// Handlebars to HTML
+	handlebars: {
 
-		// Jade files to watch for changes
-		src: source + '/jade/**/*.jade',
+		// Files to watch for changes
+		src: [source + '/handlebars/**/*.hbs', source + '/data/**/*.json'],
+		data: source + '/data/**/*.json',
 
 		// Destination for html files
 		dest: destination,
 
+		partials: source + '/handlebars/Partials/**/*.hbs',
+		layout: source + '/handlebars/Shared/layout.hbs',
+
 		// Entry points for views resulting in HTML pages
-		views: source + '/jade/views/**/*.jade',
-
-		// Options to pass to gulp-jade
-		options: {
-			pretty: true
-		}
+		views: source + '/handlebars/Views/**/*.hbs',
 	},
 
-	// SVG icons to webfont
-	fonticons: {
-
-		// SVG files to watch for changes
-		src: source + '/svg/**/*.svg',
-
-		// Destination for font files
-		dest: destination + '/fonts',
-
-		// Destination folder for the less files
-		// containing the mixin
-		sassDest: source + '/sass/core/',
-
-		// Where the browser can find your font files
-		root: webroot + '/fonts'
+	svgSprite: {
+		src: source + '/svgsprite/**/*.svg',
+		svgDest: source + '/handlebars/Partials/svg-sprite.svg',
+		sassDest: source + '/sass/core/svg-sprite.scss',
+		htmlDest: destination + '/svg-sprite.html',
+		namespaceClassnames: false
 	},
 
-	tinypng: {
-		//change api key!
-		apikey: "37Y9xQpd3cb1fGBVOfwRSS-D3Ktmi_K7",
-		// SVG files to watch for changes
-		src: source + '/tinypng/**/*.{png,jpg,jpeg,PNG,JPG,JPEG}',
-		// Destination folder for the less files
-		// containing the mixin
-		dest: source + '/static/img'
+	static: {
+		src: source + '/static/**'
 	},
 
-	// Static webserver and livereload
 	browserSync: {
 
 		// If you have static html, css and js files and no server,
@@ -152,17 +89,18 @@ var options = {
 		// If you already have a server running,
 		// you can use browserSync as a proxy, like:
 		// proxy: 'localhost:60000'
-		
+
 		// Wether to open new tab on start or not
 		open: true,
 		logFileChanges: false
 	},
 
-	// These are required for the 
+	// These are required for the
 	// extended options, do not alter
 	dest: destination,
 	webroot: webroot,
-	src: source
+	src: source,
+	root: root,
 };
 
 // Export them options

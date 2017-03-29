@@ -1,84 +1,61 @@
 var gulp        = require('gulp');
+var path        = require('path');
 var webpack     = require('webpack');
-var browserSync = require('browser-sync');
-var kickstarter = require('../utils/kickstarter');
-var options     = require('../options').webpack;
-var gulpWatch   = require('gulp-watch');
-var gutil = require('gulp-util');
-var notifier = require('node-notifier');
-var path = require('path');
+var gutil       = require('gulp-util');
+var deepAssign  = require('deep-assign');
+var browserSync = require('./browser-sync').server;
+var gulpOptions = require('../options');
+var notify      = require('../utils/notify');
+
+var defaultOptions = {
+
+	// Define where your javascript source files lie
+	src: gulpOptions.src + '/js/**/*.js',
+
+	// Define entry points for your scripts.
+	// Use paths starting with './' (this folder)
+	// or '../' (this folders parent)
+	entry: {
+		app: './' + gulpOptions.src + '/js/app.js'
+	},
+
+	// Set resolve paths
+	resolve: {
+		extensions: ['', '.js'],
+		alias: { 
+      src: path.resolve(gulpOptions.root, gulpOptions.src + '/js') 
+    },
+	},
+
+	// Destination folder
+	output: {
+		path: gulpOptions.dest + '/js/',
+		publicPath: gulpOptions.webroot
+	},
+
+	// Use common chunks plugin?
+	commonChunks: false,
+
+	module: {
+		loaders: [
+			{
+				test: /\.js$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/,
+				query: {
+					presets: ['es2015']
+				}
+			}
+		]
+	},
+};
+var options = deepAssign(defaultOptions, gulpOptions.webpack);
 
 // Set shared options
 options.plugins = options.plugins || [];
 options.output.filename = options.output.filename || '[name].js';
 options.bail = true;
-
-/**
- * Test build for karma
- * @param  {Function} callback Gulp callback
- */
-function test (callback) {
-	if (!options) return;
-
-	pack(options, callback);
-}
-
-/**
- * Dev build. Non minified but with sourcemaps
- * @param  {Function} callback Gulp callback
- */
-function dev (callback) {
-	if (!options) return;
-
-	// Common chunks
-	if (options.commonChunks) {
-		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
-			name: 'shared',
-			filename: '[name].js'
-		}));
-	}
-
-	// Enable debug mode and sourcemaps
-	webpack.debug = true;
-	options.devtool = 'source-map';
-	pack(options, callback);
-}
-
-/**
- * Stage build with minification and source maps
- * @param  {Function} callback Gulp callback
- */
-function stage (callback) {
-	if (!options) return;
-
-	// Common chunks
-	if (options.commonChunks) {
-		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
-			name: 'shared',
-			filename: '[name].js'
-		}));
-	}
-
-	// Sourcemaps
-	options.devtool = 'source-map';
-
-	// Minify
-	options.plugins.push(new webpack.optimize.UglifyJsPlugin())
-
-	pack(options, callback);
-}
-
-/**
- * Use gulp-watch to wait for file changes. gulp-watch is used over
- * webpack.watch for consistency over all tasks.
- */
-function watch () {
-	if (!options) return;
-
-	gulpWatch(options.src, function () {
-		gulp.start('webpack');
-	});
-}
+options.devtool = 'source-map';
 
 /**
  * Start webpack and log errors to the console and with the error handler.
@@ -86,18 +63,32 @@ function watch () {
  * @param  {Object}   options  Options for webpack
  * @param  {Function} callback Callback for gulp
  */
-function pack (options, callback) {	
+function pack (callback) {
+
+	// Common chunks
+	if (options.commonChunks) {
+		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
+			name: 'shared',
+			filename: '[name].js'
+		}));
+	}
+
+	// Production or not?
+	if (process.argv.indexOf('--production') > -1) {
+		options.plugins.push(new webpack.optimize.UglifyJsPlugin());
+	} else {
+		webpack.debug = true;
+	}
+
 	webpack(options, function (err, stats) {
 
 		if (err) {
 
 			// Log errors
 			gutil.log(gutil.colors.red(err.message));
-			notifier.notify({
-				title: 'gulp webpack error:',
-				message: err.message,
-				icon: path.join(__dirname, '../utils/gulp.png')
-			});
+			if (process.argv.indexOf('--production') < 0) {
+        notify(err);
+      }
 		} else {
 
 			// Reload page
@@ -109,19 +100,5 @@ function pack (options, callback) {
 	});
 }
 
-// Register tasks
-gulp.task('webpack', dev);
-gulp.task('webpack:test', test);
-gulp.task('webpack:dev', watch);
-gulp.task('webpack:stage', stage);
-
-// Register event handlers
-kickstarter.on('gulp.dev', function () {
-	gulp.start('webpack:dev');
-});
-kickstarter.on('gulp.stage', function () {
-	gulp.start('webpack:stage');
-});
-
 // Export tasks
-module.exports = dev;
+module.exports = pack;

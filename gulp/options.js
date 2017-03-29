@@ -13,10 +13,10 @@ var root = process.cwd();
  * 	4. Profit.
  */
 
-// Frontend folder
+// Frontend source folder
 var source = 'Frontend';
 
-// Output folder for assets, relative to gulpfile.js
+// Output folder for assets
 var destination = 'Assets';
 
 // Route to your asset folder from a browser point of view
@@ -32,21 +32,20 @@ var options = {
 	webpack: {
 		src: source + '/js/**/*.js',
 
-		// Define entry points for your scripts.
-		// Use paths starting with './' (this folder)
-		// or '../' (this folders parent)
+		// Define entry points for your scripts
 		entry: {
 			app: './' + source + '/js/app.js'
 		},
 
-		// Define globals if you use CDN scripts
+		// Define globals if you use CDN scripts so you can require('jquery')
+		// without actually including jquery in your bundle
 		/*externals: {
 		    'jquery': 'jQuery'
 		},*/
 
 		// Use common chunks plugin?
-		// If you are using multiple bundles, this plugin can
-		// identify modules used by all bundles and it places them in a separate
+		// If you are using multiple bundles, this plugin
+		// identifies modules used by all bundles and places them in a separate
 		// script 'shared.js', so those common modules are not duplicated in all bundles.
 		// The shared.js needs to be loaded before all other bundles.
 		commonChunks: false,
@@ -55,7 +54,7 @@ var options = {
 	// Handlebars to HTML
 	handlebars: {
 
-		// Jade files to watch for changes
+		// Files to watch for changes
 		src: [source + '/handlebars/**/*.hbs', source + '/data/**/*.json'],
 		data: source + '/data/**/*.json',
 
@@ -71,7 +70,6 @@ var options = {
 
 	svgSprite: {
 		src: source + '/svgsprite/**/*.svg',
-		dest: './',
 		svgDest: source + '/handlebars/Partials/svg-sprite.svg',
 		sassDest: source + '/sass/core/svg-sprite.scss',
 		htmlDest: destination + '/svg-sprite.html',

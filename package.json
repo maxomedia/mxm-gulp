@@ -17,7 +17,13 @@
     "build": "gulp build --production",
     "stage": "gulp build --production",
     "watch": "gulp watch",
-    "serve": "gulp serve"
+    "serve": "gulp serve",
+    "sass": "gulp sass",
+    "webpack": "gulp webpack",
+    "handlebars": "gulp handlebars",
+    "pug": "gulp pug",
+    "svg-sprite": "gulp svg-sprite",
+    "static": "gulp static"
   },
   "license": "MIT",
   "description": "Gulp buildtools for frontend files",

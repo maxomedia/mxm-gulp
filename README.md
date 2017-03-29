@@ -10,7 +10,8 @@ The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
   - Build all files once (fast build, not minified)
 - `gulp stage` / `npm run build --production`
   - Build and minify all files
-- `gulp sass` / `npm run sass` [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
+- `gulp sass` / `npm run sass`
+  - [SCSS to CSS](https://github.com/dlmanning/gulp-sass)
   - [Autoprefixer](https://github.com/sindresorhus/gulp-autoprefixer)
   - [Sourcemaps](https://github.com/floridoo/gulp-sourcemaps)
   - Add `--production` flag for minified CSS

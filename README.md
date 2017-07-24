@@ -44,7 +44,6 @@ The buildsystem we use at [Maxomedia AG](https://maxomedia.ch/).
 You should know how to run gulp. If you are not familiar with it, here is a list of things you must have installed in order to use gulp.
 - node.js v6+ (recommended) (http://nodejs.org/)
 - npm v3+ (recommended) (https://www.npmjs.com/)
-- gulp v4+ (http://gulpjs.com/)
 
 #### Planned features
 - Reimplement JS testing
@@ -55,9 +54,10 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 
 2. Open a command prompt and navigate to the folder where gulpfile.js lies.
 
-3. Next, install the npm dependencies. Type the following in your command prompt and hit enter:
+3. Next, install the npm dependencies and the global gulp 4.0 alpha module:
   ```bash
     npm install
+    npm install gulpjs/gulp#4.0 -g
   ```
 
 4.  Now's the time to set your options. You can find them under `gulp/options.js`. Be sure to set `destination` and `webroot` variables to your liking, these are the most important.

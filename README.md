@@ -45,10 +45,6 @@ You should know how to run gulp. If you are not familiar with it, here is a list
 - node.js v6+ (recommended) (http://nodejs.org/)
 - npm v3+ (recommended) (https://www.npmjs.com/)
 
-#### Planned features
-- Reimplement JS testing
-- Generated styleguides with hologram or similar
-
 #### Installation
 1. Download the zip and place its contents where you want to use them
 

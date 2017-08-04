@@ -46,13 +46,6 @@ var options = {
 		/*externals: {
 		    'jquery': 'jQuery'
 		},*/
-
-		// Use common chunks plugin?
-		// If you are using multiple bundles, this plugin
-		// identifies modules used by all bundles and places them in a separate
-		// script 'shared.js', so those common modules are not duplicated in all bundles.
-		// The shared.js needs to be loaded before all other bundles.
-		commonChunks: false,
 	},
 
 	// Handlebars to HTML

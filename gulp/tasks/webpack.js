@@ -7,10 +7,10 @@ var browserSync = require('./browser-sync').server;
 var gulpOptions = require('../options');
 var notify      = require('../utils/notify');
 
-var defaultOptions = {
+// Webpack 2 does not like unknown settings
+delete gulpOptions['src'];
 
-	// Define where your javascript source files lie
-	src: gulpOptions.src + '/js/**/*.js',
+var defaultOptions = {
 
 	// Define entry points for your scripts.
 	// Use paths starting with './' (this folder)
@@ -21,7 +21,7 @@ var defaultOptions = {
 
 	// Set resolve paths
 	resolve: {
-		extensions: ['', '.js'],
+		extensions: ['.js'],
 		alias: { 
       src: path.resolve(gulpOptions.root, gulpOptions.src + '/js') 
     },
@@ -29,12 +29,9 @@ var defaultOptions = {
 
 	// Destination folder
 	output: {
-		path: gulpOptions.dest + '/js/',
+		path: path.resolve(gulpOptions.dest + '/js/'),
 		publicPath: gulpOptions.webroot
 	},
-
-	// Use common chunks plugin?
-	commonChunks: false,
 
 	module: {
 		loaders: [
@@ -66,12 +63,12 @@ options.devtool = 'source-map';
 function pack (callback) {
 
 	// Common chunks
-	if (options.commonChunks) {
+	/* if (options.commonChunks) {
 		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
 			name: 'shared',
 			filename: '[name].js'
 		}));
-	}
+	} */
 
 	// Production or not?
 	if (process.argv.indexOf('--production') > -1) {

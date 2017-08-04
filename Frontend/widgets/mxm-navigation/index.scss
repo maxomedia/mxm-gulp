@@ -1,0 +1,7 @@
+@import '../mxm-customcode/vars-bootstrap';
+
+.mxm_navigation {
+    @import '_main';
+    @import '_meta';
+    @import '_footer';
+}

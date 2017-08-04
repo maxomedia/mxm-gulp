@@ -1,0 +1,61 @@
+@import '_bootstrap';
+@import 'vars-mxm';
+@import 'font-awesome/font-awesome';
+@import 'jquery.fancybox';
+@import 'layout';
+@import '_visibility';
+
+a.phone {
+    color: inherit;
+
+    &:hover {
+        color: inherit;
+        text-decoration: inherit;
+    }
+}
+
+img {
+    max-width: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: $gray-dark;
+
+    @media (max-width: $screen-xs-max) {
+        overflow-x: hidden;
+    }
+
+    header {
+        background-color: #fff;
+        padding-top: $grid-gutter-width;
+    }
+
+    main {
+        background-color: #fff;
+        padding-bottom: $grid-gutter-width;
+
+        @media (max-width: $screen-xs-max) {
+            margin-left: floor($grid-gutter-width/2*-1);
+            margin-right: floor($grid-gutter-width/2*-1);
+        }
+    }
+
+    footer {
+        padding: $grid-gutter-width 0;
+        background-color: $gray-dark;
+        color: #fff;
+
+        @media (max-width: $screen-xs-max) {
+            font-size: 12px;
+        }
+
+        a {
+            color: #fff;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}

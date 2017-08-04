@@ -1,0 +1,49 @@
+@import '../mxm-customcode/vars-bootstrap';
+
+hr.mxm_spacer {
+    border-top: 1px solid $gray-darker;
+
+    &.xs {
+        margin: floor($grid-gutter-width/6) 0;
+    }
+
+    &.sm {
+        margin: floor($grid-gutter-width/4) 0;
+    }
+
+    &.md {
+        margin: floor($grid-gutter-width/2) 0;
+    }
+
+    &.lg {
+        margin: floor($grid-gutter-width) 0;
+    }
+
+    &.xl {
+        margin: floor($grid-gutter-width*2) 0;
+    }
+}
+
+div.mxm_spacer {
+    &.xs {
+        padding: floor($grid-gutter-width/6) 0;
+    }
+
+    &.sm {
+        padding: floor($grid-gutter-width/4) 0;
+        @media (max-width: $screen-xs-max) { padding : floor($grid-gutter-width/3) 0; }
+    }
+
+    &.md {
+        padding: floor($grid-gutter-width/2) 0;
+        @media (max-width: $screen-xs-max) { padding : floor($grid-gutter-width/6) 0; }
+    }
+
+    &.lg {
+        padding: floor($grid-gutter-width) 0;
+    }
+
+    &.xl {
+        padding: floor($grid-gutter-width*2) 0;
+    }
+}

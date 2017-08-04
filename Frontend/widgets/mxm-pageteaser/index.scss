@@ -1,0 +1,26 @@
+@import '../mxm-customcode/vars-bootstrap';
+
+.mxm_pageteaser {
+    & {
+        margin-bottom : floor($grid-gutter-width);
+        display : block;
+
+        span {
+            display: block;
+            background-color: $gray-light;
+            color: $text-color;
+            padding: floor($grid-gutter-width/4) floor($grid-gutter-width/2);
+            transition : all 0.3s;
+            text-align : center;
+        }
+
+        &:hover {
+            text-decoration : none;
+            span {
+                background-color : $brand-primary;
+                color : #fff;
+                font-weight : bold;
+            }
+        }
+    }
+}

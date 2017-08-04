@@ -1,0 +1,49 @@
+.visible-mobile,
+.visible-tablet,
+.visible-desktop {
+    display: none !important;
+}
+
+.visible-mobile {
+    @media (max-width: $screen-xs-max) {
+        display: block !important;
+    }
+}
+
+.visible-tablet {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        display: block !important;
+    }
+}
+
+.visible-desktop {
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        display: block !important;
+    }
+
+    @media (min-width: $screen-lg-min) {
+        display: block !important;
+    }
+}
+
+.hidden-mobile {
+    @media (max-width: $screen-xs-max) {
+        display: none !important;
+    }
+}
+
+.hidden-tablet {
+    @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max) {
+        display: none !important;
+    }
+}
+
+.hidden-desktop {
+    @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
+        display: none !important;
+    }
+
+    @media (min-width: $screen-lg-min) {
+        display: none !important;
+    }
+}

@@ -25,12 +25,16 @@ var webroot = '';
 // Per task options
 var options = {
 	sass: {
-		src: source + '/sass/**/*.scss',
-		main: source + '/sass/main.scss',
+		watch: source + '/**/*.scss',
+		main: [
+			source + '/widgets/*/index.scss',
+			source + '/sass/main.scss',
+		],
+		dest: destination,
 	},
 
 	webpack: {
-		src: source + '/js/**/*.js',
+		// src: source + '/js/**/*.js',
 
 		// Define entry points for your scripts
 		entry: {

@@ -1,5 +1,6 @@
 var gulp           = require('gulp');
 var childProcess   = require('child_process');
+var gutil          = require('gulp-util');
 var package        = require('./package.json');
 
 var browserSync    = require('./gulp/tasks/browser-sync');
@@ -23,7 +24,15 @@ var buildTask = gulp.series(
 
 var watchTask = function (done) {
 	gulp.watch(options.handlebars.src, handlebarsTask);
-	gulp.watch(options.sass.src, sassTask);
+	// gulp.watch(options.sass.src, sassTask);
+	gulp.watch(options.sass.watch).on('change', function (file) {
+		console.time('sass');
+		gutil.log('Starting \'' + gutil.colors.cyan('compileSass') + '\'...');
+		sassTask(file).on('finish', function () {
+			gutil.log('Finished \'' + gutil.colors.cyan('compileSass') + '\'...');
+			console.timeEnd('sass');
+		});
+	});	
 	gulp.watch(options.static.src, staticTask);
 	gulp.watch(options.webpack.src, webpackTask);
 	gulp.watch(options.svgSprite.src, svgSpriteTask);

@@ -24,7 +24,6 @@ var buildTask = gulp.series(
 
 var watchTask = function (done) {
 	gulp.watch(options.handlebars.src, handlebarsTask);
-	// gulp.watch(options.sass.src, sassTask);
 	gulp.watch(options.sass.watch).on('change', function (file) {
 		console.time('sass');
 		gutil.log('Starting \'' + gutil.colors.cyan('compileSass') + '\'...');

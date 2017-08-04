@@ -26,26 +26,23 @@ var webroot = '';
 var options = {
 	sass: {
 		watch: source + '/**/*.scss',
-		main: [
+		entry: [
 			source + '/widgets/*/index.scss',
 			source + '/sass/main.scss',
 		],
 		dest: destination,
+		sassOptions: null,
+		autoprefixerOptions: null,
+		sourcemapOptions: null,
 	},
 
 	webpack: {
-		// src: source + '/js/**/*.js',
-
-		// Define entry points for your scripts
-		entry: {
-			app: './' + source + '/js/app.js'
-		},
-
-		// Define globals if you use CDN scripts so you can require('jquery')
-		// without actually including jquery in your bundle
-		/*externals: {
-		    'jquery': 'jQuery'
-		},*/
+		watch: source + '/**/*.js',
+		entry: [
+			source + '/widgets/*/index.js',
+			source + '/js/app.js',
+		],
+		dest: destination,
 	},
 
 	// Handlebars to HTML

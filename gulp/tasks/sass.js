@@ -4,34 +4,23 @@ var fs           = require('fs');
 var sass         = require('gulp-sass');
 var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
-var deepAssign   = require('deep-assign');
 var gutil        = require('gulp-util');
 var merge        = require('merge-stream');
-var gulpOptions  = require('../options');
+var options  = require('../options');
 var plumber      = require('gulp-plumber');
 var browserSync  = require('./browser-sync').server;
 var errorHandler = require('../utils/errorHandler');
 
-// Merge default options with options from 
-// main options file
-var defaultOptions = {
-	src: gulpOptions.src + '/sass/**/*.scss',
-	dest: gulpOptions.dest + '/css',
-
-	options: {
-		nodeSass: {
-			includePaths: ['node_modules'],
-		},
-		autoprefixer: {
-			browsers: ['last 2 versions']
-		},
-		sourcemaps: {
-			sourceMappingURLPrefix: gulpOptions.webroot + '/css'
-		}
-	}
+// Default plugin options
+var sassOptions = options.sassOptions || {
+	includePaths: ['node_modules'],
 };
-var options = deepAssign(defaultOptions, gulpOptions.sass);
-var passedOpt = options.options;
+var autoprefixerOptions = options.autoprefixerOptions || {
+	browsers: ['last 2 versions'],
+}
+var sourcemapOptions = options.sourcemapOptions || {
+	sourceMappingURLPrefix: gulpOptions.webroot + '/css'
+}
 
 /**
  * Walk up the diretory tree to find some index.scss,
@@ -88,13 +77,13 @@ var compileSass = function (watchFile) {
 	}
 	
 	// Create a gulp stream for every entry glob
-	var tasks = options.main.map(function (src) {
+	var tasks = options.entry.map(function (src) {
 		return gulp.src(indexSrc || src)
 			.pipe(plumber(errorHandler))
 			.pipe(sourcemaps.init())
-			.pipe(sass(passedOpt.nodeSass))
-			.pipe(autoprefixer(passedOpt.autoprefixer))
-			.pipe(sourcemaps.write('/', passedOpt.sourcemaps))
+			.pipe(sass(sassOptions))
+			.pipe(autoprefixer(autoprefixerOptions))
+			.pipe(sourcemaps.write('/', sourcemapOptions))
 			.pipe(gulp.dest(indexDest || options.dest))
 	});
 

@@ -1,0 +1,63 @@
+&.main {
+    margin: $grid-gutter-width 0 0;
+    min-height: 0;
+    border: none;
+    background-color: $brand-info;
+    font-size: $font-size-base;
+
+    @media (max-width: $screen-xs-max) {
+        display : none;
+    }
+    ul {
+        li {
+            a {
+                text-align: left;
+                background-color: $brand-info;
+                color: #fff;
+
+                &:hover {
+                    color: $brand-danger;
+                }
+            }
+
+            &.active {
+                a {
+                    color: $brand-danger;
+                }
+            }
+
+            &.open {
+                a {
+                    background-color: $brand-info;
+                    color: $brand-danger;
+                }
+
+                ul.dropdown-menu {
+                    background-color: #fff;
+                    padding: floor($grid-gutter-width/2) 0;
+                    min-width: 100%;
+                    margin: 0;
+                    border: none;
+
+                    li {
+                        a {
+                            padding: floor($grid-gutter-width/4) floor($grid-gutter-width/2);
+                            background-color: #fff;
+                            color: $text-color;
+
+                            &:hover {
+                                color: $brand-danger;
+                            }
+                        }
+
+                        &.active {
+                            a {
+                                color: $brand-danger;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

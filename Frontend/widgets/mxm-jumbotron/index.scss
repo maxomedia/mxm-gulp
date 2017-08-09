@@ -1,0 +1,6 @@
+@import '../mxm-customcode/vars-bootstrap';
+@import '../mxm-customcode/_bootstrap';
+
+.mxm_jumbotron {
+    @import '_slick';
+}

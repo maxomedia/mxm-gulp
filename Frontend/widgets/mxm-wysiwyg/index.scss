@@ -1,0 +1,8 @@
+@import '../mxm-customcode/vars-bootstrap';
+
+.mxm_wysiwyg {
+    p.lead {
+        color : $brand-primary;
+        font-weight : bold;
+    }	
+}

@@ -1,0 +1,225 @@
+/* slick slider original css */
+
+& {
+    @media (max-width: $screen-xs-max) {
+        margin-left: floor($grid-gutter-width/2*-1);
+        margin-right: floor($grid-gutter-width/2*-1);
+    }
+}
+
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    left: 0;
+    top: 0;
+    display: block;
+
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+
+    &:after {
+        clear: both;
+    }
+
+    .slick-loading & {
+        visibility: hidden;
+    }
+}
+
+.slick-slide {
+    float: left;
+    height: 100%;
+    min-height: 1px;
+    position: relative;
+
+    [dir="rtl"] & {
+        float: right;
+    }
+
+    img {
+        display: block;
+    }
+
+    &.slick-loading img {
+        display: none;
+    }
+
+    &.dragging img {
+        pointer-events: none;
+    }
+
+    .slick-initialized & {
+        display: block;
+    }
+
+    .slick-loading & {
+        visibility: hidden;
+    }
+
+    .slick-vertical & {
+        display: block;
+        height: auto;
+        border: 1px solid transparent;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0,0,0,0.3);
+
+        h2 {
+            font-weight: bold;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            margin : 0;
+            left: $grid-gutter-width*2;
+            right: $grid-gutter-width*2;
+            text-align: center;
+            transform: translateY(-50%);
+
+            @media (max-width: $screen-xs-max) {
+                font-size: 16px;
+            }
+
+            span {
+                font-weight: normal;
+                display: block;
+            }
+        }
+    }
+}
+
+.slick-arrow.slick-hidden {
+    display: none;
+}
+
+/* custom slick css */
+.mxm_slider {
+    .teaser {
+        margin: 0;
+    }
+
+    .slick-item,
+    .slick-item:hover,
+    .slick-item:focus {
+        outline: 0;
+    }
+
+    .slick-list {
+        width: 100%;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.dragging {
+            cursor: pointer;
+            cursor: hand;
+        }
+    }
+
+    .slick-arrow {
+        box-shadow: none;
+        background: none;
+        outline: 0;
+        border: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+
+        &:hover,
+        &:focus {
+            background: transparent;
+        }
+    }
+
+    %list-unstyled {
+        color: blah;
+    }
+
+    .slick-dots {
+        @extend .list-unstyled;
+        @extend .list-inline;
+        margin: 5px 0;
+
+        li {
+            outline: 0;
+            border: 0;
+            background: 0;
+            position: relative;
+            width: auto;
+            height: auto;
+            margin-right: 0;
+        }
+    }
+}
+
+.slick-arrow {
+    box-shadow: none;
+    background: none;
+    outline: 0;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: floor($grid-gutter-width/2);
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 100;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+
+    &:hover,
+    &:focus {
+        background: transparent;
+    }
+
+    &.arrow-right {
+        right: floor($grid-gutter-width/2);
+        left: auto;
+    }
+}

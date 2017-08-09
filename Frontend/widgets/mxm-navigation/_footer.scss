@@ -1,0 +1,24 @@
+&.footer {
+    ul {
+        float: right;
+
+        li {
+            display: inline-block;
+            margin-right: floor($grid-gutter-width/2);
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            a {
+                padding : 0;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: transparent;
+                    color: $brand-danger;
+                }
+            }
+        }
+    }
+}

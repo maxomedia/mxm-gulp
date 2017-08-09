@@ -25,30 +25,24 @@ var webroot = '';
 // Per task options
 var options = {
 	sass: {
-		src: source + '/sass/**/*.scss',
-		main: source + '/sass/main.scss',
+		watch: source + '/**/*.scss',
+		entry: [
+			// source + '/widgets/*/css/index.scss',
+			source + '/sass/main.scss',
+		],
+		dest: destination,
+		sassOptions: null,
+		autoprefixerOptions: null,
+		sourcemapOptions: null,
 	},
 
-	webpack: {
-		src: source + '/js/**/*.js',
-
-		// Define entry points for your scripts
-		entry: {
-			app: './' + source + '/js/app.js'
-		},
-
-		// Define globals if you use CDN scripts so you can require('jquery')
-		// without actually including jquery in your bundle
-		/*externals: {
-		    'jquery': 'jQuery'
-		},*/
-
-		// Use common chunks plugin?
-		// If you are using multiple bundles, this plugin
-		// identifies modules used by all bundles and places them in a separate
-		// script 'shared.js', so those common modules are not duplicated in all bundles.
-		// The shared.js needs to be loaded before all other bundles.
-		commonChunks: false,
+	js: {
+		watch: source + '/**/*.js',
+		entry: [
+			// source + '/widgets/*/index.js',
+			source + '/js/app.js',
+		],
+		dest: destination,
 	},
 
 	// Handlebars to HTML
@@ -73,11 +67,15 @@ var options = {
 		svgDest: source + '/handlebars/Partials/svg-sprite.svg',
 		sassDest: source + '/sass/core/svg-sprite.scss',
 		htmlDest: destination + '/svg-sprite.html',
-		namespaceClassnames: false
+		namespaceClassnames: false,
 	},
 
 	static: {
-		src: source + '/static/**'
+		src: [
+			// source + '/widgets/*/static/**',
+			source + '/static/**',
+		],
+		dest: destination,
 	},
 
 	browserSync: {

@@ -6,7 +6,8 @@ var sourcemaps   = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
 var gutil        = require('gulp-util');
 var merge        = require('merge-stream');
-var options  = require('../options');
+var options  		 = require('../options').sass;
+var rootOptions  = require('../options');
 var plumber      = require('gulp-plumber');
 var browserSync  = require('./browser-sync').server;
 var errorHandler = require('../utils/errorHandler');
@@ -19,7 +20,7 @@ var autoprefixerOptions = options.autoprefixerOptions || {
 	browsers: ['last 2 versions'],
 }
 var sourcemapOptions = options.sourcemapOptions || {
-	sourceMappingURLPrefix: gulpOptions.webroot + '/css'
+	sourceMappingURLPrefix: options.webroot + '/css'
 }
 
 /**
@@ -50,7 +51,7 @@ function findIndex(dir) {
  */
 var compileSass = function (watchFile) {
 	if (process.argv.indexOf('--production') > -1) {
-		passedOpt.nodeSass.outputStyle = 'compressed';
+		sassOptions.outputStyle = 'compressed';
 	}
 
 	// Cast to array, else the map will fail
@@ -72,12 +73,13 @@ var compileSass = function (watchFile) {
 		if (index) {
 			indexSrc = [index];
 			// Patch destination to widget folder
-			indexDest = options.dest + '/' + dir.substring(dir.lastIndexOf('\\'), dir.length);
+			indexDest = path.resolve(process.cwd(), rootOptions.dest + '/' + dir.substring(dir.lastIndexOf('\\'), dir.length));
 		}
 	}
 	
 	// Create a gulp stream for every entry glob
 	var tasks = options.entry.map(function (src) {
+		if (src.indexOf('widgets') < 0) options.dest = options.dest + '/css';
 		return gulp.src(indexSrc || src)
 			.pipe(plumber(errorHandler))
 			.pipe(sourcemaps.init())

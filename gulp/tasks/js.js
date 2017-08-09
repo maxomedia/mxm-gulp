@@ -1,36 +1,53 @@
 var gulp        = require('gulp');
 var path        = require('path');
+var glob        = require('glob');
 var webpack     = require('webpack');
 var gutil       = require('gulp-util');
-var deepAssign  = require('deep-assign');
 var browserSync = require('./browser-sync').server;
-var gulpOptions = require('../options');
+var options     = require('../options').js;
+var rootOptions = require('../options');
 var notify      = require('../utils/notify');
 
-// Webpack 2 does not like unknown settings
-delete gulpOptions['src'];
+// Webpack for beginners:
+// https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9
 
-var defaultOptions = {
+// Get entry object from glob array
+var entryObject = {};
+options.entry.map(function (entryPath) {
+	glob.sync(entryPath).map(function (filePath) {
+		var basename = path.basename(filePath);
+		var filename = basename.substring(0, basename.lastIndexOf('.'));
+		var pathParts = filePath.split('/');
+		var parentFolder = pathParts[pathParts.length - 3];
+		if (filePath.indexOf('widgets') >= 0) {
+			entryObject[parentFolder + '/' + filename] = path.resolve(filePath);
+		} else {
+			var basename = path.basename(filePath);
+			entryObject['/js/' + filename] = path.resolve(filePath);
+		}
+	});
+});
+
+var webpackOptions = {
 
 	// Define entry points for your scripts.
 	// Use paths starting with './' (this folder)
 	// or '../' (this folders parent)
-	entry: {
-		app: './' + gulpOptions.src + '/js/app.js'
-	},
+	entry: entryObject,
 
 	// Set resolve paths
 	resolve: {
 		extensions: ['.js'],
 		alias: { 
-      src: path.resolve(gulpOptions.root, gulpOptions.src + '/js') 
+      src: path.resolve(rootOptions.root, rootOptions.src + '/js') 
     },
 	},
 
 	// Destination folder
 	output: {
-		path: path.resolve(gulpOptions.dest + '/js/'),
-		publicPath: gulpOptions.webroot
+		filename: '[name].js',
+		path: path.resolve(rootOptions.dest),
+		publicPath: rootOptions.webroot,
 	},
 
 	module: {
@@ -45,14 +62,10 @@ var defaultOptions = {
 			}
 		]
 	},
+	plugins: [],
+	bail: true,
+	devtool: 'source-map',
 };
-var options = deepAssign(defaultOptions, gulpOptions.webpack);
-
-// Set shared options
-options.plugins = options.plugins || [];
-options.output.filename = options.output.filename || '[name].js';
-options.bail = true;
-options.devtool = 'source-map';
 
 /**
  * Start webpack and log errors to the console and with the error handler.
@@ -62,22 +75,14 @@ options.devtool = 'source-map';
  */
 function pack (callback) {
 
-	// Common chunks
-	/* if (options.commonChunks) {
-		options.plugins.push(new webpack.optimize.CommonsChunkPlugin({
-			name: 'shared',
-			filename: '[name].js'
-		}));
-	} */
-
 	// Production or not?
 	if (process.argv.indexOf('--production') > -1) {
-		options.plugins.push(new webpack.optimize.UglifyJsPlugin());
-	} else {
-		webpack.debug = true;
+		webpackOptions.plugins.push(new webpack.optimize.UglifyJsPlugin({
+			sourceMap: true,
+		}));
 	}
 
-	webpack(options, function (err, stats) {
+	webpack(webpackOptions, function (err, stats) {
 
 		if (err) {
 

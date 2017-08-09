@@ -16,7 +16,7 @@ var copyStaticFiles = function () {
 	return gulp.src(options.static.src)
 		.pipe(plumber(errorHandler))
 		.pipe(newer(options.dest))
-		.pipe(gulp.dest(options.dest))
+		.pipe(gulp.dest(options.static.dest))
 		.pipe(browserSync.stream());
 };
 

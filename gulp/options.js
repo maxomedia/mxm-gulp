@@ -27,7 +27,7 @@ var options = {
 	sass: {
 		watch: source + '/**/*.scss',
 		entry: [
-			source + '/widgets/*/index.scss',
+			// source + '/widgets/*/css/index.scss',
 			source + '/sass/main.scss',
 		],
 		dest: destination,
@@ -36,10 +36,10 @@ var options = {
 		sourcemapOptions: null,
 	},
 
-	webpack: {
+	js: {
 		watch: source + '/**/*.js',
 		entry: [
-			source + '/widgets/*/index.js',
+			// source + '/widgets/*/index.js',
 			source + '/js/app.js',
 		],
 		dest: destination,
@@ -67,11 +67,15 @@ var options = {
 		svgDest: source + '/handlebars/Partials/svg-sprite.svg',
 		sassDest: source + '/sass/core/svg-sprite.scss',
 		htmlDest: destination + '/svg-sprite.html',
-		namespaceClassnames: false
+		namespaceClassnames: false,
 	},
 
 	static: {
-		src: source + '/static/**'
+		src: [
+			// source + '/widgets/*/static/**',
+			source + '/static/**',
+		],
+		dest: destination,
 	},
 
 	browserSync: {
